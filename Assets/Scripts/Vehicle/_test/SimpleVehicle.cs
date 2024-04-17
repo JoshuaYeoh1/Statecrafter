@@ -2,11 +2,11 @@ using UnityEngine;
 
 public class SimpleVehicle : MonoBehaviour
 {
-    [SerializeField] private float mass = 1.0f;
-    [SerializeField] private float maxForce = 0.01f;
-    [SerializeField] private float maxSpeed = 2.0f;
+    public float mass = 1;
+    public float maxForce = 1;
+    public float maxSpeed = 5;
 
-    private Vector3 acceleration;
+    Vector3 acceleration;
 
     public float Mass { get => Mathf.Max(0.001f, mass); }
 
@@ -15,10 +15,10 @@ public class SimpleVehicle : MonoBehaviour
     public Vector3 Position { get => transform.position; }
 
     public Vector3 ForwardHeading
-    { get => transform.up; private set { transform.up = value; } }
+    { get => transform.up; set { transform.up = value; } }
 
-    public Vector3 CurrentVelocity { get; private set; }
-    public Vector3 TurnVelocity { get; private set; } // orientation
+    public Vector3 CurrentVelocity { get; set; }
+    public Vector3 TurnVelocity { get; set; } // orientation
 
     // Instantly teleport the vehicle to a different position
     public void Teleport(Vector3 worldPosition)
@@ -32,14 +32,14 @@ public class SimpleVehicle : MonoBehaviour
         acceleration += force / Mass;
     }
 
-    private Vector3 CalculateSteeringForce(Vector3 desiredVelocity)
+    Vector3 CalculateSteeringForce(Vector3 desiredVelocity)
     {
         var steerVector = desiredVelocity - CurrentVelocity;
         var clampedForce = Vector3.ClampMagnitude(steerVector, maxForce);
         return clampedForce;
     }
 
-    private void ApplyMove()
+    void ApplyMove()
     {
         CurrentVelocity = Vector3.ClampMagnitude(CurrentVelocity + acceleration, MaxSpeed);
         acceleration *= 0;
@@ -47,7 +47,7 @@ public class SimpleVehicle : MonoBehaviour
         transform.Translate(CurrentVelocity * Time.deltaTime, Space.World);
     }
 
-    private void AdjustOrientation()
+    void AdjustOrientation()
     {
         float speed = CurrentVelocity.magnitude;
         // Ternary operator
@@ -58,7 +58,7 @@ public class SimpleVehicle : MonoBehaviour
             ForwardHeading : TurnVelocity;
     }
 
-    private void Update()
+    void Update()
     {
         ApplyMove();
         AdjustOrientation();

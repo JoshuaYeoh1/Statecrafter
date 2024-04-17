@@ -4,15 +4,12 @@ using UnityEngine;
 
 public class Steve : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [HideInInspector] public ForceVehicle2D vehicle;
+    [HideInInspector] public PursuitBehaviour move;
 
-    // Update is called once per frame
-    void Update()
+    void Awake()
     {
-        
+        vehicle=GetComponent<ForceVehicle2D>();
+        move=GetComponent<PursuitBehaviour>();
     }
 }
