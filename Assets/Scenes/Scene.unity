@@ -823,6 +823,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5746aa2653c376c4c9af274713658ebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vehicle: {fileID: 0}
+  move: {fileID: 0}
 --- !u!4 &2117485757
 Transform:
   m_ObjectHideFlags: 0
@@ -883,6 +885,9 @@ MonoBehaviour:
   slowingRange: 1
   stoppingRange: 0.05
   evade: 0
+  departure: 1
+  evadeRange: 4
+  evadeSlowingRange: 3
 --- !u!114 &2117485761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,7 +905,7 @@ MonoBehaviour:
   acceleration: 10
   deceleration: 10
   turnSpeed: 10
-  linearTurn: 1
+  linearTurn: 0
   angleOffset: -90
   velocity: 0
 --- !u!1660057539 &9223372036854775807

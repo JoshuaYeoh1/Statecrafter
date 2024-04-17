@@ -50,11 +50,13 @@ public class ForceVehicle2D : MonoBehaviour
 
     [Header("Turn")]
     public float turnSpeed=10;
-    public bool linearTurn=true;
+    public bool linearTurn;
     public float angleOffset=-90;
 
     void Turn(Vector3 dir)
     {
+        if(dir==Vector3.zero) return;
+
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
         Quaternion lookRotation = Quaternion.Euler(0, 0, angle + angleOffset);
@@ -90,6 +92,7 @@ public class ForceVehicle2D : MonoBehaviour
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    [Header("Debug")]
     public float velocity;
 
     void FixedUpdate()

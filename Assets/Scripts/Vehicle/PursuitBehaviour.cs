@@ -28,6 +28,9 @@ public class PursuitBehaviour : MonoBehaviour
     
     [Header("Evasion")]
     public bool evade;
+    public bool departure=true;
+    public float evadeSlowingRange=3;
+    public float evadeStoppingRange=4;
 
     Vector3 GetVector()
     {
@@ -35,15 +38,26 @@ public class PursuitBehaviour : MonoBehaviour
 
         Vector3 predictedDir = GetPredictedDir();
 
-        Vector3 desiredVelocity;
+        Vector3 desiredVelocity = evade ?
+            GetEvadeVector(predictedDir):
+            GetPursuitVector(predictedDir);
 
-        if(!evade && arrival)
+        return desiredVelocity;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    Vector3 GetPursuitVector(Vector3 predictedDir)
+    {
+        Vector3 pursuitVelocity;
+
+        if(arrival)
         {
             float distance = Vector3.Distance(target.position, transform.position);
 
             if(distance<=stoppingRange)
             {
-                desiredVelocity=Vector3.zero;
+                pursuitVelocity=Vector3.zero;
             }
             else
             {
@@ -51,14 +65,44 @@ public class PursuitBehaviour : MonoBehaviour
 
                 float clippedSpeed = Mathf.Min(rampedSpeed, vehicle.maxSpeed);
 
-                desiredVelocity = clippedSpeed * predictedDir;
+                pursuitVelocity = clippedSpeed * predictedDir;
             }
         }
-        else desiredVelocity = vehicle.maxSpeed * predictedDir;
+        else pursuitVelocity = vehicle.maxSpeed * predictedDir;
 
-        return desiredVelocity;
+        return pursuitVelocity;
     }
 
+    Vector3 GetEvadeVector(Vector3 predictedDir)
+    {
+        Vector3 evadeVelocity;
+
+        if(departure)
+        {
+            float distance = Vector3.Distance(target.position, transform.position);
+            
+            if(distance<=evadeStoppingRange)
+            {
+                if(distance<=evadeSlowingRange)
+                {
+                    evadeVelocity = vehicle.maxSpeed * predictedDir;
+                }
+                else
+                {
+                    float rampedSpeed = vehicle.maxSpeed * (evadeStoppingRange-distance)/(evadeStoppingRange-evadeSlowingRange);
+
+                    float clippedSpeed = Mathf.Min(rampedSpeed, vehicle.maxSpeed);
+
+                    evadeVelocity = clippedSpeed * predictedDir;
+                }
+            }
+            else evadeVelocity=Vector3.zero;
+        }
+        else evadeVelocity = vehicle.maxSpeed * predictedDir;
+
+        return evadeVelocity;
+    }
+    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     Vector3 GetPredictedDir()
@@ -104,8 +148,8 @@ public class PursuitBehaviour : MonoBehaviour
         return target.position + (targetsVelocity * timeToReach);
     }
 
-    Vector3 GetDir(Vector3 targetPos, Vector3 selfPos)
+    Vector3 GetDir(Vector3 to, Vector3 from)
     {
-        return (targetPos-selfPos).normalized;
+        return (to-from).normalized;
     }
 }
