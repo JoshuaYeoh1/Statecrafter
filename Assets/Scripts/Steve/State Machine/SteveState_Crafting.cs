@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class SteveState_Mining : BaseState
+public class SteveState_Crafting : BaseState
 {
-    public override string Name => "Mining";
+    public override string Name => "Crafting";
 
     Steve steve;
 
-    public SteveState_Mining(SteveStateMachine sm)
+    public SteveState_Crafting(SteveStateMachine sm)
     {
         steve = sm.steve;
     }
