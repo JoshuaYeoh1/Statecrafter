@@ -22,7 +22,9 @@ public class Radar2D : MonoBehaviour
 
     public float range=5;
     public LayerMask layers;
+
     public List<GameObject> targets = new();
+    public GameObject closest;
 
     public void Scan()
     {
@@ -38,21 +40,25 @@ public class Radar2D : MonoBehaviour
             }
             //else targets.Add(other.gameObject); 
         }
+
+        closest = GetClosest(targets);
     }
 
-    public GameObject GetClosest(List<GameObject> targets)
+    public GameObject GetClosest(List<GameObject> objects)
     {
+        if(objects.Count==0) return null;
+
         GameObject closest = null;
         float closestDistance = Mathf.Infinity;
 
-        foreach(GameObject target in targets) // go through all detected colliders
+        foreach(GameObject obj in objects) // go through all detected colliders
         {
-            float distance = Vector3.Distance(target.transform.position, transform.position);
+            float distance = Vector3.Distance(obj.transform.position, transform.position);
 
             if(distance<closestDistance) // find and replace with the nearer one
             {
                 closestDistance = distance;
-                closest = target;
+                closest = obj;
             }
         }
 

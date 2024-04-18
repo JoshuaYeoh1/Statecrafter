@@ -16,6 +16,7 @@ public class SteveStateMachine : MonoBehaviour
 
         // STATES
         /////////////////////////////////////////////////////////////////////////////////////////
+
         SteveState_Idle idle = new(this);
         SteveState_Mining mining = new(this);
         SteveState_Looting looting = new(this);
@@ -30,72 +31,95 @@ public class SteveStateMachine : MonoBehaviour
 
         idle.AddTransition(mining, (timeInState) =>
         {
-            // if(condition)
-            // {
-            //     return true;
-            // }
+            if(
+                !steve.HasEnoughResources() &&
+                !steve.closestLoot &&
+                !steve.closestEnemy &&
+                !steve.IsLowHP() &&
+                steve.GetTargetResource()
+            )
+            {
+                return true;
+            }
             return false;
         });
 
         idle.AddTransition(looting, (timeInState) =>
         {
-            // if(condition)
-            // {
-            //     return true;
-            // }
+            if(
+                !steve.HasEnoughResources() &&
+                steve.closestLoot &&
+                !steve.closestEnemy &&
+                !steve.IsLowHP()
+            )
+            {
+                return true;
+            }
             return false;
         });
 
         idle.AddTransition(crafting, (timeInState) =>
         {
-            // if(condition)
-            // {
-            //     return true;
-            // }
+            if(
+                steve.HasEnoughResources() &&
+                !steve.NeedsFurnace() &&
+                !steve.closestEnemy &&
+                !steve.IsLowHP() &&
+                steve.GetClosestCraftingTable()
+            )
+            {
+                return true;
+            }
             return false;
         });
 
         idle.AddTransition(smelting, (timeInState) =>
         {
-            // if(condition)
-            // {
-            //     return true;
-            // }
+            if(
+                steve.HasEnoughResources() &&
+                steve.NeedsFurnace() &&
+                !steve.closestEnemy &&
+                !steve.IsLowHP() &&
+                steve.GetClosestFurnace()
+            )
+            {
+                return true;
+            }
             return false;
         });
 
         idle.AddTransition(fighting, (timeInState) =>
         {
-            if(steve.closestEnemy)
+            if(
+                steve.closestEnemy &&
+                !steve.IsLowHP()
+            )
             {
-                if(!steve.IsLowHP())
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
         });
 
         idle.AddTransition(fleeing, (timeInState) =>
         {
-            if(steve.closestEnemy)
+            if(
+                steve.closestEnemy &&
+                steve.IsLowHP()
+            )
             {
-                if(steve.IsLowHP())
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
         });
 
         idle.AddTransition(sleeping, (timeInState) =>
         {
-            if(!steve.closestEnemy)
+            if(
+                !steve.closestEnemy &&
+                steve.IsLowHP()
+            )
             {
-                if(steve.IsLowHP())
-                {
-                    return true;
-                }
+                return true;
             }
             return false;
         });
@@ -104,10 +128,16 @@ public class SteveStateMachine : MonoBehaviour
 
         mining.AddTransition(idle, (timeInState) =>
         {
-            // if(condition)
-            // {
-            //     return true;
-            // }
+            if(
+                steve.HasEnoughResources() ||
+                steve.closestLoot ||
+                steve.closestEnemy ||
+                steve.IsLowHP() ||
+                !steve.GetTargetResource()
+            )
+            {
+                return true;
+            }
             return false;
         });
 
@@ -115,10 +145,15 @@ public class SteveStateMachine : MonoBehaviour
         
         looting.AddTransition(idle, (timeInState) =>
         {
-            // if(condition)
-            // {
-            //     return true;
-            // }
+            if(
+                steve.HasEnoughResources() ||
+                !steve.closestLoot ||
+                steve.closestEnemy ||
+                steve.IsLowHP()
+            )
+            {
+                return true;
+            }
             return false;
         });
 
@@ -126,10 +161,16 @@ public class SteveStateMachine : MonoBehaviour
         
         crafting.AddTransition(idle, (timeInState) =>
         {
-            // if(condition)
-            // {
-            //     return true;
-            // }
+            if(
+                !steve.HasEnoughResources() ||
+                steve.NeedsFurnace() ||
+                steve.closestEnemy ||
+                steve.IsLowHP() ||
+                !steve.GetClosestCraftingTable()
+            )
+            {
+                return true;
+            }
             return false;
         });
 
@@ -137,10 +178,16 @@ public class SteveStateMachine : MonoBehaviour
         
         smelting.AddTransition(idle, (timeInState) =>
         {
-            // if(condition)
-            // {
-            //     return true;
-            // }
+            if(
+                !steve.HasEnoughResources() ||
+                !steve.NeedsFurnace() ||
+                steve.closestEnemy ||
+                steve.IsLowHP() ||
+                !steve.GetClosestFurnace()
+            )
+            {
+                return true;
+            }
             return false;
         });
 
@@ -148,10 +195,13 @@ public class SteveStateMachine : MonoBehaviour
         
         fighting.AddTransition(idle, (timeInState) =>
         {
-            // if(condition)
-            // {
-            //     return true;
-            // }
+            if(
+                !steve.closestEnemy ||
+                steve.IsLowHP()
+            )
+            {
+                return true;
+            }
             return false;
         });
 
@@ -159,10 +209,13 @@ public class SteveStateMachine : MonoBehaviour
         
         fleeing.AddTransition(idle, (timeInState) =>
         {
-            // if(condition)
-            // {
-            //     return true;
-            // }
+            if(
+                !steve.closestEnemy ||
+                !steve.IsLowHP()
+            )
+            {
+                return true;
+            }
             return false;
         });
 
@@ -170,10 +223,13 @@ public class SteveStateMachine : MonoBehaviour
         
         sleeping.AddTransition(idle, (timeInState) =>
         {
-            // if(condition)
-            // {
-            //     return true;
-            // }
+            if(
+                steve.closestEnemy ||
+                steve.IsFullHP()
+            )
+            {
+                return true;
+            }
             return false;
         });
 

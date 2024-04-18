@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LootInfo
 {
-    public ItemType item;
+    public Item item;
     public int quantity;
     public Vector3 contactPoint;
 }
@@ -13,23 +13,24 @@ public class Loot2D : MonoBehaviour
 {
     Rigidbody2D rb;
 
-    public ItemType lootItem;
-    public int quantity=1;
-
-    public float lootDelay=1;
-    public bool destroyOnLoot=true;
-
     void Awake()
     {
         rb=GetComponent<Rigidbody2D>();
     }
 
-    bool canLoot;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public Item lootItem;
+    public int quantity=1;
 
     void OnEnable()
     {
         if(lootDelay>0) StartCoroutine(LootDelaying());
+        Push();
     }
+
+    public float lootDelay=1;
+    bool canLoot;
 
     IEnumerator LootDelaying()
     {
@@ -53,6 +54,8 @@ public class Loot2D : MonoBehaviour
         Pickup(other.attachedRigidbody.gameObject);
     }
 
+    public bool destroyOnLoot=true;
+
     void Pickup(GameObject looter)
     {
         EventManager.Current.OnLoot(looter, CopyLootInfo());
@@ -74,7 +77,7 @@ public class Loot2D : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void Push(float force)
+    public void Push(float force=2)
     {
         Vector2 randVector = new Vector2
         (
