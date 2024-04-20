@@ -11,7 +11,6 @@ public class Recipe
     public List<int> quantities = new();
     public float craftingTime;
     public List<Item> results = new();
-    public List<GameObject> resultsPrefabs = new();
 }
 
 public class RecipeManager : MonoBehaviour
@@ -86,9 +85,9 @@ public class RecipeManager : MonoBehaviour
             inventory[recipe.ingredients[i]] -= recipe.quantities[i];
         }
 
-        foreach(GameObject prefab in recipe.resultsPrefabs)
+        foreach(Item item in recipe.results)
         {
-            Instantiate(prefab, station.transform.position, Quaternion.identity);
+            ItemManager.Current.Spawn(item, station.transform.position);
         }
 
         // foreach(Item result in recipe.results)

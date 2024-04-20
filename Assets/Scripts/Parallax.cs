@@ -36,7 +36,7 @@ public class Parallax : MonoBehaviour
         offsetPos = Camera.main.transform.position * parallax;
 
         offsetPos.x = enableX ? offsetPos.x : 0;
-        offsetPos.y = enableY ? offsetPos.x : 0;
+        offsetPos.y = enableY ? offsetPos.y : 0;
 
         transform.position = startPos + offsetPos;
     }

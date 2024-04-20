@@ -49,6 +49,7 @@ public class Hurt2D : MonoBehaviour
     [Header("iFrame")]
     public bool iframe;
     public float iframeTime=.5f;
+    public bool colorFlicker=true;
 
     public void DoIFraming(float t, float r, float g, float b)
     {
@@ -57,25 +58,32 @@ public class Hurt2D : MonoBehaviour
     }
 
     Coroutine iFramingRt;
+    
     IEnumerator IFraming(float t, float r, float g, float b)
     {
         iframe=true;
-        StartIFrameFlicker(r, g, b);
+        if(colorFlicker) ToggleColorFlicker(true, r, g, b);
 
         yield return new WaitForSeconds(t);
 
         iframe=false;
-        StopIFrameFlicker();
+        if(colorFlicker) ToggleColorFlicker(false);
     }
 
-    void StartIFrameFlicker(float r, float g, float b)
+    void ToggleColorFlicker(bool toggle, float r=0, float g=0, float b=0)
     {
-        if(iFrameFlickeringRt!=null) StopCoroutine(iFrameFlickeringRt);
-        iFrameFlickeringRt = StartCoroutine(IFrameFlickering(r, g, b));
+        if(colorFlickeringRt!=null) StopCoroutine(colorFlickeringRt);
+
+        if(toggle)
+        {
+            colorFlickeringRt = StartCoroutine(ColorFlickering(r, g, b));
+        }
+        else SpriteManager.Current.RevertColor(gameObject);
     }
 
-    Coroutine iFrameFlickeringRt;
-    IEnumerator IFrameFlickering(float r, float g, float b)
+    Coroutine colorFlickeringRt;
+
+    IEnumerator ColorFlickering(float r, float g, float b)
     {
         while(true)
         {
@@ -84,12 +92,6 @@ public class Hurt2D : MonoBehaviour
             SpriteManager.Current.RevertColor(gameObject);
             yield return new WaitForSecondsRealtime(.05f);
         }
-    }
-
-    void StopIFrameFlicker()
-    {
-        if(iFrameFlickeringRt!=null) StopCoroutine(iFrameFlickeringRt);
-        SpriteManager.Current.RevertColor(gameObject);
     }
 
     [Header("Poise")]

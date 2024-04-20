@@ -6,12 +6,11 @@ TagManager:
   tags:
   - NPC
   - Enemy
-  - Loot
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Solid
   - Water
   - UI
   - NPC
@@ -41,6 +40,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 2571060181
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Actors
+    uniqueID: 1201729199
+    locked: 0
+  - name: FG
+    uniqueID: 965269753
     locked: 0

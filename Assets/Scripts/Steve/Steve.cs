@@ -5,7 +5,7 @@ using UnityEngine;
 public class Steve : MonoBehaviour
 {
     [HideInInspector] public ForceVehicle2D vehicle;
-    [HideInInspector] public PursuitBehaviour move;
+    [HideInInspector] public PursuitAI move;
     [HideInInspector] public HPManager hp;
     [HideInInspector] public Hurt2D hurt;
     [HideInInspector] public Radar2D radar;
@@ -15,7 +15,7 @@ public class Steve : MonoBehaviour
     void Awake()
     {
         vehicle=GetComponent<ForceVehicle2D>();
-        move=GetComponent<PursuitBehaviour>();
+        move=GetComponent<PursuitAI>();
         hp=GetComponent<HPManager>();
         hurt=GetComponent<Hurt2D>();
         radar=GetComponent<Radar2D>();
