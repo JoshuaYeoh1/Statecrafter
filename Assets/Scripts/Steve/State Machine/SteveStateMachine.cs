@@ -21,7 +21,6 @@ public class SteveStateMachine : MonoBehaviour
         SteveState_Mining mining = new(this);
         SteveState_Looting looting = new(this);
         SteveState_Crafting crafting = new(this);
-        SteveState_Smelting smelting = new(this);
         SteveState_Fighting fighting = new(this);
         SteveState_Fleeing fleeing = new(this);
         SteveState_Sleeping sleeping = new(this);
@@ -62,25 +61,9 @@ public class SteveStateMachine : MonoBehaviour
         {
             if(
                 steve.HasEnoughResources() &&
-                !steve.NeedsFurnace() &&
+                steve.GetRequiredCraftingStation() &&
                 !steve.closestEnemy &&
-                !steve.IsLowHP() &&
-                steve.GetClosestCraftingTable()
-            )
-            {
-                return true;
-            }
-            return false;
-        });
-
-        idle.AddTransition(smelting, (timeInState) =>
-        {
-            if(
-                steve.HasEnoughResources() &&
-                steve.NeedsFurnace() &&
-                !steve.closestEnemy &&
-                !steve.IsLowHP() &&
-                steve.GetClosestFurnace()
+                !steve.IsLowHP()
             )
             {
                 return true;
@@ -163,27 +146,10 @@ public class SteveStateMachine : MonoBehaviour
         {
             if(
                 !steve.HasEnoughResources() ||
-                steve.NeedsFurnace() ||
+                !steve.GetRequiredCraftingStation() ||
                 steve.closestEnemy ||
                 steve.IsLowHP() ||
-                !steve.GetClosestCraftingTable()
-            )
-            {
-                return true;
-            }
-            return false;
-        });
-
-        /////////////////////////////////////////////////////////////////////////////////////////
-        
-        smelting.AddTransition(idle, (timeInState) =>
-        {
-            if(
-                !steve.HasEnoughResources() ||
-                !steve.NeedsFurnace() ||
-                steve.closestEnemy ||
-                steve.IsLowHP() ||
-                !steve.GetClosestFurnace()
+                steve.HasCrafted()
             )
             {
                 return true;

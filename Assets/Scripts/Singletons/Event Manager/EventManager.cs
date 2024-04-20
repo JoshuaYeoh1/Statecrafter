@@ -39,6 +39,7 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, GameObject, HurtInfo> HitEvent; // ignores iframe
     public event Action<GameObject, GameObject, HurtInfo> HurtEvent; // respects iframe
     public event Action<GameObject, GameObject, HurtInfo> DeathEvent;
+    public event Action<GameObject, Item, int> AmmoEvent;
 
     public void OnHit(GameObject attacker, GameObject victim, HurtInfo hurtInfo)
     {
@@ -51,6 +52,10 @@ public class EventManager : MonoBehaviour
     public void OnDeath(GameObject victim, GameObject killer, HurtInfo hurtInfo)
     {
         DeathEvent?.Invoke(victim, killer, hurtInfo);
+    }
+    public void OnAmmo(GameObject shooter, Item ammoItem, int quantity)
+    {
+        AmmoEvent?.Invoke(shooter, ammoItem, quantity);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,9 +70,24 @@ public class EventManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public event Action<GameObject, LootInfo> LootEvent;
+    public event Action<GameObject, GameObject, Recipe> UpdateCraftEvent;
+    public event Action<GameObject> UpdateNotCraftEvent;
+    public event Action<GameObject, GameObject, Recipe> CraftedEvent;
 
     public void OnLoot(GameObject looter, LootInfo lootInfo)
     {
         LootEvent?.Invoke(looter, lootInfo);
+    }
+    public void OnUpdateCraft(GameObject crafter, GameObject station, Recipe recipe)
+    {
+        UpdateCraftEvent?.Invoke(crafter, station, recipe);
+    }
+    public void OnUpdateNotCraft(GameObject station)
+    {
+        UpdateNotCraftEvent?.Invoke(station);
+    }
+    public void OnCrafted(GameObject crafter, GameObject station, Recipe recipe)
+    {
+        CraftedEvent?.Invoke(crafter, station, recipe);
     }
 }

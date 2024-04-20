@@ -224,6 +224,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3576b0ba749f3d84a9d5c93db24ce1c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &165743141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 165743142}
+  - component: {fileID: 165743143}
+  m_Layer: 0
+  m_Name: Firepoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &165743142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165743141}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2112330561}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &165743143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165743141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb9965389b2ccc429c6168666edf347, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  constrainTo: {fileID: 2117485757}
+  fixedUpdate: 1
+  positionMult: {x: 1, y: 1, z: 1}
+  rotationMult: {x: 0, y: 0, z: 0}
+  scaleMult: {x: 0, y: 0, z: 0}
+  positionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
+  scaleOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +379,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0
   far clip plane: 1000
   field of view: 34
   orthographic: 1
@@ -672,7 +724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: 0}
+  m_FollowOffset: {x: 0, y: 0, z: -10}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -753,6 +805,64 @@ Transform:
   - {fileID: 78846579}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1497285187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1497285190}
+  - component: {fileID: 1497285189}
+  - component: {fileID: 1497285188}
+  m_Layer: 0
+  m_Name: Crafting Table
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1497285188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497285187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69420dc30fff1674a999e2e58eea03d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1497285189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497285187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b9b0abcad9c5140adec101c5e86d12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 0
+--- !u!4 &1497285190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497285187}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1972622101
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,7 +874,7 @@ GameObject:
   - component: {fileID: 1972622103}
   - component: {fileID: 1972622102}
   m_Layer: 0
-  m_Name: Steve Cam
+  m_Name: Cinecam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -777,7 +887,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1972622101}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
@@ -789,11 +899,11 @@ MonoBehaviour:
   m_Priority: 10
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
-  m_Follow: {fileID: 2117485757}
+  m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 34
     OrthographicSize: 5
-    NearClipPlane: 0.3
+    NearClipPlane: 0
     FarClipPlane: 1000
     Dutch: 0
     ModeOverride: 0
@@ -826,6 +936,39 @@ Transform:
   - {fileID: 519420032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2112330560
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2112330561}
+  m_Layer: 0
+  m_Name: Steve Group
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2112330561
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112330560}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2117485757}
+  - {fileID: 165743142}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2117485754
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,6 +987,7 @@ GameObject:
   - component: {fileID: 2117485763}
   - component: {fileID: 2117485764}
   - component: {fileID: 2117485765}
+  - component: {fileID: 2117485766}
   m_Layer: 6
   m_Name: Steve
   m_TagString: Untagged
@@ -882,11 +1026,23 @@ MonoBehaviour:
   hurt: {fileID: 0}
   radar: {fileID: 0}
   inv: {fileID: 0}
-  lowHPPercent: 30
+  combat: {fileID: 0}
+  lowHPPercent: 25
   closestEnemy: {fileID: 0}
   closestLoot: {fileID: 0}
   currentTool: 1
   nextTool: 2
+  nextItem: 2
+  huggyRange: 0.05
+  meleeRange: 1
+  longRange: 5
+  fistPrefab: {fileID: 0}
+  woodPickaxePrefab: {fileID: 0}
+  stonePickaxePrefab: {fileID: 0}
+  ironPickaxePrefab: {fileID: 0}
+  diamondPickaxePrefab: {fileID: 0}
+  currentMeleePrefab: {fileID: 0}
+  bowPrefab: {fileID: 0}
 --- !u!4 &2117485757
 Transform:
   m_ObjectHideFlags: 0
@@ -895,13 +1051,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117485754}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 528398627}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2112330561}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &2117485759
 Rigidbody2D:
@@ -944,12 +1100,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   arrival: 1
-  slowingRange: 1
   stoppingRange: 0.05
   evade: 0
   departure: 1
-  evadeSlowingRange: 3
-  evadeStoppingRange: 4
+  evadeRange: 4
+  slowingRangeOffset: 0.5
 --- !u!114 &2117485761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1023,6 +1178,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1152
   targets: []
+  closest: {fileID: 0}
 --- !u!114 &2117485765
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1035,6 +1191,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21587320716eeb4a98977ccb3204a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2117485766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2117485754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ccbb9dedd7880f438b68eef0b558070, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 0.05
+  firepoint: {fileID: 165743142}
+  attackCooldown: 0.4
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1042,5 +1213,6 @@ SceneRoots:
   - {fileID: 29003984}
   - {fileID: 1342002766}
   - {fileID: 1972622103}
-  - {fileID: 2117485757}
+  - {fileID: 2112330561}
   - {fileID: 726797722}
+  - {fileID: 1497285190}

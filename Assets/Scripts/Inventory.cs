@@ -64,4 +64,21 @@ public class Inventory : MonoBehaviour
             inventory.Remove(item);
         }
     }
+
+    public bool HasItem(Item item)
+    {
+        return inventory.ContainsKey(item) && inventory[item]>0;
+    }
+
+    public int GetItemQuantity(Item item)
+    {
+        if(!HasItem(item)) return 0;
+
+        return inventory[item];
+    }
+    
+    public void Clear()
+    {
+        inventory.Clear();
+    }
 }

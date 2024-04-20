@@ -15,15 +15,22 @@ public class SteveState_Sleeping : BaseState
     {
         Debug.Log($"{steve.gameObject.name} State: {Name}");
 
-
+        steve.move.target=steve.GetClosestBed().transform;
+        steve.move.evade=false;
+        steve.combat.range=steve.huggyRange;
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-
+        if(steve.combat.InRange())
+        {
+            steve.hp.regen=true;
+        }
+        else steve.hp.regen=false;
     }
 
     protected override void OnExit()
     {
+        steve.hp.regen=false;
     }
 }

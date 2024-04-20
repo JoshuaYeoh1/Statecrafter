@@ -15,7 +15,11 @@ public class SteveState_Idle : BaseState
     {
         Debug.Log($"{steve.gameObject.name} State: {Name}");
 
-
+        steve.move.target=null;
+        steve.move.evade=false;
+        steve.move.arrival=true;
+        steve.move.departure=true;
+        steve.combat.range=steve.meleeRange;
     }
 
     protected override void OnUpdate(float deltaTime)

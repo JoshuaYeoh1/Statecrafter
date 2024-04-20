@@ -23,14 +23,15 @@ public class PursuitBehaviour : MonoBehaviour
     
     [Header("Pursuit")]
     public bool arrival=true;
-    public float slowingRange=1;
     public float stoppingRange=.05f;
     
     [Header("Evasion")]
     public bool evade;
     public bool departure=true;
-    public float evadeSlowingRange=3;
-    public float evadeStoppingRange=4;
+    public float evadeRange=4;
+
+    [Header("Slowing")]
+    public float slowingRangeOffset=.5f;
 
     Vector3 GetVector()
     {
@@ -55,13 +56,13 @@ public class PursuitBehaviour : MonoBehaviour
         {
             float distance = Vector3.Distance(target.position, transform.position);
 
-            if(distance<=stoppingRange)
+            if(distance <= stoppingRange)
             {
                 pursuitVelocity=Vector3.zero;
             }
             else
             {
-                float rampedSpeed = vehicle.maxSpeed * distance/slowingRange;
+                float rampedSpeed = vehicle.maxSpeed * distance / (stoppingRange+slowingRangeOffset);
 
                 float clippedSpeed = Mathf.Min(rampedSpeed, vehicle.maxSpeed);
 
@@ -81,15 +82,15 @@ public class PursuitBehaviour : MonoBehaviour
         {
             float distance = Vector3.Distance(target.position, transform.position);
             
-            if(distance<=evadeStoppingRange)
+            if(distance <= evadeRange)
             {
-                if(distance<=evadeSlowingRange)
+                if(distance <= evadeRange-slowingRangeOffset)
                 {
                     evadeVelocity = vehicle.maxSpeed * predictedDir;
                 }
                 else
                 {
-                    float rampedSpeed = vehicle.maxSpeed * (evadeStoppingRange-distance)/(evadeStoppingRange-evadeSlowingRange);
+                    float rampedSpeed = vehicle.maxSpeed * (evadeRange-distance) / slowingRangeOffset;
 
                     float clippedSpeed = Mathf.Min(rampedSpeed, vehicle.maxSpeed);
 
@@ -148,7 +149,7 @@ public class PursuitBehaviour : MonoBehaviour
         return target.position + (targetsVelocity * timeToReach);
     }
 
-    Vector3 GetDir(Vector3 to, Vector3 from)
+    public Vector3 GetDir(Vector3 to, Vector3 from)
     {
         return (to-from).normalized;
     }
