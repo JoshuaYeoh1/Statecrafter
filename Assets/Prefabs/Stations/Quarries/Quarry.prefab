@@ -70,7 +70,7 @@ MonoBehaviour:
   - {fileID: 6652918968045978713, guid: acb4ea3a16c66ef42a2d7e75bb7350fb, type: 3}
   maxResources: 4
   currentResources: []
-  resourceSpawnTime: {x: 1, y: 5}
+  resourceSpawnTime: {x: 5, y: 10}
   enemyPrefabs: []
   maxEnemies: 0
   currentEnemies: []

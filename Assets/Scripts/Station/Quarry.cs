@@ -31,6 +31,8 @@ public class Quarry : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(Random.Range(resourceSpawnTime.x, resourceSpawnTime.y));
+
+            if(!IsInView() || !visibleOnlySpawn)
             CheckOres();
         }
     }
@@ -62,6 +64,8 @@ public class Quarry : MonoBehaviour
         while(true)
         {
             yield return new WaitForSeconds(Random.Range(enemySpawnTime.x, enemySpawnTime.y));
+
+            if(!IsInView() || !visibleOnlySpawn)
             CheckEnemies();
         }
     }
@@ -114,5 +118,14 @@ public class Quarry : MonoBehaviour
     {
         Gizmos.color = new Color(0, 1, 1, .5f);
         Gizmos.DrawWireCube(transform.position + spawnBounds.center, spawnBounds.size);
+    }
+
+    public bool visibleOnlySpawn=true;
+    
+    bool IsInView()
+    {
+        Vector3 viewportPosition = Camera.main.WorldToViewportPoint(transform.position);
+
+        return viewportPosition.x > 0 && viewportPosition.x < 1 && viewportPosition.y > 0 && viewportPosition.y < 1;
     }
 }

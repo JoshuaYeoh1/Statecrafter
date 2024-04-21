@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class StationSpawner : MonoBehaviour
 {
-    public float innerRadius = 2;
-    public float outerRadius = 10;
+    public float innerRadius = 4;
+    public float outerRadius = 30;
 
     Vector2 RandomSpotInDoughnut()
     {
@@ -20,21 +20,21 @@ public class StationSpawner : MonoBehaviour
     }
 
     public Station treePrefab;
-    public Vector2 treeCount = new Vector2(10, 15);
+    public Vector2Int treeCount = new Vector2Int(20, 20);
 
     public Station quarryPrefab;
-    public Vector2 quarryCount = new Vector2(5, 8);
+    public Vector2Int quarryCount = new Vector2Int(10, 10);
     
     List<Vector3> occupiedSpots = new();
 
     void Start()
     {
-        for(int i=0; i<Random.Range(treeCount.x, treeCount.y); i++)
+        for(int i=0; i<Random.Range(treeCount.x, treeCount.y+1); i++)
         {
             Spawn(treePrefab);
         }
         
-        for(int i=0; i<Random.Range(quarryCount.x, quarryCount.y); i++)
+        for(int i=0; i<Random.Range(quarryCount.x, quarryCount.y+1); i++)
         {
             Spawn(quarryPrefab);
         }

@@ -27,30 +27,18 @@ public class SteveState_Fighting : BaseState
             steve.move.target=closestEnemy.transform;
         }
 
-        if(steve.inv.HasItem(Item.Arrow))
+        bool hasArrows = steve.inv.HasItem(Item.Arrow);
+
+        steve.combat.range = hasArrows ? steve.longRange : steve.meleeRange;
+
+        if(steve.combat.InRange())
         {
-            steve.combat.range=steve.longRange;
+            steve.move.evade=true;
+            steve.move.departure=true;
 
-            if(steve.combat.InRange())
-            {
-                steve.move.evade=true;
-                steve.move.departure=true;
-
-                steve.combat.Attack(steve.bowPrefab);
-            }
-            else steve.move.evade=false;
+            steve.combat.Attack(hasArrows ? steve.bowPrefab : steve.currentMeleePrefab);
         }
-        else
-        {
-            steve.combat.range=steve.meleeRange;
-
-            steve.move.evade=false;
-
-            if(steve.combat.InRange())
-            {
-                steve.combat.Attack(steve.currentMeleePrefab);
-            }
-        }
+        else steve.move.evade=false;
     }
 
     protected override void OnExit()

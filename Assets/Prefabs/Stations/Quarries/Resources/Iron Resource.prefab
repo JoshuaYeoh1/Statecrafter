@@ -54,11 +54,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5703837618175066484, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
       propertyPath: hp
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 5703837618175066484, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
       propertyPath: hpMax
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 6489225229063045796, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
       propertyPath: m_Name

@@ -97,22 +97,44 @@ public class Steve : MonoBehaviour
 
     public GameObject GetClosestStone()
     {
-        return radar.GetClosest(ResourceManager.Current.GetStones());
+        GameObject target = radar.GetClosest(ResourceManager.Current.GetStones());
+
+        if(!target) target = GetClosestCoalOre();
+
+        return target;
     }
 
     public GameObject GetClosestCoalOre()
     {
-        return radar.GetClosest(ResourceManager.Current.GetCoals());
+        GameObject target = radar.GetClosest(ResourceManager.Current.GetCoals());
+
+        if(!target) target = GetClosestStone();
+
+        return target;
     }
 
     public GameObject GetClosestIronOre()
     {
-        return radar.GetClosest(ResourceManager.Current.GetIrons());
+        GameObject target = radar.GetClosest(ResourceManager.Current.GetIrons());
+
+        if(!target) target = GetClosestCoalOre();
+
+        if(!target) target = GetClosestStone();
+
+        return target;
     }
 
     public GameObject GetClosestDiamondOre()
     {
-        return radar.GetClosest(ResourceManager.Current.GetDiamonds());
+        GameObject target = radar.GetClosest(ResourceManager.Current.GetDiamonds());
+
+        if(!target) target = GetClosestIronOre(); // these are to clear space if full capacity in quarries
+
+        if(!target) target = GetClosestCoalOre();
+
+        if(!target) target = GetClosestStone();
+
+        return target;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -151,7 +173,7 @@ public class Steve : MonoBehaviour
     {
         if(inv.HasItem(Item.DiamondPickaxe))
         {
-            goalItem = Item.None;
+            goalItem = Item.DiamondBlock;
         }
         else if(inv.HasItem(Item.IronPickaxe))
         {
@@ -236,6 +258,7 @@ public class Steve : MonoBehaviour
 
     [Header("Combat")]
     public float huggyRange=.05f;
+    public float useRange=.75f;
     public float meleeRange=1.5f;
     public float longRange=7;
 

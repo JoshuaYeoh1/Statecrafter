@@ -62,7 +62,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnBounds:
     m_Center: {x: 0, y: 1, z: 0}
-    m_Extent: {x: 0.5, y: 1, z: 0}
+    m_Extent: {x: 0.25, y: 0.5, z: 0}
   resourcePrefabs:
   - {fileID: 176287195741409542, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
   maxResources: 2
@@ -72,6 +72,7 @@ MonoBehaviour:
   maxEnemies: 0
   currentEnemies: []
   enemySpawnTime: {x: 10, y: 15}
+  visibleOnlySpawn: 0
 --- !u!1 &7598387556474211348
 GameObject:
   m_ObjectHideFlags: 0

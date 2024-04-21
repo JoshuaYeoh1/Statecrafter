@@ -16,6 +16,7 @@ public enum Item
     Diamond,
     DiamondPickaxe,
     Arrow,
+    DiamondBlock,
 }
 
 public class ItemManager : MonoBehaviour

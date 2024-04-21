@@ -27,7 +27,7 @@ public class SteveState_Crafting : BaseState
             steve.move.target=station.transform;
         }
         steve.move.evade=false;
-        steve.combat.range=steve.meleeRange;
+        steve.combat.range=steve.useRange;
 
         if(steve.combat.InRange())
         {

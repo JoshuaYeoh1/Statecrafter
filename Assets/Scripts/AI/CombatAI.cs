@@ -24,7 +24,8 @@ public class CombatAI : MonoBehaviour
 
     void UpdateRange()
     {
-        move.stoppingRange = move.evadeRange = range;
+        move.stoppingRange = range;
+        move.evadeRange = range*.8f;
     }
 
     public bool InRange()
@@ -64,7 +65,7 @@ public class CombatAI : MonoBehaviour
 
         Quaternion lookRotation = Quaternion.Euler(0, 0, angle + angleOffset);
 
-        transform.rotation = linearTurn ?
+        aimer.rotation = linearTurn ?
             Quaternion.Lerp(aimer.rotation, lookRotation, aimSpeed * Time.deltaTime): // linearly aim the direction
             Quaternion.Slerp(aimer.rotation, lookRotation, aimSpeed * Time.deltaTime); // smoothly aim the direction
     }

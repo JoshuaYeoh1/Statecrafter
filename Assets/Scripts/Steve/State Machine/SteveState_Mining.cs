@@ -27,13 +27,16 @@ public class SteveState_Mining : BaseState
             steve.move.target=targetResource.transform;
         }
         
-        steve.move.evade=false;
         steve.combat.range=steve.meleeRange;
 
         if(steve.combat.InRange())
         {
+            steve.move.evade=true;
+            steve.move.departure=true;
+
             steve.combat.Attack(steve.currentMeleePrefab);
         }
+        else steve.move.evade=false;
     }
 
     protected override void OnExit()

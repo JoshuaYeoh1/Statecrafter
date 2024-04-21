@@ -48,30 +48,36 @@ MonoBehaviour:
   - name: Wood Pickaxe
     craftingStation: 1
     ingredients: 01000000
-    quantities: 03000000
+    quantities: 05000000
     craftingTime: 5
     results: 02000000
   - name: Stone Pickaxe
     craftingStation: 1
     ingredients: 03000000
-    quantities: 03000000
+    quantities: 05000000
     craftingTime: 5
     results: 04000000
   - name: Iron Ingot
     craftingStation: 2
     ingredients: 0500000006000000
     quantities: 0100000001000000
-    craftingTime: 10
+    craftingTime: 5
     results: 07000000
   - name: Iron Pickaxe
     craftingStation: 1
     ingredients: 07000000
-    quantities: 03000000
+    quantities: 05000000
     craftingTime: 5
     results: 08000000
   - name: Diamond Pickaxe
     craftingStation: 1
     ingredients: 09000000
-    quantities: 03000000
+    quantities: 05000000
     craftingTime: 5
     results: 0a000000
+  - name: Diamond Block
+    craftingStation: 1
+    ingredients: 09000000
+    quantities: 09000000
+    craftingTime: 5
+    results: 0c000000
