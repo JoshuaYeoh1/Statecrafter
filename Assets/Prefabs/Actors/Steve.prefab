@@ -256,7 +256,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3025905349624694407}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -349,18 +349,16 @@ MonoBehaviour:
   lowHPPercent: 25
   closestEnemy: {fileID: 0}
   closestLoot: {fileID: 0}
-  currentTool: 1
-  nextTool: 2
-  nextItem: 2
+  currentMeleePrefab: {fileID: 0}
+  goalItem: 2
   huggyRange: 0.05
-  meleeRange: 1
-  longRange: 5
+  meleeRange: 1.5
+  longRange: 7
   fistPrefab: {fileID: 948980528100640746, guid: 002fd0bd5651b3444b215db744815207, type: 3}
   woodPickaxePrefab: {fileID: 4529329827309642947, guid: ea2ac9c4c9961f84d9a46b7fcdc954ba, type: 3}
   stonePickaxePrefab: {fileID: 4529329827309642947, guid: a62bfc6d33a22e343893ae15cecc562f, type: 3}
   ironPickaxePrefab: {fileID: 4529329827309642947, guid: 87688be702bfcd34aac67460f6475ba3, type: 3}
   diamondPickaxePrefab: {fileID: 4529329827309642947, guid: 6a55a84ae2f269a43a0daa4a044dbccd, type: 3}
-  currentMeleePrefab: {fileID: 0}
   bowPrefab: {fileID: 948980528100640746, guid: 2bf34a725d0e72447b28276cd9e4c115, type: 3}
 --- !u!114 &3101731592218810877
 MonoBehaviour:
@@ -463,7 +461,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10baf498fb9e1c34781dbd04eac8d9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 5
+  range: 8
   layers:
     serializedVersion: 2
     m_Bits: 1152

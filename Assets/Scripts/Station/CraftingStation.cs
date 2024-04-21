@@ -30,6 +30,8 @@ public class CraftingStation : MonoBehaviour
 
             EventManager.Current.OnCrafted(crafter, gameObject, recipe);
         }
+
+        EventManager.Current.OnUIBarUpdate(gameObject, progress, recipe.craftingTime);
     }
 
     void OnUpdateNotCraft(GameObject station)
@@ -37,5 +39,7 @@ public class CraftingStation : MonoBehaviour
         if(station!=gameObject) return;
 
         progress=0;
+
+        EventManager.Current.OnUIBarUpdate(gameObject, progress, progress+1);
     }
 }

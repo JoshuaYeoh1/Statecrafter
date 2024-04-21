@@ -11,6 +11,9 @@ GameObject:
   - component: {fileID: 6040698364682081960}
   - component: {fileID: 2714892256354319091}
   - component: {fileID: 733391478825078161}
+  - component: {fileID: -8181636940466680419}
+  - component: {fileID: 4253806528645087221}
+  - component: {fileID: 4855891374154340589}
   m_Layer: 10
   m_Name: Loot
   m_TagString: Loot
@@ -79,6 +82,77 @@ MonoBehaviour:
   lootDelay: 1
   contactPoint: {x: 0, y: 0, z: 0}
   destroyOnLoot: 1
+--- !u!114 &-8181636940466680419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775846598288885977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8462864776ba5ff42b9c2097112403a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomTranslateX: 0
+  randomTranslateY: 0
+  randomTranslateZ: 0
+  minTranslate: -0.1
+  maxTranslate: 0.1
+  randomRotateX: 0
+  randomRotateY: 0
+  randomRotateZ: 1
+  minRotate: -180
+  maxRotate: 180
+  randomScaleX: 0
+  randomScaleY: 0
+  randomScaleZ: 0
+  minScale: 0.9
+  maxScale: 1.1
+  randomMirrorX: 0
+  randomMirrorY: 0
+  randomMirrorZ: 0
+--- !u!114 &4253806528645087221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775846598288885977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfdc7f697f92d884d8327672cc05d532, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedMult: {x: -360, y: 360}
+--- !u!114 &4855891374154340589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4775846598288885977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa76d7099fbdba040af825d9772629a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animPos: 0
+  inPos: {x: 0, y: 0, z: 0}
+  outPos: {x: 0, y: 0, z: 0}
+  animRot: 0
+  inRot: {x: 0, y: 0, z: 0}
+  outRot: {x: 0, y: 0, z: 0}
+  animScale: 1
+  inScale: {x: 0, y: 0, z: 0}
+  outScale: {x: 0, y: 0, z: 0}
+  img: {fileID: 0}
+  animAlpha: 0
+  inAlpha: 0
+  outAlpha: 0
+  playOnEnable: 1
+  playOnEnableAnimTime: 0.25
+  playOnEnableDelay: 0
 --- !u!1 &6677508248672619931
 GameObject:
   m_ObjectHideFlags: 0

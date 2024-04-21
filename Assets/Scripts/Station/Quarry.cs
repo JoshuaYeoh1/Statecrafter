@@ -2,19 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum QuarryType
-{
-    Tree,
-    StoneQuarry,
-    CoalQuarry,
-    IronQuarry,
-    DiamondQuarry,
-}
-
 public class Quarry : MonoBehaviour
 {
-    public QuarryType type;
-
     public Bounds spawnBounds;
 
     void OnEnable()
@@ -25,38 +14,38 @@ public class Quarry : MonoBehaviour
 
     void Update()
     {
-        RemoveNulls(currentOres);
+        RemoveNulls(currentResources);
         RemoveNulls(currentEnemies);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     [Header("Resource")]
-    public List<GameObject> orePrefabs = new();
-    public int maxOres=3;
-    public List<GameObject> currentOres = new();
-    public Vector2 oreSpawnTime = new Vector2(1, 5);
+    public List<GameObject> resourcePrefabs = new();
+    public int maxResources=3;
+    public List<GameObject> currentResources = new();
+    public Vector2 resourceSpawnTime = new Vector2(1, 5);
 
     IEnumerator CheckingOres()
     {
         while(true)
         {
-            yield return new WaitForSeconds(Random.Range(oreSpawnTime.x, oreSpawnTime.y));
+            yield return new WaitForSeconds(Random.Range(resourceSpawnTime.x, resourceSpawnTime.y));
             CheckOres();
         }
     }
 
     void CheckOres()
     {
-        if(orePrefabs.Count==0) return;
+        if(resourcePrefabs.Count==0) return;
 
-        if(currentOres.Count<maxOres)
+        if(currentResources.Count<maxResources)
         {
-            GameObject spawned = Spawn(orePrefabs, true);
+            GameObject spawned = Spawn(resourcePrefabs, true);
 
             spawned.transform.position = GetRandomSpot(spawnBounds);
 
-            currentOres.Add(spawned);
+            currentResources.Add(spawned);
         }
     }
 
@@ -118,7 +107,7 @@ public class Quarry : MonoBehaviour
     {
         list.RemoveAll(item => item == null);
     }
-
+    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     void OnDrawGizmosSelected()

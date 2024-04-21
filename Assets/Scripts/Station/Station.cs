@@ -7,10 +7,19 @@ public enum StationType
     Bed,
     CraftingTable,
     Furnace,
-    Quarry    
+    Tree,
+    Quarry,
 }
 
 public class Station : MonoBehaviour
 {
     public StationType type;
+
+    public float size=2;
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(0, 1, 1, .5f);
+        Gizmos.DrawWireSphere(transform.position, size);
+    }
 }

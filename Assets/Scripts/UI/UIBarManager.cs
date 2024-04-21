@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(UIHider))]
-
 public class UIBarManager : MonoBehaviour
 {
     public GameObject owner;
@@ -27,12 +25,14 @@ public class UIBarManager : MonoBehaviour
         LeanTween.cancel(gameObject);
     }
     
+    public float tweenTime=.2f;
+
     void OnUIBarUpdate(GameObject owner, float value, float valueMax)
     {
-        if(!owner && owner!=this.owner) return;
+        if(!owner || owner!=this.owner) return;
 
-        TweenFilledImage(value/valueMax, .2f);
-        TweenSlider(value/valueMax, .2f);
+        TweenFilledImage(value/valueMax, tweenTime);
+        TweenSlider(value/valueMax, tweenTime);
 
         if(hider)
         {
@@ -51,11 +51,15 @@ public class UIBarManager : MonoBehaviour
 
         LeanTween.cancel(tweenFilledImageId);
 
-        tweenFilledImageId = LeanTween.value(filledImage.fillAmount, to, time)
-            .setEaseInOutSine()
-            .setIgnoreTimeScale(true)
-            .setOnUpdate( (float value)=>{if(filledImage) filledImage.fillAmount=value;} )
-            .id;
+        if(time>0)
+        {
+            tweenFilledImageId = LeanTween.value(filledImage.fillAmount, to, time)
+                .setEaseInOutSine()
+                .setIgnoreTimeScale(true)
+                .setOnUpdate( (float value)=>{if(filledImage) filledImage.fillAmount=value;} )
+                .id;
+        }
+        else filledImage.fillAmount=to;
     }
 
     public Slider slider; 
@@ -68,10 +72,14 @@ public class UIBarManager : MonoBehaviour
 
         LeanTween.cancel(tweenSliderId);
 
-        tweenSliderId = LeanTween.value(slider.value, to, time)
-            .setEaseInOutSine()
-            .setIgnoreTimeScale(true)
-            .setOnUpdate( (float value)=>{if(slider) slider.value=value;} )
-            .id;
+        if(time>0)
+        {
+            tweenSliderId = LeanTween.value(slider.value, to, time)
+                .setEaseInOutSine()
+                .setIgnoreTimeScale(true)
+                .setOnUpdate( (float value)=>{if(slider) slider.value=value;} )
+                .id;
+        }
+        else slider.value=to;
     }
 }

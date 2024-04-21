@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 3
+  size: 5
 --- !u!114 &78324309368120961
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,15 +60,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db065c716547414e99a44992b9a85aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
   spawnBounds:
     m_Center: {x: 0, y: 1, z: 0}
     m_Extent: {x: 0.5, y: 1, z: 0}
-  orePrefabs:
+  resourcePrefabs:
   - {fileID: 176287195741409542, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
-  maxOres: 3
-  currentOres: []
-  oreSpawnTime: {x: 1, y: 5}
+  maxResources: 2
+  currentResources: []
+  resourceSpawnTime: {x: 1, y: 5}
   enemyPrefabs: []
   maxEnemies: 0
   currentEnemies: []
@@ -144,7 +144,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1723907115
   m_SortingLayer: -1
-  m_SortingOrder: 2
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: f74af0e567bf933448f35b4f667f0524, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

@@ -83,6 +83,7 @@ public class CombatAI : MonoBehaviour
         
         GameObject spawned = Instantiate(prefab, aimer.position, aimer.rotation);
         spawned.transform.parent = aimer;
+        spawned.name = prefab.name;
 
         if(spawned.TryGetComponent(out Hurtbox2D hurtbox))
         {

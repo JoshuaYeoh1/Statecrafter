@@ -92,27 +92,27 @@ public class Steve : MonoBehaviour
 
     public GameObject GetClosestWood()
     {
-        return radar.GetClosest(StationManager.Current.GetTreeLogs());
+        return radar.GetClosest(ResourceManager.Current.GetWoods());
     }
 
     public GameObject GetClosestStone()
     {
-        return radar.GetClosest(StationManager.Current.GetStones());
+        return radar.GetClosest(ResourceManager.Current.GetStones());
     }
 
     public GameObject GetClosestCoalOre()
     {
-        return radar.GetClosest(StationManager.Current.GetCoalOres());
+        return radar.GetClosest(ResourceManager.Current.GetCoals());
     }
 
     public GameObject GetClosestIronOre()
     {
-        return radar.GetClosest(StationManager.Current.GetIronOres());
+        return radar.GetClosest(ResourceManager.Current.GetIrons());
     }
 
     public GameObject GetClosestDiamondOre()
     {
-        return radar.GetClosest(StationManager.Current.GetDiamondOres());
+        return radar.GetClosest(ResourceManager.Current.GetDiamonds());
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -236,8 +236,8 @@ public class Steve : MonoBehaviour
 
     [Header("Combat")]
     public float huggyRange=.05f;
-    public float meleeRange=1;
-    public float longRange=5;
+    public float meleeRange=1.5f;
+    public float longRange=7;
 
     public GameObject fistPrefab;
     public GameObject woodPickaxePrefab;

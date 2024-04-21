@@ -46,7 +46,6 @@ public class SteveStateMachine : MonoBehaviour
         idle.AddTransition(looting, (timeInState) =>
         {
             if(
-                !steve.CanCraftGoalItem() &&
                 steve.closestLoot &&
                 !steve.closestEnemy &&
                 !steve.IsLowHP()
@@ -62,6 +61,7 @@ public class SteveStateMachine : MonoBehaviour
             if(
                 steve.CanCraftGoalItem() &&
                 steve.GetRequiredCraftingStation() &&
+                !steve.closestLoot &&
                 !steve.closestEnemy &&
                 !steve.IsLowHP()
             )
@@ -129,7 +129,6 @@ public class SteveStateMachine : MonoBehaviour
         looting.AddTransition(idle, (timeInState) =>
         {
             if(
-                steve.CanCraftGoalItem() ||
                 !steve.closestLoot ||
                 steve.closestEnemy ||
                 steve.IsLowHP()
@@ -147,6 +146,7 @@ public class SteveStateMachine : MonoBehaviour
             if(
                 !steve.CanCraftGoalItem() ||
                 !steve.GetRequiredCraftingStation() ||
+                steve.closestLoot ||
                 steve.closestEnemy ||
                 steve.IsLowHP() ||
                 steve.HasCrafted()

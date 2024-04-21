@@ -53,22 +53,23 @@ public class Hurtbox2D : MonoBehaviour
 
         ToggleColl(hasSweepingEdge); // if can swipe through multiple
         
-        EventManager.Current.OnHit(owner, otherRb.gameObject, GetHurtInfoCopy());
+        EventManager.Current.OnHit(owner, otherRb.gameObject, CopyHurtInfo());
 
         if(destroyOnHit) Destroy(gameObject);
     }
 
-    HurtInfo GetHurtInfoCopy()
+    HurtInfo CopyHurtInfo()
     {
-        HurtInfo info = new();
-
-        info.coll = coll;
-        info.owner = owner;
-        info.attackerName = ownerName;
-        info.dmg = dmg;
-        info.kbForce = kbForce;
-        info.contactPoint = contactPoint;
-        info.hasSweepingEdge = hasSweepingEdge;
+        HurtInfo info = new()
+        {
+            coll = coll,
+            owner = owner,
+            attackerName = ownerName,
+            dmg = dmg,
+            kbForce = kbForce,
+            contactPoint = contactPoint,
+            hasSweepingEdge = hasSweepingEdge
+        };
 
         return info;
     }
