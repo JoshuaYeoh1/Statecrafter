@@ -24,12 +24,19 @@ public class Inventory : MonoBehaviour
 
     public void AddItem(Item item, int quantity)
     {
-        inventory[item] += quantity;
+        if(HasItem(item))
+        {
+            inventory[item] += quantity;
+        }
+        else if(quantity>0)
+        {
+            inventory.Add(item, quantity);
+        }
     }
     
     public void RemoveItem(Item item, int quantity)
     {
-        if(!inventory.ContainsKey(item)) return;
+        if(!HasItem(item)) return;
 
         inventory[item] -= quantity;
 
@@ -39,9 +46,9 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public bool HasItem(Item item)
+    public bool HasItem(Item item, int quantity=1)
     {
-        return inventory.ContainsKey(item) && inventory[item]>0;
+        return inventory.ContainsKey(item) && inventory[item]>=quantity;
     }
 
     public int GetItemQuantity(Item item)
@@ -58,7 +65,7 @@ public class Inventory : MonoBehaviour
 
     public void Drop(Item item, int quantity)
     {
-        if(!inventory.ContainsKey(item)) return;
+        if(!HasItem(item)) return;
 
         int left = inventory[item];
 

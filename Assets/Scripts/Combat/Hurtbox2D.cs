@@ -18,7 +18,7 @@ public class HurtInfo
 
 public class Hurtbox2D : MonoBehaviour
 {
-    Collider2D coll;
+    public Collider2D coll;
     public GameObject owner;
     public string ownerName;
 
@@ -28,10 +28,10 @@ public class Hurtbox2D : MonoBehaviour
 
     public bool hasSweepingEdge=true;
 
+    public bool destroyOnHit;
+
     void Awake()
     {
-        coll=GetComponent<Collider2D>();
-
         ToggleColl(enabledOnAwake);
     }
     
@@ -54,6 +54,8 @@ public class Hurtbox2D : MonoBehaviour
         ToggleColl(hasSweepingEdge); // if can swipe through multiple
         
         EventManager.Current.OnHit(owner, otherRb.gameObject, GetHurtInfoCopy());
+
+        if(destroyOnHit) Destroy(gameObject);
     }
 
     HurtInfo GetHurtInfoCopy()

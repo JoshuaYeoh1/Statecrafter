@@ -14,15 +14,21 @@ public class SteveState_Fleeing: BaseState
     protected override void OnEnter()
     {
         Debug.Log($"{steve.gameObject.name} State: {Name}");
-
-        steve.move.target=steve.closestEnemy.transform;
-        steve.move.evade=true;
-        steve.move.departure=false;
     }
+
+    GameObject closestEnemy;
 
     protected override void OnUpdate(float deltaTime)
     {
+        closestEnemy = steve.closestEnemy;
 
+        if(closestEnemy)
+        {
+            steve.move.target=closestEnemy.transform;
+        }
+
+        steve.move.evade=true;
+        steve.move.departure=false;
     }
 
     protected override void OnExit()

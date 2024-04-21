@@ -133,7 +133,7 @@ public class Hurt2D : MonoBehaviour
         Vector3 kbVector = rb.transform.position - contactPoint;
         kbVector.z=0; // no z axis in 2D
 
-        rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        rb.velocity = Vector3.zero;
         rb.AddForce(kbVector.normalized * force, ForceMode2D.Impulse);
     }
 

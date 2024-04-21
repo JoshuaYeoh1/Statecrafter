@@ -39,27 +39,27 @@ public class RecipeManager : MonoBehaviour
         return null;
     }
 
-    public bool CanCraft(Recipe recipe, Dictionary<Item, int> inventory)
+    public bool CanCraft(Recipe recipe, Inventory inv)
     {
         if(recipe==null) return false;
 
         for(int i=0; i<recipe.ingredients.Count; i++)
         {
-            if(inventory.ContainsKey(recipe.ingredients[i]))
+            if(inv.HasItem(recipe.ingredients[i]))
             {
-                if(inventory[recipe.ingredients[i]] >= recipe.quantities[i])
+                if(inv.GetItemQuantity(recipe.ingredients[i]) >= recipe.quantities[i])
                 {
                     continue;
                 }
                 else
                 {
-                    Debug.LogWarning($"Not Enough {recipe.ingredients[i]} for {recipe.name}");
+                    //Debug.Log($"Not Enough {recipe.ingredients[i]} for {recipe.name}");
                     return false;
                 }
             }
             else
             {
-                Debug.LogWarning($"No {recipe.ingredients[i]} for {recipe.name}");
+                //Debug.Log($"No {recipe.ingredients[i]} for {recipe.name}");
                 return false;
             }
         }
@@ -67,22 +67,22 @@ public class RecipeManager : MonoBehaviour
         return true;
     }
 
-    public bool CanCraft(Item targetItem, Dictionary<Item, int> inventory)
+    public bool CanCraft(Item targetItem, Inventory inv)
     {
         Recipe recipe = GetRecipe(targetItem);
 
-        return CanCraft(recipe, inventory);
+        return CanCraft(recipe, inv);
     }
 
-    public void Craft(Recipe recipe, Dictionary<Item, int> inventory, GameObject station)
+    public void Craft(Recipe recipe, Inventory inv, GameObject station)
     {
         if(recipe==null) return;
 
-        if(!CanCraft(recipe, inventory)) return;
+        if(!CanCraft(recipe, inv)) return;
 
         for(int i=0; i<recipe.ingredients.Count; i++)
         {
-            inventory[recipe.ingredients[i]] -= recipe.quantities[i];
+            inv.RemoveItem(recipe.ingredients[i], recipe.quantities[i]);
         }
 
         foreach(Item item in recipe.results)
@@ -96,12 +96,12 @@ public class RecipeManager : MonoBehaviour
         // }
     }
 
-    public void Craft(Item targetItem, Dictionary<Item, int> inventory, GameObject station)
+    public void Craft(Item targetItem, Inventory inv, GameObject station)
     {
-        if(!CanCraft(targetItem, inventory)) return;
+        if(!CanCraft(targetItem, inv)) return;
 
         Recipe recipe = GetRecipe(targetItem);
 
-        Craft(recipe, inventory, station);
+        Craft(recipe, inv, station);
     }    
 }

@@ -18,16 +18,6 @@ public enum Item
     Arrow,
 }
 
-public enum Tool
-{
-    None,
-    Fist,
-    WoodPickaxe,
-    StonePickaxe,
-    IronPickaxe,
-    DiamondPickaxe,
-}
-
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager Current;

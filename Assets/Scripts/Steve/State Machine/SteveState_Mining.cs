@@ -14,14 +14,22 @@ public class SteveState_Mining : BaseState
     protected override void OnEnter()
     {
         Debug.Log($"{steve.gameObject.name} State: {Name}");
-
-        steve.move.target=steve.GetTargetResource().transform;
-        steve.move.evade=false;
-        steve.combat.range=steve.meleeRange;
     }
+
+    GameObject targetResource;
 
     protected override void OnUpdate(float deltaTime)
     {
+        targetResource = steve.GetGoalResource();
+
+        if(targetResource)
+        {
+            steve.move.target=targetResource.transform;
+        }
+        
+        steve.move.evade=false;
+        steve.combat.range=steve.meleeRange;
+
         if(steve.combat.InRange())
         {
             steve.combat.Attack(steve.currentMeleePrefab);

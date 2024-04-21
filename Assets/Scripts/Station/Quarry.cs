@@ -52,17 +52,9 @@ public class Quarry : MonoBehaviour
 
         if(currentOres.Count<maxOres)
         {
-            GameObject prefab = orePrefabs[Random.Range(0, orePrefabs.Count)];
+            GameObject spawned = Spawn(orePrefabs, true);
 
-            GameObject spawned = Instantiate(prefab, transform);
-
-            Vector2 randomSpot = new Vector2
-            (
-                Random.Range(spawnBounds.min.x, spawnBounds.max.x),
-                Random.Range(spawnBounds.min.y, spawnBounds.max.y)
-            );
-
-            spawned.transform.position += new Vector3(randomSpot.x, randomSpot.y, 0);
+            spawned.transform.position = GetRandomSpot(spawnBounds);
 
             currentOres.Add(spawned);
         }
@@ -91,23 +83,36 @@ public class Quarry : MonoBehaviour
 
         if(currentEnemies.Count<maxEnemies)
         {
-            GameObject prefab = enemyPrefabs[Random.Range(0, enemyPrefabs.Count)];
+            GameObject spawned = Spawn(enemyPrefabs, false);
 
-            GameObject spawned = Instantiate(prefab);
-
-            Vector2 randomSpot = new Vector2
-            (
-                Random.Range(spawnBounds.min.x, spawnBounds.max.x),
-                Random.Range(spawnBounds.min.y, spawnBounds.max.y)
-            );
-
-            spawned.transform.position += new Vector3(randomSpot.x, randomSpot.y, 0);
+            spawned.transform.position = GetRandomSpot(spawnBounds);
 
             currentEnemies.Add(spawned);
         }
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    GameObject Spawn(List<GameObject> prefabs, bool parent)
+    {
+        GameObject prefab = prefabs[Random.Range(0, prefabs.Count)];
+
+        GameObject spawned = Instantiate(prefab, transform.position, Quaternion.identity);
+        if(parent) spawned.transform.parent = transform;
+
+        return spawned;
+    }
+
+    Vector3 GetRandomSpot(Bounds bounds)
+    {
+        Vector3 randomSpot = transform.position + new Vector3
+        (
+            Random.Range(bounds.min.x, bounds.max.x),
+            Random.Range(bounds.min.y, bounds.max.y)
+        );
+
+        return randomSpot;
+    }
 
     void RemoveNulls(List<GameObject> list)
     {
@@ -119,6 +124,6 @@ public class Quarry : MonoBehaviour
     void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(0, 1, 1, .5f);
-        Gizmos.DrawWireCube(spawnBounds.center, spawnBounds.size);
+        Gizmos.DrawWireCube(transform.position + spawnBounds.center, spawnBounds.size);
     }
 }

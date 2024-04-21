@@ -26,23 +26,22 @@ public class Loot2D : MonoBehaviour
 
     void OnEnable()
     {
-        if(lootDelay>0) StartCoroutine(LootDelaying());
         Push();
-    }
 
-    void Start()
-    {
-        anim.Play($"{item}", 0);
+        Invoke(nameof(EnableLoot), lootDelay);
     }
 
     public float lootDelay=1;
     bool canLoot;
 
-    IEnumerator LootDelaying()
+    void EnableLoot()
     {
-        canLoot=false;
-        yield return new WaitForSeconds(lootDelay);
         canLoot=true;
+    }
+
+    void Update()
+    {
+        anim.Play($"{item}", 0);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +82,7 @@ public class Loot2D : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public void Push(float force=2)
+    public void Push(float force=1.5f)
     {
         Vector2 randVector = new Vector2
         (

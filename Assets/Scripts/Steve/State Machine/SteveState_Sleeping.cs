@@ -13,15 +13,23 @@ public class SteveState_Sleeping : BaseState
 
     protected override void OnEnter()
     {
-        Debug.Log($"{steve.gameObject.name} State: {Name}");
-
-        steve.move.target=steve.GetClosestBed().transform;
-        steve.move.evade=false;
-        steve.combat.range=steve.huggyRange;
+        Debug.Log($"{steve.gameObject.name} State: {Name}");        
     }
+
+    GameObject closestBed;
 
     protected override void OnUpdate(float deltaTime)
     {
+        closestBed = steve.GetClosestBed();
+
+        if(closestBed)
+        {
+            steve.move.target=closestBed.transform;
+        }
+
+        steve.move.evade=false;
+        steve.combat.range=steve.huggyRange;
+
         if(steve.combat.InRange())
         {
             steve.hp.regen=true;

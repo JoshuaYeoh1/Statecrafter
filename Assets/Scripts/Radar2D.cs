@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class Radar2D : MonoBehaviour
 {
-    void OnEnable()
+    void Update()
     {
-        StartCoroutine(SlowUpdate());
-    }
-    
-    IEnumerator SlowUpdate()
-    {
-        while(true)
-        {
-            Scan();
-            yield return new WaitForSeconds(.1f);
-        }
+        RemoveNulls(targets);
+        Scan();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -81,6 +73,11 @@ public class Radar2D : MonoBehaviour
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    void RemoveNulls(List<GameObject> list)
+    {
+        list.RemoveAll(item => item == null);
+    }
 
     void OnDrawGizmosSelected()
     {

@@ -13,7 +13,7 @@ public class CombatAI : MonoBehaviour
 
     void Update()
     {
-        UpdateAIRange();
+        UpdateRange();
         UpdateAimer();
     }
     
@@ -22,7 +22,7 @@ public class CombatAI : MonoBehaviour
     [Header("Range")]
     public float range=.05f;
 
-    void UpdateAIRange()
+    void UpdateRange()
     {
         move.stoppingRange = move.evadeRange = range;
     }
@@ -39,11 +39,14 @@ public class CombatAI : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     [Header("Aim")]
-    public Transform firepoint;
+    public Transform aimer;
+    public float aimSpeed=10;
+    public bool linearTurn;
+    public float angleOffset=-90;
 
     void UpdateAimer()
     {
-        firepoint.up = move.target ? GetAim() : transform.up;
+        Aim(GetAim());
     }
 
     Vector3 GetAim()
@@ -52,11 +55,24 @@ public class CombatAI : MonoBehaviour
 
         return move.GetDir(move.target.position, transform.position);
     }
+
+    void Aim(Vector3 dir)
+    {
+        if(dir==Vector3.zero) return;
+
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        Quaternion lookRotation = Quaternion.Euler(0, 0, angle + angleOffset);
+
+        transform.rotation = linearTurn ?
+            Quaternion.Lerp(aimer.rotation, lookRotation, aimSpeed * Time.deltaTime): // linearly aim the direction
+            Quaternion.Slerp(aimer.rotation, lookRotation, aimSpeed * Time.deltaTime); // smoothly aim the direction
+    }
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     [Header("Attack")]
-    public float attackCooldown=.4f;
+    public float attackCooldown=.6f;
     bool canAttack=true;
 
     public void Attack(GameObject prefab)
@@ -65,8 +81,18 @@ public class CombatAI : MonoBehaviour
         canAttack=false;
         Invoke(nameof(EnableAttack), attackCooldown);
         
-        Instantiate(prefab, firepoint.position, firepoint.rotation);
-        prefab.transform.parent = firepoint;
+        GameObject spawned = Instantiate(prefab, aimer.position, aimer.rotation);
+        spawned.transform.parent = aimer;
+
+        if(spawned.TryGetComponent(out Hurtbox2D hurtbox))
+        {
+            hurtbox.owner = gameObject;
+        }
+        
+        if(spawned.TryGetComponent(out BowAnim bow))
+        {
+            bow.owner = gameObject;
+        }
     }
 
     void EnableAttack()

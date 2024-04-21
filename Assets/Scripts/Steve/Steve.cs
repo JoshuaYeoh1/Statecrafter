@@ -7,7 +7,6 @@ public class Steve : MonoBehaviour
     [HideInInspector] public ForceVehicle2D vehicle;
     [HideInInspector] public PursuitAI move;
     [HideInInspector] public HPManager hp;
-    [HideInInspector] public Hurt2D hurt;
     [HideInInspector] public Radar2D radar;
     [HideInInspector] public Inventory inv;
     [HideInInspector] public CombatAI combat;
@@ -17,7 +16,6 @@ public class Steve : MonoBehaviour
         vehicle=GetComponent<ForceVehicle2D>();
         move=GetComponent<PursuitAI>();
         hp=GetComponent<HPManager>();
-        hurt=GetComponent<Hurt2D>();
         radar=GetComponent<Radar2D>();
         inv=GetComponent<Inventory>();
         combat=GetComponent<CombatAI>();
@@ -25,22 +23,13 @@ public class Steve : MonoBehaviour
 
     void OnEnable()
     {
-        EventManager.Current.HitEvent += OnHit;
         EventManager.Current.CraftedEvent += OnCrafted;
         EventManager.Current.AmmoEvent += OnAmmo;
     }
     void OnDisable()
     {
-        EventManager.Current.HitEvent -= OnHit;
         EventManager.Current.CraftedEvent -= OnCrafted;
         EventManager.Current.AmmoEvent -= OnAmmo;
-    }
-
-    public void OnHit(GameObject attacker, GameObject victim, HurtInfo hurtInfo)
-    {
-        if(victim!=gameObject) return;
-
-        hurt.Hit(attacker, hurtInfo);
     }
 
     public float lowHPPercent=25;
@@ -60,7 +49,8 @@ public class Steve : MonoBehaviour
     void Update()
     {
         UpdateClosest();
-        UpdateCurrentTool();
+        UpdateTool();
+        UpdateGoal();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -125,113 +115,116 @@ public class Steve : MonoBehaviour
         return radar.GetClosest(StationManager.Current.GetDiamondOres());
     }
 
-    public GameObject GetTargetResource()
-    {
-        if(nextTool==Tool.DiamondPickaxe)
-        {
-            return GetClosestDiamondOre();
-        }
-        else if(nextTool==Tool.IronPickaxe)
-        {
-            int eachRequired = RecipeManager.Current.GetRecipe(Item.IronPickaxe).quantities[0];
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            if(inv.inventory.ContainsKey(Item.Coal))
+    [Header("Inventory")]
+    public GameObject currentMeleePrefab;
+
+    void UpdateTool()
+    {
+        if(inv.HasItem(Item.DiamondPickaxe))
+        {
+            currentMeleePrefab = diamondPickaxePrefab;
+        }
+        else if(inv.HasItem(Item.IronPickaxe))
+        {
+            currentMeleePrefab = ironPickaxePrefab;
+        }
+        else if(inv.HasItem(Item.StonePickaxe))
+        {
+            currentMeleePrefab = stonePickaxePrefab;
+        }
+        else if(inv.HasItem(Item.WoodPickaxe))
+        {
+            currentMeleePrefab = woodPickaxePrefab;
+        }
+        else
+        {
+            currentMeleePrefab = fistPrefab;
+        }
+    }
+
+    [Header("Goal")]
+    public Item goalItem = Item.WoodPickaxe;
+
+    void UpdateGoal()
+    {
+        if(inv.HasItem(Item.DiamondPickaxe))
+        {
+            goalItem = Item.None;
+        }
+        else if(inv.HasItem(Item.IronPickaxe))
+        {
+            goalItem = Item.DiamondPickaxe;
+        }
+        else if(inv.HasItem(Item.StonePickaxe))
+        {
+            if(RecipeManager.Current.CanCraft(Item.IronPickaxe, inv))
             {
-                if(inv.inventory[Item.Coal] >= eachRequired)
-                {
-                    if(inv.inventory.ContainsKey(Item.IronOre))
-                    {
-                        if(inv.inventory[Item.IronOre] < eachRequired)
-                        {
-                            return GetClosestIronOre();
-                        }
-                    }
-                    else return GetClosestIronOre();
-                }
-                else return GetClosestCoalOre();
+                goalItem = Item.IronPickaxe;
             }
-            else return GetClosestCoalOre();
+            else
+            {
+                goalItem = RecipeManager.Current.GetRecipe(Item.IronPickaxe).ingredients[0];
+            }
         }
-        else if(nextTool==Tool.StonePickaxe)
+        else if(inv.HasItem(Item.WoodPickaxe))
         {
-            return GetClosestStone();
+            goalItem = Item.StonePickaxe;
         }
-        else if(nextTool==Tool.WoodPickaxe)
+        else
         {
-            return GetClosestWood();
+            goalItem = Item.WoodPickaxe;
+        }
+    }
+
+    public GameObject GetGoalResource()
+    {
+        Recipe goalRecipe = GetGoalRecipe();
+
+        if(goalRecipe!=null && !CanCraftGoalItem())
+        {
+            for(int i=0; i<goalRecipe.ingredients.Count; i++)
+            {
+                if(!inv.HasItem(goalRecipe.ingredients[i], goalRecipe.quantities[i]))
+                {
+                    switch(goalRecipe.ingredients[i])
+                    {
+                        case Item.Wood: return GetClosestWood();
+                        case Item.Stone: return GetClosestStone();
+                        case Item.Coal: return GetClosestCoalOre();
+                        case Item.IronOre: return GetClosestIronOre();
+                        case Item.Diamond: return GetClosestDiamondOre();
+                    }
+                }
+            }
         }
 
         return null;
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    [Header("Inventory")]
-    public Tool currentTool = Tool.Fist;
-    public Tool nextTool = Tool.WoodPickaxe;
-    public Item nextItem = Item.WoodPickaxe;
-
-    void UpdateCurrentTool()
+    public Recipe GetGoalRecipe()
     {
-        if(inv.inventory.ContainsKey(Item.DiamondPickaxe))
-        {
-            currentTool = Tool.DiamondPickaxe;
-            currentMeleePrefab = diamondPickaxePrefab;
-            nextTool = Tool.None;
-            nextItem = Item.None;
-        }
-        else if(inv.inventory.ContainsKey(Item.IronPickaxe))
-        {
-            currentTool = Tool.IronPickaxe;
-            currentMeleePrefab = ironPickaxePrefab;
-            nextTool = Tool.DiamondPickaxe;
-            nextItem = Item.DiamondPickaxe;
-        }
-        else if(inv.inventory.ContainsKey(Item.StonePickaxe))
-        {
-            currentTool = Tool.StonePickaxe;
-            currentMeleePrefab = stonePickaxePrefab;
-            nextTool = Tool.IronPickaxe;
-            nextItem = Item.IronPickaxe;
-        }
-        else if(inv.inventory.ContainsKey(Item.WoodPickaxe))
-        {
-            currentTool = Tool.WoodPickaxe;
-            currentMeleePrefab = woodPickaxePrefab;
-            nextTool = Tool.StonePickaxe;
-            nextItem = Item.StonePickaxe;
-        }
-        else
-        {
-            currentTool = Tool.Fist;
-            currentMeleePrefab = fistPrefab;
-            nextTool = Tool.WoodPickaxe;
-            nextItem = Item.WoodPickaxe;
-        }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
-    public bool HasEnoughResources()
-    {
-        return RecipeManager.Current.CanCraft(nextItem, inv.inventory);
-    }
-
-    public Recipe GetTargetRecipe()
-    {
-        return RecipeManager.Current.GetRecipe(nextItem);
+        return RecipeManager.Current.GetRecipe(goalItem);
     }
 
     public GameObject GetRequiredCraftingStation()
     {
-        return GetTargetRecipe().craftingStation == StationType.Furnace ? GetClosestFurnace() : GetClosestCraftingTable();
+        return GetGoalRecipe().craftingStation == StationType.Furnace ? GetClosestFurnace() : GetClosestCraftingTable();
     }
 
+    public bool CanCraftGoalItem()
+    {
+        return RecipeManager.Current.CanCraft(goalItem, inv);
+    }
+    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
     void OnCrafted(GameObject crafter, GameObject station, Recipe recipe)
     {
         if(crafter!=gameObject) return;
 
-        RecipeManager.Current.Craft(recipe, inv.inventory, station);
+        RecipeManager.Current.Craft(recipe, inv, station);
 
         crafted.Enable();
     }
@@ -251,7 +244,6 @@ public class Steve : MonoBehaviour
     public GameObject stonePickaxePrefab;
     public GameObject ironPickaxePrefab;
     public GameObject diamondPickaxePrefab;
-    public GameObject currentMeleePrefab;
     public GameObject bowPrefab;
 
     void OnAmmo(GameObject shooter, Item ammoItem, int quantity) // done by animation event

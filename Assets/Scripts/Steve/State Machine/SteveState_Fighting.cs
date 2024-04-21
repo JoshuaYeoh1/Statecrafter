@@ -14,12 +14,19 @@ public class SteveState_Fighting : BaseState
     protected override void OnEnter()
     {
         Debug.Log($"{steve.gameObject.name} State: {Name}");
-
-        steve.move.target=steve.closestEnemy.transform;
     }
+
+    GameObject closestEnemy;
 
     protected override void OnUpdate(float deltaTime)
     {
+        closestEnemy = steve.closestEnemy;
+
+        if(closestEnemy)
+        {
+            steve.move.target=closestEnemy.transform;
+        }
+
         if(steve.inv.HasItem(Item.Arrow))
         {
             steve.combat.range=steve.longRange;

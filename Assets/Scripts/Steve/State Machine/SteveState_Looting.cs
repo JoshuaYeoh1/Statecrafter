@@ -14,15 +14,20 @@ public class SteveState_Looting : BaseState
     protected override void OnEnter()
     {
         Debug.Log($"{steve.gameObject.name} State: {Name}");
-
-        steve.move.target=steve.closestLoot.transform;
-        steve.move.evade=false;
-        steve.combat.range=steve.huggyRange;
     }
 
+    GameObject closestLoot;
     protected override void OnUpdate(float deltaTime)
     {
+        closestLoot=steve.closestLoot;
 
+        if(closestLoot)
+        {
+            steve.move.target=closestLoot.transform;
+        }
+
+        steve.move.evade=false;
+        steve.combat.range=steve.huggyRange;
     }
 
     protected override void OnExit()

@@ -74,7 +74,7 @@ public class StationManager : MonoBehaviour
 
         foreach(GameObject station in GetQuarryStations())
         {
-            if(station.TryGetComponent<Quarry>(out Quarry quarry))
+            if(station.TryGetComponent(out Quarry quarry))
             {
                 if(quarry.type==type)
                 {
