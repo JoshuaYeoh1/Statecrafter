@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1665457036386422165, guid: 26f867665ec357d45af7b92f50430e75, type: 3}
       propertyPath: dmg
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1665457036386422165, guid: 26f867665ec357d45af7b92f50430e75, type: 3}
       propertyPath: ownerName

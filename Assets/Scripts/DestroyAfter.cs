@@ -27,14 +27,16 @@ public class DestroyAfter : MonoBehaviour
 
     void ShrinkAnim(float waitTime)
     {
-        List<GameObject> objectsToShrink = new List<GameObject>();
+        List<GameObject> objectsToShrink = new();
 
         if(shrinkObjects.Count>0) objectsToShrink = shrinkObjects;
         else objectsToShrink.Add(gameObject);
 
         foreach(GameObject obj in objectsToShrink)
         {
-            LeanTween.scale(obj, Vector3.zero, shrinkTime).setDelay(waitTime).setEaseInOutSine();
+            if(waitTime>0) LeanTween.scale(obj, Vector3.zero, shrinkTime).setDelay(waitTime).setEaseInOutSine();
+
+            else LeanTween.scale(obj, Vector3.zero, shrinkTime).setEaseInOutSine();
         }
     }
 

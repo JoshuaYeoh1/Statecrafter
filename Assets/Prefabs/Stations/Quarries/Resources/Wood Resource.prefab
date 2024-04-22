@@ -211,6 +211,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   requiredTools:
+  - Diamond Axe Hurtbox
+  - Iron Axe Hurtbox
+  - Stone Axe Hurtbox
+  - Wood Axe Hurtbox
   - Steve Fist Hurtbox
 --- !u!1 &6489225229063045796
 GameObject:

@@ -32,13 +32,13 @@ public class SteveState_Sleeping : BaseState
 
         if(steve.combat.InRange())
         {
-            steve.hp.regen=true;
+            steve.hp.regenHp=steve.sleepRegen;
         }
-        else steve.hp.regen=false;
+        else steve.hp.regenHp=steve.hp.defaultRegenHp;
     }
 
     protected override void OnExit()
     {
-        steve.hp.regen=false;
+        steve.hp.regenHp=steve.hp.defaultRegenHp;
     }
 }

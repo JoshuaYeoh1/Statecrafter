@@ -46,7 +46,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948980528100640746}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -64,7 +64,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 7
+  m_Constraints: 0
 --- !u!95 &3370895514164840532
 Animator:
   serializedVersion: 5
@@ -114,10 +114,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnEnabled: 0
-  destroyAfter: {x: 3, y: 4}
+  destroyAfter: {x: 0, y: 0}
   shrinkObjects:
   - {fileID: 948980528100640746}
-  shrinkTime: 0.5
+  shrinkTime: 0.1
 --- !u!114 &8374968137833263571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   owner: {fileID: 0}
   arrowPrefab: {fileID: 3014379882308067333, guid: 26f867665ec357d45af7b92f50430e75, type: 3}
   firepoint: {fileID: 1993786793211447218}
-  shootForce: 5
+  shootForce: 10
 --- !u!1 &1101947747015537955
 GameObject:
   m_ObjectHideFlags: 0

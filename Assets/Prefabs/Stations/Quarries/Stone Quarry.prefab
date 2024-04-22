@@ -9,6 +9,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 6821359271598139325, guid: 95f2de6756a123844ad1aa54986c1dd8, type: 3}
+      propertyPath: enemySpawnTime.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 6821359271598139325, guid: 95f2de6756a123844ad1aa54986c1dd8, type: 3}
+      propertyPath: enemySpawnTime.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6821359271598139325, guid: 95f2de6756a123844ad1aa54986c1dd8, type: 3}
       propertyPath: resourcePrefabs.Array.size
       value: 1
       objectReference: {fileID: 0}

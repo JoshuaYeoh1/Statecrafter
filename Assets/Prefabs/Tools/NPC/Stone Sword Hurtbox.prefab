@@ -9,11 +9,39 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8762641957127965162, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+      propertyPath: variants.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8762641957127965162, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: variants.Array.data[0].animNamePrefix
-      value: Slash
+      value: Stab
       objectReference: {fileID: 0}
     - target: {fileID: -8762641957127965162, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: variants.Array.data[0].numberSuffix.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8762641957127965162, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+      propertyPath: variants.Array.data[1].animNamePrefix
+      value: Slash
+      objectReference: {fileID: 0}
+    - target: {fileID: -8762641957127965162, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+      propertyPath: variants.Array.data[1].numberSuffix.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8762641957127965162, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+      propertyPath: variants.Array.data[1].numberSuffix.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8762641957127965162, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+      propertyPath: variants.Array.data[2].animNamePrefix
+      value: Slash
+      objectReference: {fileID: 0}
+    - target: {fileID: -8762641957127965162, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+      propertyPath: variants.Array.data[2].numberSuffix.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8762641957127965162, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+      propertyPath: variants.Array.data[2].numberSuffix.y
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 825880072970442279, guid: 002fd0bd5651b3444b215db744815207, type: 3}
@@ -50,15 +78,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 948980528100640746, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: m_Name
-      value: Iron Pickaxe
+      value: Stone Sword Hurtbox
       objectReference: {fileID: 0}
     - target: {fileID: 1626187332428824432, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ea2e52b2742264243abd36c8c11fae58, type: 3}
+      objectReference: {fileID: 21300000, guid: 7ef0d128142d9e14bbf04d1a24e912aa, type: 3}
     - target: {fileID: 2838643147298960810, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: dmg
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8108873885137653607, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: m_LocalPosition.x

@@ -41,11 +41,11 @@ public class LockTransform : MonoBehaviour
     {
         if(!enableLock) return;
 
-        transform.localPosition = new Vector3
+        transform.position = new Vector3
         (
-            lockPosition.x==0 ? transform.localPosition.x : 0 + positionOffset.x,
-            lockPosition.y==0 ? transform.localPosition.y : 0 + positionOffset.y,
-            lockPosition.z==0 ? transform.localPosition.z : 0 + positionOffset.z
+            lockPosition.x==0 ? transform.position.x : 0 + positionOffset.x,
+            lockPosition.y==0 ? transform.position.y : 0 + positionOffset.y,
+            lockPosition.z==0 ? transform.position.z : 0 + positionOffset.z
         );
         
         transform.rotation = Quaternion.Euler

@@ -27,7 +27,7 @@ public class SteveState_Fighting : BaseState
             steve.move.target=closestEnemy.transform;
         }
 
-        bool canShoot = steve.inv.HasItem(Item.Arrow) && steve.currentBow!=null;
+        bool canShoot = steve.inv.HasItem(Item.Arrow) && steve.inv.HasItem(Item.Bow);
 
         steve.combat.range = canShoot ? steve.longRange : steve.meleeRange;
 

@@ -361,7 +361,8 @@ MonoBehaviour:
   inv: {fileID: 376875514397710490}
   combat: {fileID: 6889804801764347536}
   equip: {fileID: 0}
-  lowHPPercent: 25
+  lowHPPercent: 35
+  sleepRegen: 0.25
   closestEnemy: {fileID: 0}
   closestLoot: {fileID: 0}
   huggyRange: 0.05
@@ -425,28 +426,28 @@ MonoBehaviour:
     prefab: {fileID: 4529329827309642947, guid: 6a55a84ae2f269a43a0daa4a044dbccd, type: 3}
   - name: WoodAxe
     item: 13
-    prefab: {fileID: 0}
+    prefab: {fileID: 4529329827309642947, guid: d255582c376cfe542adb20c35c770e2a, type: 3}
   - name: StoneAxe
     item: 14
-    prefab: {fileID: 0}
+    prefab: {fileID: 4529329827309642947, guid: 87a10d495980f404fa50d755d13fba58, type: 3}
   - name: IronAxe
     item: 15
-    prefab: {fileID: 0}
+    prefab: {fileID: 4529329827309642947, guid: 7d0cc2c2c416bec4b90618da5fde7ea4, type: 3}
   - name: DiamondAxe
     item: 16
-    prefab: {fileID: 0}
+    prefab: {fileID: 4529329827309642947, guid: 40990ff0f6f6ac84d9ddb05e9cdb67bc, type: 3}
   - name: WoodSword
     item: 17
-    prefab: {fileID: 0}
+    prefab: {fileID: 4529329827309642947, guid: d8caa48d278d81b4ba902875de814429, type: 3}
   - name: StoneSword
     item: 18
-    prefab: {fileID: 0}
+    prefab: {fileID: 4529329827309642947, guid: 3236262ef93f56f44bf15b133ec622c7, type: 3}
   - name: IronSword
     item: 19
-    prefab: {fileID: 0}
+    prefab: {fileID: 4529329827309642947, guid: 4ddd0e6bc8c2b2047aed0db1b911e6ae, type: 3}
   - name: DiamondSword
     item: 20
-    prefab: {fileID: 0}
+    prefab: {fileID: 4529329827309642947, guid: d71395b3baf5f844dbc4aa2ed62bda0b, type: 3}
   - name: Bow
     item: 21
     prefab: {fileID: 948980528100640746, guid: 2bf34a725d0e72447b28276cd9e4c115, type: 3}
@@ -503,9 +504,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 20
   hpMax: 20
-  regen: 0
+  regen: 1
   regenWhenEmpty: 0
-  regenHp: 0.2
+  regenHp: 0.05
   regenInterval: 0.1
   defaultRegenHp: 0
 --- !u!114 &58028477099949779
@@ -538,7 +539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10baf498fb9e1c34781dbd04eac8d9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 8
+  range: 7
   layers:
     serializedVersion: 2
     m_Bits: 1152

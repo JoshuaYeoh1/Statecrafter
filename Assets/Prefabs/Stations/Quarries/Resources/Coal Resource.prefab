@@ -222,8 +222,8 @@ MonoBehaviour:
   randomScaleX: 1
   randomScaleY: 1
   randomScaleZ: 1
-  minScale: 0.8
-  maxScale: 1.2
+  minScale: 0.7
+  maxScale: 1
   randomMirrorX: 1
   randomMirrorY: 1
   randomMirrorZ: 1

@@ -71,10 +71,13 @@ MonoBehaviour:
   maxResources: 4
   currentResources: []
   resourceSpawnTime: {x: 5, y: 10}
-  enemyPrefabs: []
-  maxEnemies: 0
+  enemyPrefabs:
+  - {fileID: 8597147406971664791, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
+  - {fileID: 8024966451074910289, guid: 57f705fd255e0f74f81895d59243641e, type: 3}
+  - {fileID: 3585319180004064322, guid: fd9262bd31783a848bc0ebd9c43b098e, type: 3}
+  maxEnemies: 1
   currentEnemies: []
-  enemySpawnTime: {x: 10, y: 20}
+  enemySpawnTime: {x: 30, y: 60}
   visibleOnlySpawn: 1
 --- !u!1 &9032598449778235484
 GameObject:

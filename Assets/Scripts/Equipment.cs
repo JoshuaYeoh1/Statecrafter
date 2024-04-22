@@ -35,7 +35,7 @@ public class Equipment : MonoBehaviour
                 return tool;
             }
         }
-        return null;
+        return tools[0];
     }
 
     public Tool GetPriority(List<Item> priorityList, Inventory inv)
@@ -47,6 +47,6 @@ public class Equipment : MonoBehaviour
                 return GetTool(priorityList[i]);
             }
         }
-        return null;
+        return tools[0];
     }
 }

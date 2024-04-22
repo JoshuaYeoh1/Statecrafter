@@ -35,6 +35,7 @@ public class Steve : MonoBehaviour
     }
 
     public float lowHPPercent=25;
+    public float sleepRegen=.25f;
 
     public bool IsLowHP()
     {
@@ -157,13 +158,16 @@ public class Steve : MonoBehaviour
 
     void UpdateTools()
     {
-        Resource resource = goalResource.GetComponent<Resource>();
-
-        if(resource.type==Item.WoodLog)
+        if(goalResource)
         {
-            currentTool = equip.GetPriority(axePriority, inv);
+            Resource resource = goalResource.GetComponent<Resource>();
+
+            if(resource.type==Item.WoodLog)
+            {
+                currentTool = equip.GetPriority(axePriority, inv);
+            }
+            else currentTool = equip.GetPriority(pickaxePriority, inv);
         }
-        else currentTool = equip.GetPriority(pickaxePriority, inv);
 
         currentSword = equip.GetPriority(swordPriority, inv);
         currentBow = equip.GetPriority(bowPriority, inv);
@@ -205,7 +209,7 @@ public class Steve : MonoBehaviour
                 return goalPriority[i];
             }
         }
-        return goalPriority[goalPriority.Count-1];
+        return goalPriority[0];
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
