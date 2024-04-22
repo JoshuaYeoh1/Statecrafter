@@ -46,9 +46,7 @@ public class SteveStateMachine : MonoBehaviour
         idle.AddTransition(looting, (timeInState) =>
         {
             if(
-                steve.closestLoot &&
-                !steve.closestEnemy &&
-                !steve.IsLowHP()
+                steve.closestLoot
             )
             {
                 return true;
@@ -75,6 +73,7 @@ public class SteveStateMachine : MonoBehaviour
         {
             if(
                 steve.closestEnemy &&
+                !steve.closestLoot &&
                 !steve.IsLowHP()
             )
             {
@@ -87,6 +86,7 @@ public class SteveStateMachine : MonoBehaviour
         {
             if(
                 steve.closestEnemy &&
+                !steve.closestLoot &&
                 steve.IsLowHP()
             )
             {
@@ -99,6 +99,7 @@ public class SteveStateMachine : MonoBehaviour
         {
             if(
                 !steve.closestEnemy &&
+                !steve.closestLoot &&
                 !steve.IsFullHP()
             )
             {
@@ -129,9 +130,7 @@ public class SteveStateMachine : MonoBehaviour
         looting.AddTransition(idle, (timeInState) =>
         {
             if(
-                !steve.closestLoot ||
-                steve.closestEnemy ||
-                steve.IsLowHP()
+                !steve.closestLoot
             )
             {
                 return true;
@@ -163,6 +162,7 @@ public class SteveStateMachine : MonoBehaviour
         {
             if(
                 !steve.closestEnemy ||
+                steve.closestLoot ||
                 steve.IsLowHP()
             )
             {
@@ -177,6 +177,7 @@ public class SteveStateMachine : MonoBehaviour
         {
             if(
                 !steve.closestEnemy ||
+                steve.closestLoot ||
                 !steve.IsLowHP()
             )
             {
@@ -191,6 +192,7 @@ public class SteveStateMachine : MonoBehaviour
         {
             if(
                 steve.closestEnemy ||
+                steve.closestLoot ||
                 steve.IsFullHP()
             )
             {

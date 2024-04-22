@@ -16,6 +16,14 @@ PrefabInstance:
       propertyPath: ownerName
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 1665457036386422165, guid: 26f867665ec357d45af7b92f50430e75, type: 3}
+      propertyPath: destroyOnHit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1665457036386422165, guid: 26f867665ec357d45af7b92f50430e75, type: 3}
+      propertyPath: hasSweepingEdge
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2225296849612040291, guid: 26f867665ec357d45af7b92f50430e75, type: 3}
       propertyPath: m_Layer
       value: 9

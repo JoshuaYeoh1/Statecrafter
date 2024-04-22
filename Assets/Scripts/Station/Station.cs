@@ -9,17 +9,27 @@ public enum StationType
     Furnace,
     Tree,
     Quarry,
+    Group,
 }
 
 public class Station : MonoBehaviour
 {
     public StationType type;
 
-    public float size=2;
+    public float stationSize=2;
 
     void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(0, 1, 1, .5f);
-        Gizmos.DrawWireSphere(transform.position, size);
+        Gizmos.color = new Color(0, 1, 0, .5f);
+        Gizmos.DrawWireSphere(transform.position, stationSize);
+    }
+
+    void OnEnable()
+    {
+        StationManager.Current.occupiedSpots.Add(transform.position);
+    }
+    void OnDisable()
+    {
+        StationManager.Current.occupiedSpots.Remove(transform.position);
     }
 }

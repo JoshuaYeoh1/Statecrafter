@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defMaxSpeed: 0
-  maxSpeed: 1
+  maxSpeed: 1.5
   acceleration: 10
   deceleration: 10
   turnSpeed: 10
@@ -458,7 +458,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   subjectName: Zombie
   iframe: 0
-  iframeTime: 0.5
+  iframeTime: 0.4
   colorFlicker: 1
   poise: 0
   poiseRegenDelay: 3
@@ -474,7 +474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10baf498fb9e1c34781dbd04eac8d9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 7
+  range: 10
   layers:
     serializedVersion: 2
     m_Bits: 64
@@ -497,7 +497,7 @@ MonoBehaviour:
   aimSpeed: 10
   linearTurn: 0
   angleOffset: -90
-  attackCooldown: 0.6
+  attackCooldown: 1
 --- !u!114 &629815647818878142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -584,6 +584,7 @@ MonoBehaviour:
   interval: {x: 1, y: 4}
   innerRadius: 1
   outerRadius: 5
+  maxRangeFromStart: 10
 --- !u!1 &9040818457507027751
 GameObject:
   m_ObjectHideFlags: 0

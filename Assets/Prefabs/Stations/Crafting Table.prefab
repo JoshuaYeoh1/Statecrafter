@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
+  stationSize: 0.72
 --- !u!114 &1144897754846731344
 MonoBehaviour:
   m_ObjectHideFlags: 0

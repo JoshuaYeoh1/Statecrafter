@@ -13,6 +13,46 @@ public class StationManager : MonoBehaviour
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public List<Vector3> occupiedSpots = new();
+    
+    public Dictionary<GameObject, GameObject> occupiedStations = new(); // station, user
+
+    public void OccupyStation(GameObject station, GameObject user)
+    {
+        if(!occupiedStations.ContainsKey(station))
+        {
+            occupiedStations[station] = user;
+        }
+    }
+
+    public void UnoccupyStation(GameObject station, GameObject user)
+    {
+        if(occupiedStations.ContainsKey(station))
+        {
+            if(occupiedStations[station]==user)
+            {
+                occupiedStations.Remove(station);
+            }
+        }
+    }
+
+    public bool IsOccupied(GameObject station, GameObject pendingUser)
+    {
+        if(!occupiedStations.ContainsKey(station))
+        {
+            return false; // Station is not occupied
+        }
+        
+        if(occupiedStations[station] != pendingUser)
+        {
+            return true; // Station is occupied by another user
+        }
+
+        return false; // its free to use for the pending user
+    }
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public List<GameObject> GetStations(StationType type)
     {
         List<GameObject> stations = new();

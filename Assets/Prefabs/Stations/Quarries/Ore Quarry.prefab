@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
-  size: 3
+  stationSize: 3
 --- !u!114 &6821359271598139325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
   - {fileID: 8597147406971664791, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
   - {fileID: 8024966451074910289, guid: 57f705fd255e0f74f81895d59243641e, type: 3}
   - {fileID: 3585319180004064322, guid: fd9262bd31783a848bc0ebd9c43b098e, type: 3}
-  maxEnemies: 1
+  maxEnemies: 2
   currentEnemies: []
   enemySpawnTime: {x: 30, y: 60}
   visibleOnlySpawn: 1

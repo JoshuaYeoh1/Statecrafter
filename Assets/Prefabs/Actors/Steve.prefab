@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 376875514397710490}
   - component: {fileID: 6889804801764347536}
   - component: {fileID: 2234518757765904265}
+  - component: {fileID: 3895216424871365691}
   m_Layer: 6
   m_Name: Steve
   m_TagString: Untagged
@@ -265,6 +266,7 @@ Transform:
   - {fileID: 2509649549646312623}
   - {fileID: 919889765039095286}
   - {fileID: 2924061566534411223}
+  - {fileID: 2149573501943014870}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &3791422144028614640
@@ -361,14 +363,15 @@ MonoBehaviour:
   inv: {fileID: 376875514397710490}
   combat: {fileID: 6889804801764347536}
   equip: {fileID: 0}
+  wander: {fileID: 0}
   lowHPPercent: 35
   sleepRegen: 0.25
   closestEnemy: {fileID: 0}
   closestLoot: {fileID: 0}
   huggyRange: 0.05
   useRange: 0.75
-  meleeRange: 1.5
-  longRange: 7
+  meleeRange: 1.6
+  longRange: 6
   pickaxePriority: 0a000000080000000400000002000000
   axePriority: 100000000f0000000e0000000d00000000000000
   swordPriority: 140000001300000010000000120000000f0000000a000000110000000e000000080000000d000000040000000200000000000000
@@ -506,7 +509,7 @@ MonoBehaviour:
   hpMax: 20
   regen: 1
   regenWhenEmpty: 0
-  regenHp: 0.05
+  regenHp: 0.025
   regenInterval: 0.1
   defaultRegenHp: 0
 --- !u!114 &58028477099949779
@@ -587,6 +590,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d10c31cecf1996448b05dbdb04ab51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3895216424871365691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3025905349624694407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a269179046fbf0644b34d5bbe41e5172, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wanderTr: {fileID: 2149573501943014870}
+  interval: {x: 1, y: 4}
+  innerRadius: 1
+  outerRadius: 5
+  maxRangeFromStart: 20
+--- !u!1 &6045802675439882216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2149573501943014870}
+  - component: {fileID: 7090651993917800896}
+  m_Layer: 7
+  m_Name: Wander
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2149573501943014870
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045802675439882216}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6274589673844932127}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7090651993917800896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6045802675439882216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3fe51e6109c274d8b8435f3661953c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableLock: 1
+  lockPosition: {x: 0, y: 0, z: 0}
+  lockRotation: {x: 1, y: 1, z: 1}
+  positionOffset: {x: 0, y: 0, z: 0}
+  rotationOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &8532980887468296631
 GameObject:
   m_ObjectHideFlags: 0

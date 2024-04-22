@@ -37,6 +37,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4329108421572925386, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
+      propertyPath: linearTurn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329108421572925386, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
       propertyPath: attackCooldown
       value: 1.5
       objectReference: {fileID: 0}
@@ -56,6 +60,14 @@ PrefabInstance:
       propertyPath: currentWeapon.prefab
       value: 
       objectReference: {fileID: 6207017431908523213, guid: 9c30da6b605fd78408acf758a3d50c87, type: 3}
+    - target: {fileID: 8362198349011003002, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
+      propertyPath: maxSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8362198349011003002, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
+      propertyPath: turnSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 8597147406971664791, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
       propertyPath: m_Name
       value: Skeleton

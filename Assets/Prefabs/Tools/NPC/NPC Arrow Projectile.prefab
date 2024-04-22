@@ -211,7 +211,7 @@ MonoBehaviour:
   dmg: 7
   kbForce: 10
   hasSweepingEdge: 1
-  destroyOnHit: 1
+  destroyOnHit: 0
   hitboxOrigin: {fileID: 7828565290904136462}
   contactPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &1463747218845901643

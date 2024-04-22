@@ -18,11 +18,11 @@ public class SteveState_Idle : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        steve.move.target=null;
+        steve.move.target = steve.wander.wanderTr;
         steve.move.evade=false;
         steve.move.arrival=true;
         steve.move.departure=true;
-        steve.combat.range=steve.meleeRange;
+        steve.combat.range=steve.huggyRange;
     }
 
     protected override void OnExit()

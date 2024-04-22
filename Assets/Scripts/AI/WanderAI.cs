@@ -8,7 +8,15 @@ public class WanderAI : MonoBehaviour
     public Vector2 interval = new Vector2(1,4);
     public float innerRadius=1;
     public float outerRadius=5;
+    public float maxRangeFromStart=10;
+    Vector2 startPos;
     Vector2 currentPos;
+
+    void Awake()
+    {
+        startPos = transform.position;
+        currentPos = transform.position;
+    }
 
     void OnEnable()
     {
@@ -21,7 +29,13 @@ public class WanderAI : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(interval.x, interval.y));
 
-            currentPos = RandomSpotInDoughnut();
+            float distanceFromStart = Vector3.Distance(transform.position, startPos);
+
+            if(distanceFromStart>maxRangeFromStart)
+            {
+                currentPos=startPos;
+            }
+            else currentPos = RandomSpotInDoughnut();
         }
     }
 

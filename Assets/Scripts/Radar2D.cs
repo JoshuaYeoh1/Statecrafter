@@ -63,7 +63,7 @@ public class Radar2D : MonoBehaviour
 
         foreach(GameObject target in targets)
         {
-            if(target.tag==tag)
+            if(target && target.tag==tag)
             {
                 matches.Add(target);
             }

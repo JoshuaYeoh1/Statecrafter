@@ -92,6 +92,7 @@ public class Quarry : MonoBehaviour
 
         GameObject spawned = Instantiate(prefab, transform.position, Quaternion.identity);
         if(parent) spawned.transform.parent = transform;
+        spawned.name = prefab.name;
 
         return spawned;
     }

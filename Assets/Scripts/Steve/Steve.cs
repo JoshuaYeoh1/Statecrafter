@@ -11,6 +11,7 @@ public class Steve : MonoBehaviour
     [HideInInspector] public Inventory inv;
     [HideInInspector] public CombatAI combat;
     [HideInInspector] public Equipment equip;
+    [HideInInspector] public WanderAI wander;
 
     void Awake()
     {
@@ -21,6 +22,7 @@ public class Steve : MonoBehaviour
         inv=GetComponent<Inventory>();
         combat=GetComponent<CombatAI>();
         equip=GetComponent<Equipment>();
+        wander=GetComponent<WanderAI>();
     }
 
     void OnEnable()
@@ -78,19 +80,55 @@ public class Steve : MonoBehaviour
         return radar.GetClosest(radar.GetTargetsWithTag("Loot"));
     }
 
-    public GameObject GetClosestBed()
+    public GameObject GetClosestAvailableBed()
     {
-        return radar.GetClosest(StationManager.Current.GetBeds());
+        List<GameObject> beds = StationManager.Current.GetBeds();
+
+        List<GameObject> freeBeds = new();
+
+        foreach(GameObject bed in beds)
+        {
+            if(!StationManager.Current.IsOccupied(bed, gameObject))
+            {
+                freeBeds.Add(bed);
+            }
+        }
+
+        return radar.GetClosest(freeBeds);
     }
 
-    public GameObject GetClosestCraftingTable()
+    public GameObject GetClosestAvailableCraftingTable()
     {
-        return radar.GetClosest(StationManager.Current.GetCraftingTables());
+        List<GameObject> tables = StationManager.Current.GetCraftingTables();
+
+        List<GameObject> freeTables = new();
+
+        foreach(GameObject table in tables)
+        {
+            if(!StationManager.Current.IsOccupied(table, gameObject))
+            {
+                freeTables.Add(table);
+            }
+        }
+
+        return radar.GetClosest(freeTables);
     }
 
-    public GameObject GetClosestFurnace()
+    public GameObject GetClosestAvailableFurnace()
     {
-        return radar.GetClosest(StationManager.Current.GetFurnaces());
+        List<GameObject> furnaces = StationManager.Current.GetFurnaces();
+
+        List<GameObject> freeFurnaces = new();
+
+        foreach(GameObject furnace in furnaces)
+        {
+            if(!StationManager.Current.IsOccupied(furnace, gameObject))
+            {
+                freeFurnaces.Add(furnace);
+            }
+        }
+
+        return radar.GetClosest(freeFurnaces);
     }
 
     public GameObject GetClosestWood()
@@ -184,7 +222,7 @@ public class Steve : MonoBehaviour
 
     void UpdateGoals()
     {
-        if(inv.HasItem(Item.String, 3))
+        if(inv.HasItem(Item.String, 3) && !inv.HasItem(Item.Bow))
         {
             goalItem = RecipeManager.Current.GetGoalIngredient(Item.Bow, inv);
         }
@@ -239,8 +277,8 @@ public class Steve : MonoBehaviour
         if(recipe==null) return null;
 
         return recipe.craftingStation == StationType.Furnace ?
-            GetClosestFurnace():
-            GetClosestCraftingTable();
+            GetClosestAvailableFurnace():
+            GetClosestAvailableCraftingTable();
     }
     
     void OnCrafted(GameObject crafter, GameObject station, Recipe recipe)

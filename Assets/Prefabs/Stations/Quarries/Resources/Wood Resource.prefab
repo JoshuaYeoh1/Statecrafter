@@ -215,6 +215,7 @@ MonoBehaviour:
   - Iron Axe Hurtbox
   - Stone Axe Hurtbox
   - Wood Axe Hurtbox
+  - Alex Fist Hurtbox
   - Steve Fist Hurtbox
 --- !u!1 &6489225229063045796
 GameObject:

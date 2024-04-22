@@ -16,15 +16,17 @@ public class SteveState_Sleeping : BaseState
         Debug.Log($"{steve.gameObject.name} State: {Name}");        
     }
 
-    GameObject closestBed;
+    GameObject bed;
 
     protected override void OnUpdate(float deltaTime)
     {
-        closestBed = steve.GetClosestBed();
+        bed = steve.GetClosestAvailableBed();
 
-        if(closestBed)
+        if(bed)
         {
-            steve.move.target=closestBed.transform;
+            steve.move.target=bed.transform;
+
+            StationManager.Current.OccupyStation(bed, steve.gameObject);
         }
 
         steve.move.evade=false;
@@ -34,11 +36,17 @@ public class SteveState_Sleeping : BaseState
         {
             steve.hp.regenHp=steve.sleepRegen;
         }
-        else steve.hp.regenHp=steve.hp.defaultRegenHp;
+        else 
+        {
+            steve.hp.regenHp=steve.hp.defaultRegenHp;
+        }
     }
 
     protected override void OnExit()
     {
         steve.hp.regenHp=steve.hp.defaultRegenHp;
+
+        if(bed)
+        StationManager.Current.UnoccupyStation(bed, steve.gameObject);
     }
 }
