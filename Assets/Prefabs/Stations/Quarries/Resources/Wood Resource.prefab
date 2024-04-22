@@ -17,7 +17,6 @@ GameObject:
   - component: {fileID: -6618912280107477079}
   - component: {fileID: 4410791599644146173}
   - component: {fileID: 5682545282333105306}
-  - component: {fileID: -127434458066521193}
   m_Layer: 11
   m_Name: Wood Resource
   m_TagString: Untagged
@@ -153,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   drops:
-  - name: Wood
+  - name: WoodLog
     item: 1
     quantity: {x: 1, y: 1}
     percent: 100
@@ -211,18 +210,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 1
---- !u!114 &-127434458066521193
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 176287195741409542}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f1d50b696f709f4683950c877a75ba2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   requiredTools:
   - Steve Fist Hurtbox
 --- !u!1 &6489225229063045796

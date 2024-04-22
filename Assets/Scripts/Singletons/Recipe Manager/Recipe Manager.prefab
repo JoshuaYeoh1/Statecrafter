@@ -45,39 +45,105 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipes:
-  - name: Wood Pickaxe
+  - name: Bow
     craftingStation: 1
-    ingredients: 01000000
-    quantities: 05000000
+    ingredients: 1700000016000000
+    quantities: 0300000003000000
     craftingTime: 5
-    results: 02000000
-  - name: Stone Pickaxe
-    craftingStation: 1
-    ingredients: 03000000
-    quantities: 05000000
-    craftingTime: 5
-    results: 04000000
-  - name: Iron Ingot
-    craftingStation: 2
-    ingredients: 0500000006000000
-    quantities: 0100000001000000
-    craftingTime: 5
-    results: 07000000
-  - name: Iron Pickaxe
-    craftingStation: 1
-    ingredients: 07000000
-    quantities: 05000000
-    craftingTime: 5
-    results: 08000000
-  - name: Diamond Pickaxe
-    craftingStation: 1
-    ingredients: 09000000
-    quantities: 05000000
-    craftingTime: 5
-    results: 0a000000
-  - name: Diamond Block
+    results: 15000000
+  - name: DiamondBlock
     craftingStation: 1
     ingredients: 09000000
     quantities: 09000000
     craftingTime: 5
     results: 0c000000
+  - name: DiamondAxe
+    craftingStation: 1
+    ingredients: 0900000017000000
+    quantities: 0300000002000000
+    craftingTime: 5
+    results: 10000000
+  - name: DiamondPickaxe
+    craftingStation: 1
+    ingredients: 0900000017000000
+    quantities: 0300000002000000
+    craftingTime: 5
+    results: 0a000000
+  - name: DiamondSword
+    craftingStation: 1
+    ingredients: 0900000017000000
+    quantities: 0200000001000000
+    craftingTime: 5
+    results: 14000000
+  - name: IronAxe
+    craftingStation: 1
+    ingredients: 0700000017000000
+    quantities: 0300000002000000
+    craftingTime: 5
+    results: 0f000000
+  - name: IronPickaxe
+    craftingStation: 1
+    ingredients: 0700000017000000
+    quantities: 0300000002000000
+    craftingTime: 5
+    results: 08000000
+  - name: IronSword
+    craftingStation: 1
+    ingredients: 0700000017000000
+    quantities: 0200000001000000
+    craftingTime: 5
+    results: 13000000
+  - name: IronIngot
+    craftingStation: 2
+    ingredients: 0600000005000000
+    quantities: 0100000001000000
+    craftingTime: 10
+    results: 07000000
+  - name: StoneAxe
+    craftingStation: 1
+    ingredients: 0300000017000000
+    quantities: 0300000002000000
+    craftingTime: 5
+    results: 0e000000
+  - name: StonePickaxe
+    craftingStation: 1
+    ingredients: 0300000017000000
+    quantities: 0300000002000000
+    craftingTime: 5
+    results: 04000000
+  - name: StoneSword
+    craftingStation: 1
+    ingredients: 0300000017000000
+    quantities: 0200000001000000
+    craftingTime: 5
+    results: 12000000
+  - name: WoodPickaxe
+    craftingStation: 1
+    ingredients: 1800000017000000
+    quantities: 0300000002000000
+    craftingTime: 5
+    results: 02000000
+  - name: WoodSword
+    craftingStation: 1
+    ingredients: 1800000017000000
+    quantities: 0200000001000000
+    craftingTime: 5
+    results: 11000000
+  - name: WoodAxe
+    craftingStation: 1
+    ingredients: 1800000017000000
+    quantities: 0300000002000000
+    craftingTime: 5
+    results: 0d000000
+  - name: Stick
+    craftingStation: 1
+    ingredients: 18000000
+    quantities: 02000000
+    craftingTime: 1
+    results: 17000000170000001700000017000000
+  - name: WoodPlank
+    craftingStation: 1
+    ingredients: 01000000
+    quantities: 01000000
+    craftingTime: 3
+    results: 18000000180000001800000018000000

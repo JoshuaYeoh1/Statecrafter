@@ -5,11 +5,11 @@ using UnityEngine;
 public enum Item
 {
     None,
-    Wood,
+    WoodLog,
     WoodPickaxe,
     Stone,
     StonePickaxe,
-    Coal,
+    CoalOre,
     IronOre,
     IronIngot,
     IronPickaxe,
@@ -17,6 +17,18 @@ public enum Item
     DiamondPickaxe,
     Arrow,
     DiamondBlock,
+    WoodAxe,
+    StoneAxe,
+    IronAxe,
+    DiamondAxe,
+    WoodSword,
+    StoneSword,
+    IronSword,
+    DiamondSword,
+    Bow,
+    String,
+    Stick,
+    WoodPlanks,
 }
 
 public class ItemManager : MonoBehaviour

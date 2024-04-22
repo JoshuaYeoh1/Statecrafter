@@ -231,8 +231,9 @@ GameObject:
   - component: {fileID: 6274589673844932127}
   - component: {fileID: 3791422144028614640}
   - component: {fileID: 7037661388617641234}
-  - component: {fileID: 3781996260430139247}
   - component: {fileID: 3101731592218810877}
+  - component: {fileID: 3781996260430139247}
+  - component: {fileID: 6394562662366599258}
   - component: {fileID: 6352759977838314967}
   - component: {fileID: 7575219942888729167}
   - component: {fileID: 803846312879462648}
@@ -328,6 +329,19 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.38
+--- !u!114 &3101731592218810877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3025905349624694407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 254d002fea5c89846b550d1dbf09cf40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  steve: {fileID: 0}
 --- !u!114 &3781996260430139247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,21 +360,42 @@ MonoBehaviour:
   radar: {fileID: 1863301452282329815}
   inv: {fileID: 376875514397710490}
   combat: {fileID: 6889804801764347536}
+  equip: {fileID: 0}
   lowHPPercent: 25
   closestEnemy: {fileID: 0}
   closestLoot: {fileID: 0}
-  currentMeleePrefab: {fileID: 0}
-  goalItem: 2
   huggyRange: 0.05
+  useRange: 0.75
   meleeRange: 1.5
   longRange: 7
-  fistPrefab: {fileID: 948980528100640746, guid: 002fd0bd5651b3444b215db744815207, type: 3}
-  woodPickaxePrefab: {fileID: 4529329827309642947, guid: ea2ac9c4c9961f84d9a46b7fcdc954ba, type: 3}
-  stonePickaxePrefab: {fileID: 4529329827309642947, guid: a62bfc6d33a22e343893ae15cecc562f, type: 3}
-  ironPickaxePrefab: {fileID: 4529329827309642947, guid: 87688be702bfcd34aac67460f6475ba3, type: 3}
-  diamondPickaxePrefab: {fileID: 4529329827309642947, guid: 6a55a84ae2f269a43a0daa4a044dbccd, type: 3}
-  bowPrefab: {fileID: 948980528100640746, guid: 2bf34a725d0e72447b28276cd9e4c115, type: 3}
---- !u!114 &3101731592218810877
+  pickaxePriority: 0a000000080000000400000002000000
+  axePriority: 100000000f0000000e0000000d00000000000000
+  swordPriority: 140000001300000010000000120000000f0000000a000000110000000e000000080000000d000000040000000200000000000000
+  bowPriority: 15000000
+  currentTool:
+    name: 
+    item: 0
+    prefab: {fileID: 0}
+  currentSword:
+    name: 
+    item: 0
+    prefab: {fileID: 0}
+  currentBow:
+    name: 
+    item: 0
+    prefab: {fileID: 0}
+  goalPriority: 0c000000100000000a000000140000000f00000008000000130000000e000000040000001200000002000000110000000d000000
+  goalItem: 13
+  goalRecipe:
+    name: 
+    craftingStation: 0
+    ingredients: 
+    quantities: 
+    craftingTime: 0
+    results: 
+  goalResource: {fileID: 0}
+  goalCraftingStation: {fileID: 0}
+--- !u!114 &6394562662366599258
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -369,10 +404,52 @@ MonoBehaviour:
   m_GameObject: {fileID: 3025905349624694407}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 254d002fea5c89846b550d1dbf09cf40, type: 3}
+  m_Script: {fileID: 11500000, guid: dc233fce9b8e7b74d835e4973ac7b43f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steve: {fileID: 0}
+  tools:
+  - name: None
+    item: 0
+    prefab: {fileID: 948980528100640746, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+  - name: WoodPickaxe
+    item: 2
+    prefab: {fileID: 4529329827309642947, guid: ea2ac9c4c9961f84d9a46b7fcdc954ba, type: 3}
+  - name: StonePickaxe
+    item: 4
+    prefab: {fileID: 4529329827309642947, guid: a62bfc6d33a22e343893ae15cecc562f, type: 3}
+  - name: IronPickaxe
+    item: 8
+    prefab: {fileID: 4529329827309642947, guid: 87688be702bfcd34aac67460f6475ba3, type: 3}
+  - name: DiamondPickaxe
+    item: 10
+    prefab: {fileID: 4529329827309642947, guid: 6a55a84ae2f269a43a0daa4a044dbccd, type: 3}
+  - name: WoodAxe
+    item: 13
+    prefab: {fileID: 0}
+  - name: StoneAxe
+    item: 14
+    prefab: {fileID: 0}
+  - name: IronAxe
+    item: 15
+    prefab: {fileID: 0}
+  - name: DiamondAxe
+    item: 16
+    prefab: {fileID: 0}
+  - name: WoodSword
+    item: 17
+    prefab: {fileID: 0}
+  - name: StoneSword
+    item: 18
+    prefab: {fileID: 0}
+  - name: IronSword
+    item: 19
+    prefab: {fileID: 0}
+  - name: DiamondSword
+    item: 20
+    prefab: {fileID: 0}
+  - name: Bow
+    item: 21
+    prefab: {fileID: 948980528100640746, guid: 2bf34a725d0e72447b28276cd9e4c115, type: 3}
 --- !u!114 &6352759977838314967
 MonoBehaviour:
   m_ObjectHideFlags: 0

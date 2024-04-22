@@ -32,7 +32,7 @@ public class ResourceManager : MonoBehaviour
 
     public List<GameObject> GetWoods()
     {
-        return GetResources(Item.Wood);
+        return GetResources(Item.WoodLog);
     }
     public List<GameObject> GetStones()
     {
@@ -40,7 +40,7 @@ public class ResourceManager : MonoBehaviour
     }
     public List<GameObject> GetCoals()
     {
-        return GetResources(Item.Coal);
+        return GetResources(Item.CoalOre);
     }
     public List<GameObject> GetIrons()
     {

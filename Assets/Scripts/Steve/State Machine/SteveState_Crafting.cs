@@ -20,18 +20,18 @@ public class SteveState_Crafting : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        station = steve.GetRequiredCraftingStation();
+        station = steve.goalCraftingStation;
 
         if(station)
         {
-            steve.move.target=station.transform;
+            steve.move.target = station.transform;
         }
         steve.move.evade=false;
         steve.combat.range=steve.useRange;
 
         if(steve.combat.InRange())
         {
-            EventManager.Current.OnUpdateCraft(steve.gameObject, station, steve.GetGoalRecipe());
+            EventManager.Current.OnUpdateCraft(steve.gameObject, station, steve.goalRecipe);
         }
         else
         {

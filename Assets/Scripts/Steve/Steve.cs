@@ -10,6 +10,7 @@ public class Steve : MonoBehaviour
     [HideInInspector] public Radar2D radar;
     [HideInInspector] public Inventory inv;
     [HideInInspector] public CombatAI combat;
+    [HideInInspector] public Equipment equip;
 
     void Awake()
     {
@@ -19,6 +20,7 @@ public class Steve : MonoBehaviour
         radar=GetComponent<Radar2D>();
         inv=GetComponent<Inventory>();
         combat=GetComponent<CombatAI>();
+        equip=GetComponent<Equipment>();
     }
 
     void OnEnable()
@@ -48,9 +50,9 @@ public class Steve : MonoBehaviour
 
     void Update()
     {
-        UpdateClosest();
-        UpdateTool();
-        UpdateGoal();
+        UpdateRadar();
+        UpdateTools();
+        UpdateGoals();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -59,7 +61,7 @@ public class Steve : MonoBehaviour
     public GameObject closestEnemy;
     public GameObject closestLoot;
 
-    void UpdateClosest()
+    void UpdateRadar()
     {
         closestEnemy = GetClosestEnemy();
         closestLoot = GetClosestLoot();
@@ -97,11 +99,7 @@ public class Steve : MonoBehaviour
 
     public GameObject GetClosestStone()
     {
-        GameObject target = radar.GetClosest(ResourceManager.Current.GetStones());
-
-        if(!target) target = GetClosestCoalOre();
-
-        return target;
+        return radar.GetClosest(ResourceManager.Current.GetStones());
     }
 
     public GameObject GetClosestCoalOre()
@@ -139,108 +137,107 @@ public class Steve : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    [Header("Inventory")]
-    public GameObject currentMeleePrefab;
+    [Header("Ranges")]
+    public float huggyRange=.05f;
+    public float useRange=.75f;
+    public float meleeRange=1.5f;
+    public float longRange=7;
 
-    void UpdateTool()
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    [Header("Equipments")]
+    public List<Item> pickaxePriority = new();
+    public List<Item> axePriority = new();
+    public List<Item> swordPriority = new();
+    public List<Item> bowPriority = new();
+
+    public Tool currentTool;
+    public Tool currentSword;
+    public Tool currentBow;
+
+    void UpdateTools()
     {
-        if(inv.HasItem(Item.DiamondPickaxe))
+        Resource resource = goalResource.GetComponent<Resource>();
+
+        if(resource.type==Item.WoodLog)
         {
-            currentMeleePrefab = diamondPickaxePrefab;
+            currentTool = equip.GetPriority(axePriority, inv);
         }
-        else if(inv.HasItem(Item.IronPickaxe))
+        else currentTool = equip.GetPriority(pickaxePriority, inv);
+
+        currentSword = equip.GetPriority(swordPriority, inv);
+        currentBow = equip.GetPriority(bowPriority, inv);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    [Header("Goals")]
+    public List<Item> goalPriority = new();
+    public Item goalItem = Item.WoodAxe;
+    public Recipe goalRecipe;
+    public GameObject goalResource;
+    public GameObject goalCraftingStation;
+
+    void UpdateGoals()
+    {
+        if(inv.HasItem(Item.String, 3))
         {
-            currentMeleePrefab = ironPickaxePrefab;
-        }
-        else if(inv.HasItem(Item.StonePickaxe))
-        {
-            currentMeleePrefab = stonePickaxePrefab;
-        }
-        else if(inv.HasItem(Item.WoodPickaxe))
-        {
-            currentMeleePrefab = woodPickaxePrefab;
+            goalItem = RecipeManager.Current.GetGoalIngredient(Item.Bow, inv);
         }
         else
         {
-            currentMeleePrefab = fistPrefab;
+            goalItem = RecipeManager.Current.GetGoalIngredient(GetNextItem(), inv);
         }
+
+        goalRecipe = RecipeManager.Current.GetRecipe(goalItem);
+
+        goalResource = GetGoalResource();
+
+        goalCraftingStation = GetGoalCraftingStation();
     }
 
-    [Header("Goal")]
-    public Item goalItem = Item.WoodPickaxe;
-
-    void UpdateGoal()
+    Item GetNextItem()
     {
-        if(inv.HasItem(Item.DiamondPickaxe))
+        for(int i=goalPriority.Count-1; i>=0; i--)
         {
-            goalItem = Item.DiamondBlock;
-        }
-        else if(inv.HasItem(Item.IronPickaxe))
-        {
-            goalItem = Item.DiamondPickaxe;
-        }
-        else if(inv.HasItem(Item.StonePickaxe))
-        {
-            if(RecipeManager.Current.CanCraft(Item.IronPickaxe, inv))
+            if(!inv.HasItem(goalPriority[i]))
             {
-                goalItem = Item.IronPickaxe;
-            }
-            else
-            {
-                goalItem = RecipeManager.Current.GetRecipe(Item.IronPickaxe).ingredients[0];
+                return goalPriority[i];
             }
         }
-        else if(inv.HasItem(Item.WoodPickaxe))
-        {
-            goalItem = Item.StonePickaxe;
-        }
-        else
-        {
-            goalItem = Item.WoodPickaxe;
-        }
+        return goalPriority[goalPriority.Count-1];
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public GameObject GetGoalResource()
     {
-        Recipe goalRecipe = GetGoalRecipe();
-
-        if(goalRecipe!=null && !CanCraftGoalItem())
+        switch(goalItem)
         {
-            for(int i=0; i<goalRecipe.ingredients.Count; i++)
-            {
-                if(!inv.HasItem(goalRecipe.ingredients[i], goalRecipe.quantities[i]))
-                {
-                    switch(goalRecipe.ingredients[i])
-                    {
-                        case Item.Wood: return GetClosestWood();
-                        case Item.Stone: return GetClosestStone();
-                        case Item.Coal: return GetClosestCoalOre();
-                        case Item.IronOre: return GetClosestIronOre();
-                        case Item.Diamond: return GetClosestDiamondOre();
-                    }
-                }
-            }
+            case Item.WoodLog: return GetClosestWood();
+            case Item.Stone: return GetClosestStone();
+            case Item.IronOre: return GetClosestIronOre();
+            case Item.CoalOre: return GetClosestCoalOre();
+            case Item.Diamond: return GetClosestDiamondOre();
         }
-
         return null;
-    }
-
-    public Recipe GetGoalRecipe()
-    {
-        return RecipeManager.Current.GetRecipe(goalItem);
-    }
-
-    public GameObject GetRequiredCraftingStation()
-    {
-        return GetGoalRecipe().craftingStation == StationType.Furnace ? GetClosestFurnace() : GetClosestCraftingTable();
     }
 
     public bool CanCraftGoalItem()
     {
         return RecipeManager.Current.CanCraft(goalItem, inv);
     }
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public GameObject GetGoalCraftingStation()
+    {
+        Recipe recipe = RecipeManager.Current.GetRecipe(goalItem);
+
+        if(recipe==null) return null;
+
+        return recipe.craftingStation == StationType.Furnace ?
+            GetClosestFurnace():
+            GetClosestCraftingTable();
+    }
     
     void OnCrafted(GameObject crafter, GameObject station, Recipe recipe)
     {
@@ -253,21 +250,6 @@ public class Steve : MonoBehaviour
 
     readonly Trigger crafted = new();
     public bool HasCrafted() => crafted.Check();
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    [Header("Combat")]
-    public float huggyRange=.05f;
-    public float useRange=.75f;
-    public float meleeRange=1.5f;
-    public float longRange=7;
-
-    public GameObject fistPrefab;
-    public GameObject woodPickaxePrefab;
-    public GameObject stonePickaxePrefab;
-    public GameObject ironPickaxePrefab;
-    public GameObject diamondPickaxePrefab;
-    public GameObject bowPrefab;
 
     void OnAmmo(GameObject shooter, Item ammoItem, int quantity) // done by animation event
     {

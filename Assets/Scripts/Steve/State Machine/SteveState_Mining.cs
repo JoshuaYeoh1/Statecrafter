@@ -20,7 +20,7 @@ public class SteveState_Mining : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        targetResource = steve.GetGoalResource();
+        targetResource = steve.goalResource;
 
         if(targetResource)
         {
@@ -34,7 +34,7 @@ public class SteveState_Mining : BaseState
             steve.move.evade=true;
             steve.move.departure=true;
 
-            steve.combat.Attack(steve.currentMeleePrefab);
+            steve.combat.Attack(steve.currentTool.prefab);
         }
         else steve.move.evade=false;
     }

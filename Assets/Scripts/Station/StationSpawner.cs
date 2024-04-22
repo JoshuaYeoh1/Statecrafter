@@ -22,7 +22,7 @@ public class StationSpawner : MonoBehaviour
     public Station treePrefab;
     public Vector2Int treeCount = new Vector2Int(20, 20);
 
-    public Station quarryPrefab;
+    public List<Station> quarryPrefabs = new();
     public Vector2Int quarryCount = new Vector2Int(10, 10);
     
     List<Vector3> occupiedSpots = new();
@@ -36,6 +36,7 @@ public class StationSpawner : MonoBehaviour
         
         for(int i=0; i<Random.Range(quarryCount.x, quarryCount.y+1); i++)
         {
+            Station quarryPrefab = quarryPrefabs[Random.Range(0, quarryPrefabs.Count)];
             Spawn(quarryPrefab);
         }
     }

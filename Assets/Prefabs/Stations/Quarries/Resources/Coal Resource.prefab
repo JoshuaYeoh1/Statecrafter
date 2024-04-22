@@ -42,7 +42,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5420663466265056028, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
       propertyPath: drops.Array.data[0].name
-      value: Coal
+      value: CoalOre
       objectReference: {fileID: 0}
     - target: {fileID: 5682545282333105306, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
       propertyPath: type
@@ -51,6 +51,26 @@ PrefabInstance:
     - target: {fileID: 5682545282333105306, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
       propertyPath: resourceType
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5682545282333105306, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
+      propertyPath: requiredTools.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5682545282333105306, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
+      propertyPath: requiredTools.Array.data[0]
+      value: Diamond Pickaxe Hurtbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5682545282333105306, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
+      propertyPath: requiredTools.Array.data[1]
+      value: Iron Pickaxe Hurtbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5682545282333105306, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
+      propertyPath: requiredTools.Array.data[2]
+      value: Stone Pickaxe Hurtbox
+      objectReference: {fileID: 0}
+    - target: {fileID: 5682545282333105306, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
+      propertyPath: requiredTools.Array.data[3]
+      value: Wood Pickaxe Hurtbox
       objectReference: {fileID: 0}
     - target: {fileID: 5703837618175066484, guid: ebeea62c8fc001c4183b075d65ebe805, type: 3}
       propertyPath: hp

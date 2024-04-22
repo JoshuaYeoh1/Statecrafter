@@ -27,16 +27,16 @@ public class SteveState_Fighting : BaseState
             steve.move.target=closestEnemy.transform;
         }
 
-        bool hasArrows = steve.inv.HasItem(Item.Arrow);
+        bool canShoot = steve.inv.HasItem(Item.Arrow) && steve.currentBow!=null;
 
-        steve.combat.range = hasArrows ? steve.longRange : steve.meleeRange;
+        steve.combat.range = canShoot ? steve.longRange : steve.meleeRange;
 
         if(steve.combat.InRange())
         {
             steve.move.evade=true;
             steve.move.departure=true;
 
-            steve.combat.Attack(hasArrows ? steve.bowPrefab : steve.currentMeleePrefab);
+            steve.combat.Attack(canShoot ? steve.currentBow.prefab : steve.currentSword.prefab);
         }
         else steve.move.evade=false;
     }
