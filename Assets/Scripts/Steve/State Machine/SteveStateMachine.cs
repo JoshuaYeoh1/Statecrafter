@@ -34,7 +34,7 @@ public class SteveStateMachine : MonoBehaviour
                 !steve.CanCraftGoalItem() &&
                 !steve.closestLoot &&
                 !steve.closestEnemy &&
-                steve.IsFullHP() &&
+                steve.IsOkHP() &&
                 steve.goalResource
             )
             {
@@ -61,7 +61,7 @@ public class SteveStateMachine : MonoBehaviour
                 steve.goalCraftingStation &&
                 !steve.closestLoot &&
                 !steve.closestEnemy &&
-                steve.IsFullHP()
+                steve.IsOkHP()
             )
             {
                 return true;
@@ -100,7 +100,7 @@ public class SteveStateMachine : MonoBehaviour
             if(
                 !steve.closestEnemy &&
                 !steve.closestLoot &&
-                !steve.IsFullHP()
+                !steve.IsOkHP()
             )
             {
                 return true;
@@ -116,7 +116,7 @@ public class SteveStateMachine : MonoBehaviour
                 steve.CanCraftGoalItem() ||
                 steve.closestLoot ||
                 steve.closestEnemy ||
-                !steve.IsFullHP() ||
+                !steve.IsOkHP() ||
                 !steve.goalResource
             )
             {
@@ -147,7 +147,7 @@ public class SteveStateMachine : MonoBehaviour
                 !steve.goalCraftingStation ||
                 steve.closestLoot ||
                 steve.closestEnemy ||
-                !steve.IsFullHP() ||
+                !steve.IsOkHP() ||
                 steve.HasCrafted()
             )
             {

@@ -27,23 +27,38 @@ public class Steve : MonoBehaviour
 
     void OnEnable()
     {
+        EventManager.Current.HurtEvent += OnHurt;
         EventManager.Current.CraftedEvent += OnCrafted;
         EventManager.Current.AmmoEvent += OnAmmo;
+
+        ActorManager.Current.npcs.Add(gameObject);
     }
     void OnDisable()
     {
+        EventManager.Current.HurtEvent -= OnHurt;
         EventManager.Current.CraftedEvent -= OnCrafted;
         EventManager.Current.AmmoEvent -= OnAmmo;
+
+        ActorManager.Current.npcs.Remove(gameObject);
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public NPCName npcName;
+
+    [Header("HP")]
     public float lowHPPercent=25;
+    public float okHPPercent=75;
     public float sleepRegen=.25f;
 
     public bool IsLowHP()
     {
         return hp.GetHPPercent()<=lowHPPercent;
     }
-
+    public bool IsOkHP()
+    {
+        return hp.GetHPPercent()>=okHPPercent;
+    }
     public bool IsFullHP()
     {
         return hp.hp==hp.hpMax;
@@ -280,7 +295,23 @@ public class Steve : MonoBehaviour
             GetClosestAvailableFurnace():
             GetClosestAvailableCraftingTable();
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void OnHurt(GameObject victim, GameObject attacker, HurtInfo hurtInfo)
+    {
+        if(victim!=gameObject) return;
+
+        if(gameObject==SpectatorCam.Current.spectatedNPC)
+        {
+            CameraManager.Current.Shake();
+            TimescaleManager.Current.HitStop();
+        }
+    }
     
+    readonly Trigger crafted = new();
+    public bool HasCrafted() => crafted.Check();
+
     void OnCrafted(GameObject crafter, GameObject station, Recipe recipe)
     {
         if(crafter!=gameObject) return;
@@ -289,9 +320,6 @@ public class Steve : MonoBehaviour
 
         crafted.Enable();
     }
-
-    readonly Trigger crafted = new();
-    public bool HasCrafted() => crafted.Check();
 
     void OnAmmo(GameObject shooter, Item ammoItem, int quantity) // done by animation event
     {

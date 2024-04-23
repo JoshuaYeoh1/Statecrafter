@@ -29,6 +29,9 @@ public enum Item
     String,
     Stick,
     WoodPlanks,
+    RottenFlesh,
+    Bone,
+    SpiderEye,
 }
 
 public class ItemManager : MonoBehaviour

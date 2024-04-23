@@ -1040,12 +1040,28 @@ PrefabInstance:
       value: String
       objectReference: {fileID: 0}
     - target: {fileID: 3898940387621252974, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
+      propertyPath: drops.Array.data[1].item
+      value: 27
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898940387621252974, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
+      propertyPath: drops.Array.data[1].name
+      value: SpiderEye
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898940387621252974, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
       propertyPath: drops.Array.data[0].percent
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3898940387621252974, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
+      propertyPath: drops.Array.data[1].percent
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898940387621252974, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
       propertyPath: drops.Array.data[0].quantity.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3898940387621252974, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
+      propertyPath: drops.Array.data[1].quantity.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4206473171522035536, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
       propertyPath: hp
@@ -1058,6 +1074,10 @@ PrefabInstance:
     - target: {fileID: 4247333583037543922, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
       propertyPath: range
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7389077506460653981, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
+      propertyPath: enemyName
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7389077506460653981, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
       propertyPath: currentWeapon.prefab

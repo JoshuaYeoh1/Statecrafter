@@ -17,6 +17,19 @@ public class Enemy : MonoBehaviour
         wander=GetComponent<WanderAI>();
     }
 
+    void OnEnable()
+    {
+        EventManager.Current.HurtEvent += OnHurt;
+
+        ActorManager.Current.enemies.Add(gameObject);
+    }
+    void OnDisable()
+    {
+        EventManager.Current.HurtEvent -= OnHurt;
+
+        ActorManager.Current.enemies.Add(gameObject);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     void Update()
@@ -25,6 +38,8 @@ public class Enemy : MonoBehaviour
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public EnemyName enemyName;
 
     [Header("Radar")]
     public GameObject closestEnemy;
@@ -40,4 +55,14 @@ public class Enemy : MonoBehaviour
     public float huggyRange=.05f;
     public float range=1.5f;
     public Tool currentWeapon;
+
+    public void OnHurt(GameObject victim, GameObject attacker, HurtInfo hurtInfo)
+    {
+        if(victim!=gameObject) return;
+
+        if(attacker==SpectatorCam.Current.spectatedNPC)
+        {
+            CameraManager.Current.Shake();
+        }
+    }
 }

@@ -8,8 +8,15 @@ public class DonutSpawner : MonoBehaviour
     public Vector2Int spawnCount = new Vector2Int(10, 10);
     public float innerRadius=4;
     public float outerRadius=30;
+    public float spawnDelay;
+    public bool hideInHierarchy;
     
     void Start()
+    {
+        Invoke(nameof(StartSpawn), spawnDelay);
+    }
+
+    void StartSpawn()
     {
         for(int i=0; i<Random.Range(spawnCount.x, spawnCount.y+1); i++)
         {
@@ -18,37 +25,35 @@ public class DonutSpawner : MonoBehaviour
         }
     }
 
-    void Spawn(GameObject prefab)
+    void Spawn(GameObject prefab, int retries=50)
     {
-        Vector2 randomSpot;
+        Vector3 randomSpot = Vector3.zero;
+        bool foundSpot=false;
 
-        bool gotSpace;
-
-        do
+        for(int i=0; i<retries; i++)
         {
             randomSpot = RandomSpotInDoughnut();
+            bool gotSpace=true;
 
-            gotSpace=true;
-
-            Station station = prefab.GetComponent<Station>();
-
-            if(station)
+            if(prefab.TryGetComponent(out Station station))
             {
-                foreach(Vector2 spot in StationManager.Current.occupiedSpots)
-                {                
-                    float distance = Vector3.Distance(spot, randomSpot);
-
-                    if(distance <= station.stationSize*2)
-                    {
-                        gotSpace=false;
-                    }
-                }
+                gotSpace = StationManager.Current.HasSpace(station, randomSpot);
             }
 
-        } while(!gotSpace);
-        
-        GameObject spawned = Instantiate(prefab, randomSpot, Quaternion.identity);
-        spawned.name = prefab.gameObject.name;
+            if(gotSpace)
+            {
+                foundSpot=true;
+                break;
+            }
+        }
+
+        if(foundSpot)
+        {
+            GameObject spawned = Instantiate(prefab, randomSpot, Quaternion.identity);
+            spawned.name = prefab.gameObject.name;
+            if(hideInHierarchy) spawned.hideFlags = HideFlags.HideInHierarchy;
+        }
+        else Debug.LogWarning($"No space to spawn {prefab.name} after {retries} retries");
     }
 
     Vector3 RandomSpotInDoughnut()

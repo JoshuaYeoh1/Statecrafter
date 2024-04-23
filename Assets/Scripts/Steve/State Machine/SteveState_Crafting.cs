@@ -25,6 +25,8 @@ public class SteveState_Crafting : BaseState
         if(station)
         {
             steve.move.target = station.transform;
+
+            StationManager.Current.OccupyStation(station, steve.gameObject);
         }
 
         steve.move.evade=false;
@@ -32,17 +34,11 @@ public class SteveState_Crafting : BaseState
 
         if(steve.combat.InRange())
         {
-            EventManager.Current.OnUpdateCraft(steve.gameObject, station, steve.goalRecipe);
-
-            if(station)
-            StationManager.Current.OccupyStation(station, steve.gameObject);
+            EventManager.Current.OnUpdateCraft(steve.gameObject, station, steve.goalRecipe);            
         }
         else
         {
             EventManager.Current.OnUpdateNotCraft(station);
-
-            if(station)
-            StationManager.Current.UnoccupyStation(station, steve.gameObject);
         }
     }
 

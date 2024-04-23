@@ -16,7 +16,7 @@ public class Parallax : MonoBehaviour
         startPos = transform.position;
     }
     
-    void LateUpdate()
+    void FixedUpdate()
     {
         Offset();
         Loop();

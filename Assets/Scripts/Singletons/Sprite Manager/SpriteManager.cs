@@ -91,6 +91,39 @@ public class SpriteManager : MonoBehaviour
         RevertColor(target);
     }
 
+    // RANDOM COLOR
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void RandomOffsetColor(GameObject target, float rOffset=.15f, float gOffset=.15f, float bOffset=.15f, float aOffset=0)
+    {
+        if(!target) return;
+
+        foreach(SpriteRenderer sr in GetSpriteRenderers(target))
+        {
+            sr.color = new Color
+            (
+                sr.color.r + Random.Range(-rOffset, rOffset),
+                sr.color.g + Random.Range(-gOffset, gOffset),
+                sr.color.b + Random.Range(-bOffset, bOffset),
+                sr.color.a + Random.Range(-aOffset, aOffset)
+            );
+        }
+    }
+
+    // RANDOM FLIP
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void RandomFlip(GameObject target, bool flipY=false, bool flipX=true)
+    {
+        if(!target) return;
+
+        foreach(SpriteRenderer sr in GetSpriteRenderers(target))
+        {
+            if(flipX) sr.flipX = Random.Range(0, 2)==0 ? true : false;
+            if(flipY) sr.flipY = Random.Range(0, 2)==0 ? true : false;
+        }
+    }
+
     // COLLIDER BOUNDS
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

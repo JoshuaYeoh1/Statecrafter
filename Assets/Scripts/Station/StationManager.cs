@@ -13,8 +13,24 @@ public class StationManager : MonoBehaviour
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public List<Vector3> occupiedSpots = new();
+    public Dictionary<Transform, Station> occupiedSpots = new();
+
+    public bool HasSpace(Station pendingStation, Vector3 pendingSpot)
+    {
+        foreach(Transform spot in occupiedSpots.Keys)
+        {
+            float distance = Vector3.Distance(spot.position, pendingSpot);
+
+            if(distance < occupiedSpots[spot].stationSize + pendingStation.stationSize)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public Dictionary<GameObject, GameObject> occupiedStations = new(); // station, user
 
     public void OccupyStation(GameObject station, GameObject user)

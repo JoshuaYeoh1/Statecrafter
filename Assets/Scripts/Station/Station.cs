@@ -10,26 +10,26 @@ public enum StationType
     Tree,
     Quarry,
     Group,
+    Plant,
 }
 
 public class Station : MonoBehaviour
 {
     public StationType type;
-
     public float stationSize=2;
+
+    void OnEnable()
+    {
+        StationManager.Current.occupiedSpots.Add(transform, this);
+    }
+    void OnDisable()
+    {
+        StationManager.Current.occupiedSpots.Remove(transform);
+    }
 
     void OnDrawGizmosSelected()
     {
         Gizmos.color = new Color(0, 1, 0, .5f);
         Gizmos.DrawWireSphere(transform.position, stationSize);
-    }
-
-    void OnEnable()
-    {
-        StationManager.Current.occupiedSpots.Add(transform.position);
-    }
-    void OnDisable()
-    {
-        StationManager.Current.occupiedSpots.Remove(transform.position);
     }
 }

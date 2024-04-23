@@ -61,10 +61,15 @@ public class EventManager : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public event Action<GameObject, float, float> UIBarUpdateEvent;
+    public event Action<GameObject> SpectateEvent;
 
     public void OnUIBarUpdate(GameObject owner, float value, float valueMax)
     {
         UIBarUpdateEvent?.Invoke(owner, value, valueMax);
+    }
+    public void OnSpectate(GameObject watched)
+    {
+        SpectateEvent?.Invoke(watched);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
