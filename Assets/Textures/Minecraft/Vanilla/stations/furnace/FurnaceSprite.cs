@@ -19,12 +19,15 @@ public class FurnaceSprite : MonoBehaviour
 
     public Sprite offSprite;
     public Sprite onSprite;
+    public GameObject furnaceLight;
     
     void OnUpdateCraft(GameObject crafter, GameObject station, Recipe recipe)
     {
         if(station!=gameObject) return;
 
         sr.sprite = onSprite;
+
+        furnaceLight.SetActive(true);
     }
 
     void OnUpdateNotCraft(GameObject station)
@@ -32,5 +35,7 @@ public class FurnaceSprite : MonoBehaviour
         if(station!=gameObject) return;
 
         sr.sprite = offSprite;
+
+        furnaceLight.SetActive(false);
     }
 }

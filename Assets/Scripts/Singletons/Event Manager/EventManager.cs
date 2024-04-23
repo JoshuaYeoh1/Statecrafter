@@ -36,11 +36,16 @@ public class EventManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public event Action<GameObject> AttackEvent;
     public event Action<GameObject, GameObject, HurtInfo> HitEvent; // ignores iframe
     public event Action<GameObject, GameObject, HurtInfo> HurtEvent; // respects iframe
     public event Action<GameObject, GameObject, HurtInfo> DeathEvent;
     public event Action<GameObject, Item, int> AmmoEvent;
 
+    public void OnAttack(GameObject attacker)
+    {
+        AttackEvent?.Invoke(attacker);
+    }    
     public void OnHit(GameObject attacker, GameObject victim, HurtInfo hurtInfo)
     {
         HitEvent?.Invoke(attacker, victim, hurtInfo);

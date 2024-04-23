@@ -47,11 +47,11 @@ public class SpectatorCam : MonoBehaviour
         EventManager.Current.OnSpectate(spectatedNPC);
     }
 
-    public void Spectate(GameObject watched)
+    public void Spectate(GameObject toWatch)
     {
         for(int i=0; i<ActorManager.Current.npcs.Count; i++)
         {
-            if(ActorManager.Current.npcs[i]==watched)
+            if(ActorManager.Current.npcs[i]==toWatch)
             {
                 Spectate(i);
                 break;

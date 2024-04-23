@@ -95,6 +95,8 @@ public class CombatAI : MonoBehaviour
         {
             bow.owner = gameObject;
         }
+
+        EventManager.Current.OnAttack(gameObject);
     }
 
     void EnableAttack()

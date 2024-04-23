@@ -49,7 +49,7 @@ public class Steve : MonoBehaviour
     [Header("HP")]
     public float lowHPPercent=25;
     public float okHPPercent=75;
-    public float sleepRegen=.25f;
+    public float sleepRegenInterval=.25f;
 
     public bool IsLowHP()
     {
@@ -305,7 +305,7 @@ public class Steve : MonoBehaviour
         if(gameObject==SpectatorCam.Current.spectatedNPC)
         {
             CameraManager.Current.Shake();
-            TimescaleManager.Current.HitStop();
+            //TimescaleManager.Current.HitStop(); // headache
         }
     }
     

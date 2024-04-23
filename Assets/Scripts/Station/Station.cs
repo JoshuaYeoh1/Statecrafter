@@ -11,6 +11,7 @@ public enum StationType
     Quarry,
     Group,
     Plant,
+    Torch,
 }
 
 public class Station : MonoBehaviour

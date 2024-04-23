@@ -85,7 +85,7 @@ public class ForceVehicle2D : MonoBehaviour
 
     public void Push(float force, Vector3 direction)
     {
-        rb.velocity = new Vector3(0, rb.velocity.y, 0);
+        rb.velocity = Vector3.zero;
 
         rb.AddForce(direction*force, ForceMode2D.Impulse);
     }

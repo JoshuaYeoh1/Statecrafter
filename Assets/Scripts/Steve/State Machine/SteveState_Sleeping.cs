@@ -34,17 +34,17 @@ public class SteveState_Sleeping : BaseState
 
         if(steve.combat.InRange())
         {
-            steve.hp.regenHp=steve.sleepRegen;
+            steve.hp.regenInterval=steve.sleepRegenInterval;
         }
         else 
         {
-            steve.hp.regenHp=steve.hp.defaultRegenHp;
+            steve.hp.regenInterval=steve.hp.defaultRegenInterval;
         }
     }
 
     protected override void OnExit()
     {
-        steve.hp.regenHp=steve.hp.defaultRegenHp;
+        steve.hp.regenInterval=steve.hp.defaultRegenInterval;
 
         if(bed)
         StationManager.Current.UnoccupyStation(bed, steve.gameObject);

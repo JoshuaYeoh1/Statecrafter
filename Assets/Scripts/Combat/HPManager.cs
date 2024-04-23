@@ -13,10 +13,12 @@ public class HPManager : MonoBehaviour
     public bool regenWhenEmpty;
     public float regenHp=.2f, regenInterval=.1f;
     [HideInInspector] public float defaultRegenHp;
+    [HideInInspector] public float defaultRegenInterval;
 
     void Awake()
     {
         defaultRegenHp=regenHp;
+        defaultRegenInterval=regenInterval;
     }
     
     void OnEnable()

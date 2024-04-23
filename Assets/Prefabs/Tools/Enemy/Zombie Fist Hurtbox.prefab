@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 3d1d048fb0e20da4bbec435bc318dfbc, type: 3}
     - target: {fileID: 2838643147298960810, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: dmg
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2838643147298960810, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: ownerName
