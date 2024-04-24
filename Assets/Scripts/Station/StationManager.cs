@@ -13,6 +13,31 @@ public class StationManager : MonoBehaviour
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    void Update()
+    {
+        RemoveDictNulls(occupiedTargets);
+    }
+
+    void RemoveDictNulls<TKey, TValue>(Dictionary<TKey, TValue> dictionary)
+    {
+        List<TKey> keysToRemove = new List<TKey>();
+
+        foreach(var item in dictionary)
+        {
+            if(item.Key==null || item.Value==null) // if either is null
+            {
+                keysToRemove.Add(item.Key);
+            }
+        }
+
+        foreach(var key in keysToRemove)
+        {
+            dictionary.Remove(key);
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public Dictionary<Transform, Station> occupiedSpots = new();
 
     public bool HasSpace(Station pendingStation, Vector3 pendingSpot)
@@ -31,40 +56,55 @@ public class StationManager : MonoBehaviour
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public Dictionary<GameObject, GameObject> occupiedStations = new(); // station, user
+    public Dictionary<GameObject, GameObject> occupiedTargets = new(); // target, user
 
-    public void OccupyStation(GameObject station, GameObject user)
+    public void OccupyTarget(GameObject target, GameObject user)
     {
-        if(!occupiedStations.ContainsKey(station))
+        if(!occupiedTargets.ContainsKey(target))
         {
-            occupiedStations[station] = user;
+            occupiedTargets[target] = user;
         }
     }
 
-    public void UnoccupyStation(GameObject station, GameObject user)
+    public void UnoccupyTarget(GameObject target, GameObject user)
     {
-        if(occupiedStations.ContainsKey(station))
+        if(occupiedTargets.ContainsKey(target))
         {
-            if(occupiedStations[station]==user)
+            if(occupiedTargets[target]==user)
             {
-                occupiedStations.Remove(station);
+                occupiedTargets.Remove(target);
             }
         }
     }
 
-    public bool IsOccupied(GameObject station, GameObject pendingUser)
+    public bool IsOccupied(GameObject target, GameObject pendingUser)
     {
-        if(!occupiedStations.ContainsKey(station))
+        if(!occupiedTargets.ContainsKey(target))
         {
-            return false; // Station is not occupied
+            return false; // not occupied
         }
         
-        if(occupiedStations[station] != pendingUser)
+        if(occupiedTargets[target] != pendingUser)
         {
-            return true; // Station is occupied by another user
+            return true; // occupied by another user
         }
 
-        return false; // its free to use for the pending user
+        return false; // its free to target for the pending user
+    }
+
+    public List<GameObject> GetFreeTargets(List<GameObject> targets, GameObject pendingUser)
+    {
+        List<GameObject> freeTargets = new();
+
+        foreach(GameObject target in targets)
+        {
+            if(!IsOccupied(target, pendingUser))
+            {
+                freeTargets.Add(target);
+            }
+        }
+
+        return freeTargets;
     }
     
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -26,7 +26,7 @@ public class SteveState_Crafting : BaseState
         {
             steve.move.target = station.transform;
 
-            StationManager.Current.OccupyStation(station, steve.gameObject);
+            StationManager.Current.OccupyTarget(station, steve.gameObject);
         }
 
         steve.move.evade=false;
@@ -47,6 +47,6 @@ public class SteveState_Crafting : BaseState
         EventManager.Current.OnUpdateNotCraft(station);
 
         if(station)
-        StationManager.Current.UnoccupyStation(station, steve.gameObject);
+        StationManager.Current.UnoccupyTarget(station, steve.gameObject);
     }
 }

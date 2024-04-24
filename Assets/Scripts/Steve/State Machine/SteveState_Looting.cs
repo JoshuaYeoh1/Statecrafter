@@ -16,14 +16,17 @@ public class SteveState_Looting : BaseState
         Debug.Log($"{steve.gameObject.name} State: {Name}");
     }
 
-    GameObject closestLoot;
+    GameObject loot;
+    
     protected override void OnUpdate(float deltaTime)
     {
-        closestLoot=steve.closestLoot;
+        loot=steve.closestLoot;
 
-        if(closestLoot)
+        if(loot)
         {
-            steve.move.target=closestLoot.transform;
+            steve.move.target=loot.transform;
+
+            StationManager.Current.OccupyTarget(loot, steve.gameObject);
         }
 
         steve.move.evade=false;
@@ -32,5 +35,9 @@ public class SteveState_Looting : BaseState
 
     protected override void OnExit()
     {
+        if(loot)
+        {
+            StationManager.Current.UnoccupyTarget(loot, steve.gameObject);
+        }
     }
 }

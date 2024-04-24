@@ -50,6 +50,7 @@ public class Hurtbox2D : MonoBehaviour
     {
         if(hitboxOrigin) contactPoint = other.ClosestPoint(hitboxOrigin.position);
         else contactPoint = other.ClosestPoint(transform.position);
+        contactPoint.z=0;
 
         ToggleColl(hasSweepingEdge); // if can swipe through multiple
         

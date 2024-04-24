@@ -20,13 +20,13 @@ public class SteveState_Sleeping : BaseState
 
     protected override void OnUpdate(float deltaTime)
     {
-        bed = steve.GetClosestAvailableBed();
+        bed = steve.GetClosestBed();
 
         if(bed)
         {
             steve.move.target=bed.transform;
 
-            StationManager.Current.OccupyStation(bed, steve.gameObject);
+            StationManager.Current.OccupyTarget(bed, steve.gameObject);
         }
 
         steve.move.evade=false;
@@ -47,6 +47,6 @@ public class SteveState_Sleeping : BaseState
         steve.hp.regenInterval=steve.hp.defaultRegenInterval;
 
         if(bed)
-        StationManager.Current.UnoccupyStation(bed, steve.gameObject);
+        StationManager.Current.UnoccupyTarget(bed, steve.gameObject);
     }
 }

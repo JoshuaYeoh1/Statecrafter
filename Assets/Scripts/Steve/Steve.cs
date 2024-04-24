@@ -92,101 +92,89 @@ public class Steve : MonoBehaviour
 
     public GameObject GetClosestLoot()
     {
-        return radar.GetClosest(radar.GetTargetsWithTag("Loot"));
+        List<GameObject> loots = radar.GetTargetsWithTag("Loot");
+
+        List<GameObject> freeLoots = StationManager.Current.GetFreeTargets(loots, gameObject);
+
+        return radar.GetClosest(freeLoots);
     }
 
-    public GameObject GetClosestAvailableBed()
+    public GameObject GetClosestBed()
     {
         List<GameObject> beds = StationManager.Current.GetBeds();
 
-        List<GameObject> freeBeds = new();
-
-        foreach(GameObject bed in beds)
-        {
-            if(!StationManager.Current.IsOccupied(bed, gameObject))
-            {
-                freeBeds.Add(bed);
-            }
-        }
+        List<GameObject> freeBeds = StationManager.Current.GetFreeTargets(beds, gameObject);
 
         return radar.GetClosest(freeBeds);
     }
 
-    public GameObject GetClosestAvailableCraftingTable()
+    public GameObject GetClosestCraftingTable()
     {
         List<GameObject> tables = StationManager.Current.GetCraftingTables();
 
-        List<GameObject> freeTables = new();
-
-        foreach(GameObject table in tables)
-        {
-            if(!StationManager.Current.IsOccupied(table, gameObject))
-            {
-                freeTables.Add(table);
-            }
-        }
+        List<GameObject> freeTables = StationManager.Current.GetFreeTargets(tables, gameObject);
 
         return radar.GetClosest(freeTables);
     }
 
-    public GameObject GetClosestAvailableFurnace()
+    public GameObject GetClosestFurnace()
     {
         List<GameObject> furnaces = StationManager.Current.GetFurnaces();
 
-        List<GameObject> freeFurnaces = new();
-
-        foreach(GameObject furnace in furnaces)
-        {
-            if(!StationManager.Current.IsOccupied(furnace, gameObject))
-            {
-                freeFurnaces.Add(furnace);
-            }
-        }
+        List<GameObject> freeFurnaces = StationManager.Current.GetFreeTargets(furnaces, gameObject);
 
         return radar.GetClosest(freeFurnaces);
     }
 
     public GameObject GetClosestWood()
     {
-        return radar.GetClosest(ResourceManager.Current.GetWoods());
+        List<GameObject> woods = ResourceManager.Current.GetWoods();
+
+        List<GameObject> freeWoods = StationManager.Current.GetFreeTargets(woods, gameObject);
+
+        return radar.GetClosest(freeWoods);
     }
 
     public GameObject GetClosestStone()
     {
-        return radar.GetClosest(ResourceManager.Current.GetStones());
+        List<GameObject> stones = ResourceManager.Current.GetStones();
+
+        List<GameObject> freeStones = StationManager.Current.GetFreeTargets(stones, gameObject);
+
+        return radar.GetClosest(freeStones);
     }
 
     public GameObject GetClosestCoalOre()
     {
-        GameObject target = radar.GetClosest(ResourceManager.Current.GetCoals());
+        List<GameObject> coals = ResourceManager.Current.GetCoals();
 
-        if(!target) target = GetClosestStone();
+        if(coals.Count==0) return GetClosestStone();
 
-        return target;
+        List<GameObject> freeCoals = StationManager.Current.GetFreeTargets(coals, gameObject);
+
+        return radar.GetClosest(freeCoals);
     }
 
     public GameObject GetClosestIronOre()
     {
-        GameObject target = radar.GetClosest(ResourceManager.Current.GetIrons());
+        List<GameObject> irons = ResourceManager.Current.GetIrons();
 
-        if(!target) target = GetClosestCoalOre();
+        if(irons.Count==0) return GetClosestCoalOre();
 
-        if(!target) target = GetClosestStone();
+        List<GameObject> freeIrons = StationManager.Current.GetFreeTargets(irons, gameObject);
 
-        return target;
+        return radar.GetClosest(freeIrons);
     }
 
     public GameObject GetClosestDiamondOre()
     {
-        GameObject target = radar.GetClosest(ResourceManager.Current.GetDiamonds());
+        List<GameObject> diamonds = ResourceManager.Current.GetDiamonds();
 
-        if(!target) target = GetClosestIronOre(); // these are to clear space if full capacity in quarries
+        if(diamonds.Count==0) return GetClosestIronOre(); // these are to clear space if full capacity in quarries
 
-        if(!target) target = GetClosestCoalOre();
+        List<GameObject> freeDiamonds = StationManager.Current.GetFreeTargets(diamonds, gameObject);
 
-        if(!target) target = GetClosestStone();
-
-        return target;
+        return radar.GetClosest(freeDiamonds);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -292,8 +280,8 @@ public class Steve : MonoBehaviour
         if(recipe==null) return null;
 
         return recipe.craftingStation == StationType.Furnace ?
-            GetClosestAvailableFurnace():
-            GetClosestAvailableCraftingTable();
+            GetClosestFurnace():
+            GetClosestCraftingTable();
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

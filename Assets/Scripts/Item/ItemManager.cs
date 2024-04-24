@@ -47,10 +47,15 @@ public class ItemManager : MonoBehaviour
 
     public GameObject lootPrefab;
 
-    public void Spawn(Item item, Vector3 pos)
+    public GameObject Spawn(Item item, Vector3 pos)
     {
-        Loot2D loot = Instantiate(lootPrefab, pos, Quaternion.identity).GetComponent<Loot2D>();
+        GameObject spawned = Instantiate(lootPrefab, pos, Quaternion.identity);
 
-        loot.item = item;
+        if(spawned.TryGetComponent(out Loot2D loot))
+        {
+            loot.item = item;
+        }
+
+        return spawned;
     }
 }

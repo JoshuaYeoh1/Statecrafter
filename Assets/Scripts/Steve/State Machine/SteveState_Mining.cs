@@ -16,15 +16,17 @@ public class SteveState_Mining : BaseState
         Debug.Log($"{steve.gameObject.name} State: {Name}");
     }
 
-    GameObject targetResource;
+    GameObject resource;
 
     protected override void OnUpdate(float deltaTime)
     {
-        targetResource = steve.goalResource;
+        resource = steve.goalResource;
 
-        if(targetResource)
+        if(resource)
         {
-            steve.move.target=targetResource.transform;
+            steve.move.target=resource.transform;
+
+            StationManager.Current.OccupyTarget(resource, steve.gameObject);
         }
         
         steve.combat.range=steve.meleeRange;
@@ -41,5 +43,9 @@ public class SteveState_Mining : BaseState
 
     protected override void OnExit()
     {
+        if(resource)
+        {
+            StationManager.Current.UnoccupyTarget(resource, steve.gameObject);
+        }
     }
 }

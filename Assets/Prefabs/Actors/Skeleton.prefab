@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: attackCooldown
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4329108421572925386, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
+      propertyPath: attackCooldown.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4329108421572925386, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
+      propertyPath: attackCooldown.y
+      value: 1.9
+      objectReference: {fileID: 0}
     - target: {fileID: 7389077506460653981, guid: 795a3df2d4530214290bd3438eefe403, type: 3}
       propertyPath: range
       value: 6

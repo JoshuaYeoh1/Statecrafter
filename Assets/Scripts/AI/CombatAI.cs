@@ -73,14 +73,14 @@ public class CombatAI : MonoBehaviour
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     [Header("Attack")]
-    public float attackCooldown=.6f;
+    public Vector2 attackCooldown = new Vector2(.5f, .7f);
     bool canAttack=true;
 
     public void Attack(GameObject prefab)
     {
         if(!canAttack) return;
         canAttack=false;
-        Invoke(nameof(EnableAttack), attackCooldown);
+        Invoke(nameof(EnableAttack), Random.Range(attackCooldown.x, attackCooldown.y));
         
         GameObject spawned = Instantiate(prefab, aimer.position, aimer.rotation);
         spawned.transform.parent = aimer;

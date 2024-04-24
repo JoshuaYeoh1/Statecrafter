@@ -15,7 +15,7 @@ public class DropTable : MonoBehaviour
 
     public List<Drops> drops = new();
 
-    public void Drop()
+    public void Drop(GameObject redeemer)
     {
         foreach(Drops drop in drops)
         {
@@ -25,7 +25,9 @@ public class DropTable : MonoBehaviour
 
                 for(int i=0; i<randNum; i++)
                 {
-                    ItemManager.Current.Spawn(drop.item, transform.position);
+                    GameObject spawned = ItemManager.Current.Spawn(drop.item, transform.position);
+
+                    if(redeemer) StationManager.Current.OccupyTarget(spawned, redeemer);
                 }
             }
         }

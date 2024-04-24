@@ -26,6 +26,10 @@ public class Hurt2D : MonoBehaviour
     {
         if(iframe) return;
 
+        hurtInfo.victimName = subjectName;
+
+        EventManager.Current.OnHurt(gameObject, attacker, hurtInfo);
+        
         hp.Hurt(hurtInfo.dmg);
 
         if(hp.hp>0) // if still alive
@@ -40,10 +44,6 @@ public class Hurt2D : MonoBehaviour
             
             Die(attacker, hurtInfo);
         }
-
-        hurtInfo.victimName = subjectName;
-
-        EventManager.Current.OnHurt(gameObject, attacker, hurtInfo);
     }
 
     [Header("iFrame")]

@@ -26,7 +26,7 @@ public class DeathDrop : MonoBehaviour
     {
         if(victim!=gameObject) return;
 
-        drop.Drop();
+        drop.Drop(killer);
 
         if(destroyOnDeath) Destroy(gameObject);
     }
