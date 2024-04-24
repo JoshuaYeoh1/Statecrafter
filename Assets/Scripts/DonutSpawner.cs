@@ -33,12 +33,11 @@ public class DonutSpawner : MonoBehaviour
         for(int i=0; i<retries; i++)
         {
             randomSpot = RandomSpotInDoughnut();
-            bool gotSpace=true;
+            bool gotSpace;
 
-            if(prefab.TryGetComponent(out Station station))
-            {
-                gotSpace = StationManager.Current.HasSpace(station, randomSpot);
-            }
+            float stationSize = prefab.TryGetComponent(out Station station) ? station.stationSize : 0;
+
+            gotSpace = StationManager.Current.HasSpace(stationSize, randomSpot);
 
             if(gotSpace)
             {

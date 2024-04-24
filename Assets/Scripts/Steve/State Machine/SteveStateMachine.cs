@@ -24,6 +24,7 @@ public class SteveStateMachine : MonoBehaviour
         SteveState_Fighting fighting = new(this);
         SteveState_Fleeing fleeing = new(this);
         SteveState_Sleeping sleeping = new(this);
+        SteveState_Death death = new(this);
 
         // TRANSITIONS
         /////////////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +47,8 @@ public class SteveStateMachine : MonoBehaviour
         idle.AddTransition(looting, (timeInState) =>
         {
             if(
-                steve.closestLoot
+                steve.closestLoot &&
+                !steve.IsDead()
             )
             {
                 return true;
@@ -87,7 +89,8 @@ public class SteveStateMachine : MonoBehaviour
             if(
                 steve.closestEnemy &&
                 !steve.closestLoot &&
-                steve.IsLowHP()
+                steve.IsLowHP() &&
+                !steve.IsDead()
             )
             {
                 return true;
@@ -100,7 +103,8 @@ public class SteveStateMachine : MonoBehaviour
             if(
                 !steve.closestEnemy &&
                 !steve.closestLoot &&
-                !steve.IsOkHP()
+                !steve.IsOkHP() &&
+                !steve.IsDead()
             )
             {
                 return true;
@@ -108,6 +112,17 @@ public class SteveStateMachine : MonoBehaviour
             return false;
         });
 
+        idle.AddTransition(death, (timeInState) =>
+        {
+            if(
+                steve.IsDead()
+            )
+            {
+                return true;
+            }
+            return false;
+        });
+        
         /////////////////////////////////////////////////////////////////////////////////////////
 
         mining.AddTransition(idle, (timeInState) =>
@@ -130,7 +145,8 @@ public class SteveStateMachine : MonoBehaviour
         looting.AddTransition(idle, (timeInState) =>
         {
             if(
-                !steve.closestLoot
+                !steve.closestLoot ||
+                steve.IsDead()
             )
             {
                 return true;
@@ -178,7 +194,8 @@ public class SteveStateMachine : MonoBehaviour
             if(
                 !steve.closestEnemy ||
                 steve.closestLoot ||
-                !steve.IsLowHP()
+                !steve.IsLowHP() ||
+                steve.IsDead()
             )
             {
                 return true;
@@ -193,7 +210,21 @@ public class SteveStateMachine : MonoBehaviour
             if(
                 steve.closestEnemy ||
                 steve.closestLoot ||
-                steve.IsFullHP()
+                steve.IsFullHP() ||
+                steve.IsDead()
+            )
+            {
+                return true;
+            }
+            return false;
+        });
+
+        /////////////////////////////////////////////////////////////////////////////////////////
+        
+        death.AddTransition(idle, (timeInState) =>
+        {
+            if(
+                !steve.IsDead()
             )
             {
                 return true;

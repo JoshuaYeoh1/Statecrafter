@@ -41,7 +41,7 @@ public class Loot2D : MonoBehaviour
 
     void Update()
     {
-        anim.Play($"{item}", 0);
+        if(anim) anim.Play($"{item}", 0);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,10 +60,14 @@ public class Loot2D : MonoBehaviour
     }
 
     public bool destroyOnLoot=true;
+    bool picked;
 
     void Pickup(GameObject looter)
     {
-        EventManager.Current.OnLoot(looter, CopyLootInfo());
+        if(picked) return;
+        picked=true;
+
+        EventManager.Current.OnLoot(looter, gameObject, CopyLootInfo());
 
         if(destroyOnLoot) Destroy(gameObject);
         else gameObject.SetActive(false);

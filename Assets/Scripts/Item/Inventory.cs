@@ -6,22 +6,6 @@ public class Inventory : MonoBehaviour
 {
     public Dictionary<Item, int> inventory = new();
 
-    void OnEnable()
-    {
-        EventManager.Current.LootEvent += OnLoot;
-    }
-    void OnDisable()
-    {
-        EventManager.Current.LootEvent -= OnLoot;
-    }
-    
-    void OnLoot(GameObject looter, LootInfo lootInfo)
-    {
-        if(looter!=gameObject) return;
-
-        AddItem(lootInfo.item, lootInfo.quantity);
-    }
-
     public void AddItem(Item item, int quantity)
     {
         if(HasItem(item))
@@ -69,14 +53,15 @@ public class Inventory : MonoBehaviour
 
         int left = inventory[item];
 
-        for(int i=0; i<quantity; i++)
+        for(int i=0; i<quantity && left>0; i++)
         {
-            if(left>0)
-            {
-                left--;
-                ItemManager.Current.Spawn(item, transform.position);
-            }
-            else break;
+            left--;
+
+            GameObject spawned = ItemManager.Current.Spawn(item, transform.position);
+
+            StationManager.Current.OccupyTarget(spawned, gameObject);
+
+            drops.Add(spawned);
         }
 
         RemoveItem(item, quantity);
@@ -84,9 +69,28 @@ public class Inventory : MonoBehaviour
 
     public void DropAll()
     {
+        List<Item> itemsToRemove = new();
+
         foreach(Item item in inventory.Keys)
+        {
+            itemsToRemove.Add(item);
+        }
+
+        foreach(Item item in itemsToRemove)
         {
             Drop(item, inventory[item]);
         }
+    }
+
+    public List<GameObject> drops = new();
+
+    void Update()
+    {
+        RemoveNulls(drops);
+    }
+
+    void RemoveNulls(List<GameObject> list)
+    {
+        list.RemoveAll(item => item == null);
     }
 }

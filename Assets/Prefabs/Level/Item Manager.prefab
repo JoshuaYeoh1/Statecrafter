@@ -45,3 +45,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lootPrefab: {fileID: 4775846598288885977, guid: 168af76220d20af44b5a1c8dc06bd764, type: 3}
+  foods:
+  - name: RottenFlesh
+    item: 25
+    heal: 1
+  - name: SpiderEye
+    item: 27
+    heal: 1
+  - name: GenericFood
+    item: 28
+    heal: 2

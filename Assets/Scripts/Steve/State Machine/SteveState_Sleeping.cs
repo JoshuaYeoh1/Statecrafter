@@ -35,6 +35,8 @@ public class SteveState_Sleeping : BaseState
         if(steve.combat.InRange())
         {
             steve.hp.regenInterval=steve.sleepRegenInterval;
+            
+            steve.spawnpoint=steve.transform.position;
         }
         else 
         {

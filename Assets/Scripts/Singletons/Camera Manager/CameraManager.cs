@@ -170,7 +170,7 @@ public class CameraManager : MonoBehaviour
 
     Vector3 currentShake;
 
-    public void Shake(float time=.2f, float amp=1.5f, float freq=2)
+    public void Shake(float time=.2f, float amp=1, float freq=2)
     {
         if(time<currentShake.x || amp<currentShake.y || freq<currentShake.z) return;
 

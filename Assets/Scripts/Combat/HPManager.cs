@@ -14,6 +14,7 @@ public class HPManager : MonoBehaviour
     public float regenHp=.2f, regenInterval=.1f;
     [HideInInspector] public float defaultRegenHp;
     [HideInInspector] public float defaultRegenInterval;
+    float prevRegenInterval;
 
     void Awake()
     {
@@ -23,7 +24,7 @@ public class HPManager : MonoBehaviour
     
     void OnEnable()
     {
-        StartCoroutine(HpRegenerating());
+        StartHpRegen();
     }
 
     void Start()
@@ -33,7 +34,14 @@ public class HPManager : MonoBehaviour
 
     void Update()
     {
-        hp = Mathf.Clamp(hp, 0, hpMax);        
+        hp = Mathf.Clamp(hp, 0, hpMax);     
+
+        if(prevRegenInterval != regenInterval)
+        {
+            prevRegenInterval = regenInterval;
+
+            StartHpRegen();
+        }
     }
 
     public void Hurt(float dmg)
@@ -46,7 +54,15 @@ public class HPManager : MonoBehaviour
         
         EventManager.Current.OnUIBarUpdate(gameObject, hp, hpMax);
     }    
-    
+
+    void StartHpRegen()
+    {
+        if(hpRegeneratingRt!=null) StopCoroutine(hpRegeneratingRt);
+        hpRegeneratingRt = StartCoroutine(HpRegenerating());
+    }
+
+    Coroutine hpRegeneratingRt;
+
     IEnumerator HpRegenerating()
     {
         while(true)
@@ -64,8 +80,8 @@ public class HPManager : MonoBehaviour
 
     public void Add(float amount)
     {
-        if(amount < hpMax-hp) hp+=amount;
-        else hp=hpMax;
+        hp+=amount;
+        if(hp>hpMax) hp=hpMax;
 
         EventManager.Current.OnUIBarUpdate(gameObject, hp, hpMax);
     }

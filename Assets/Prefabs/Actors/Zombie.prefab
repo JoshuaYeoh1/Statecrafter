@@ -386,7 +386,7 @@ MonoBehaviour:
   wander: {fileID: 0}
   enemyName: 0
   closestEnemy: {fileID: 0}
-  huggyRange: 0.05
+  huggyRange: 0.1
   range: 1.2
   currentWeapon:
     name: None

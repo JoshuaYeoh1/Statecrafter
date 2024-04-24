@@ -103,13 +103,20 @@ public class VFXManager : MonoBehaviour
         SpawnMcSmoke(SpriteManager.Current.GetColliderCenter(victim));
     }    
 
-    public void OnLoot(GameObject looter, LootInfo lootInfo)
+    public void OnLoot(GameObject looter, GameObject loot, LootInfo lootInfo)
     {
-        string suffix = lootInfo.quantity>1 ? $"({lootInfo.quantity})" : "";
+        ItemFood food = ItemManager.Current.GetFood(lootInfo.item);
 
-        SpawnPopUpText(lootInfo.contactPoint, $"+{lootInfo.item}{suffix}", Color.white);
+        if(food==null)
+        {
+            string suffix = lootInfo.quantity>1 ? $"({lootInfo.quantity})" : "";
 
-        SpriteManager.Current.FlashColor(looter, 1, 1, 1);
+            SpawnPopUpText(lootInfo.contactPoint, $"+{lootInfo.item}{suffix}", Color.white);
+        }
+        else
+        {
+            SpawnPopUpText(lootInfo.contactPoint, $"+{food.heal}", Color.green);
+        }
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////

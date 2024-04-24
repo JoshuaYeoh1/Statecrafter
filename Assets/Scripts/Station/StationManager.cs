@@ -40,13 +40,13 @@ public class StationManager : MonoBehaviour
 
     public Dictionary<Transform, Station> occupiedSpots = new();
 
-    public bool HasSpace(Station pendingStation, Vector3 pendingSpot)
+    public bool HasSpace(float pendingStationSize, Vector3 pendingSpot)
     {
         foreach(Transform spot in occupiedSpots.Keys)
         {
             float distance = Vector3.Distance(spot.position, pendingSpot);
 
-            if(distance < occupiedSpots[spot].stationSize + pendingStation.stationSize)
+            if(distance < occupiedSpots[spot].stationSize + pendingStationSize)
             {
                 return false;
             }

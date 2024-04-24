@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 8980486072643744781}
-  item: 10
+  item: 22
   quantity: 1
   lootDelay: 1
   contactPoint: {x: 0, y: 0, z: 0}
@@ -229,7 +229,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1201729199
   m_SortingLayer: 1
-  m_SortingOrder: 20
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 67dc3cf9996d87d47b3c039601591cd6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -309,9 +309,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe82cafa550d7784f8e4cf0de6cb825f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  relativeTo: {fileID: 6040698364682081960}
   sinePos: 1
   posFrequency: {x: 0, y: 5, z: 0}
   posMagnitude: {x: 0, y: 0.1, z: 0}
+  localPos: 0
   sineRot: 0
   rotFrequency: {x: 0, y: 0, z: 0}
   rotMagnitude: {x: 0, y: 0, z: 0}

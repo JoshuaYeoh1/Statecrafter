@@ -79,14 +79,14 @@ public class EventManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public event Action<GameObject, LootInfo> LootEvent;
+    public event Action<GameObject, GameObject, LootInfo> LootEvent;
     public event Action<GameObject, GameObject, Recipe> UpdateCraftEvent;
     public event Action<GameObject> UpdateNotCraftEvent;
     public event Action<GameObject, GameObject, Recipe> CraftedEvent;
 
-    public void OnLoot(GameObject looter, LootInfo lootInfo)
+    public void OnLoot(GameObject looter, GameObject loot, LootInfo lootInfo)
     {
-        LootEvent?.Invoke(looter, lootInfo);
+        LootEvent?.Invoke(looter, loot, lootInfo);
     }
     public void OnUpdateCraft(GameObject crafter, GameObject station, Recipe recipe)
     {

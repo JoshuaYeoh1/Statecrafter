@@ -360,6 +360,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5746aa2653c376c4c9af274713658ebf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coll: {fileID: 0}
+  rb: {fileID: 0}
   vehicle: {fileID: 6352759977838314967}
   move: {fileID: 7575219942888729167}
   hp: {fileID: 803846312879462648}
@@ -368,19 +370,20 @@ MonoBehaviour:
   combat: {fileID: 6889804801764347536}
   equip: {fileID: 0}
   wander: {fileID: 0}
+  sr: {fileID: 7357570596668889468}
   npcName: 0
-  lowHPPercent: 35
-  okHPPercent: 75
+  lowHPPercent: 25
+  okHPPercent: 50
   sleepRegenInterval: 0.25
   closestEnemy: {fileID: 0}
   closestLoot: {fileID: 0}
-  huggyRange: 0.05
+  huggyRange: 0.1
   useRange: 0.75
   meleeRange: 1.6
   longRange: 6
   pickaxePriority: 0a000000080000000400000002000000
   axePriority: 100000000f0000000e0000000d00000000000000
-  swordPriority: 140000001300000010000000120000000f0000000a000000110000000e000000080000000d000000040000000200000000000000
+  swordPriority: 1400000010000000130000000f000000120000000e0000000a000000110000000d00000008000000040000000200000000000000
   bowPriority: 15000000
   currentTool:
     name: 
@@ -405,6 +408,7 @@ MonoBehaviour:
     results: 
   goalResource: {fileID: 0}
   goalCraftingStation: {fileID: 0}
+  respawnTime: 3
 --- !u!114 &6394562662366599258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,7 +520,7 @@ MonoBehaviour:
   regen: 1
   regenWhenEmpty: 0
   regenHp: 1
-  regenInterval: 3
+  regenInterval: 5
   defaultRegenHp: 0
   defaultRegenInterval: 0
 --- !u!114 &58028477099949779
@@ -567,6 +571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a21587320716eeb4a98977ccb3204a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  drops: []
 --- !u!114 &6889804801764347536
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,7 +781,7 @@ MonoBehaviour:
   - {x: 0.5, y: 0, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: 1529942
+  m_InstanceId: 2030028
   m_LocalBounds:
     m_Center: {x: 0, y: 0.5, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}

@@ -32,6 +32,15 @@ public enum Item
     RottenFlesh,
     Bone,
     SpiderEye,
+    GenericFood,
+}
+
+[System.Serializable]
+public class ItemFood
+{
+    public string name;
+    public Item item;
+    public float heal;
 }
 
 public class ItemManager : MonoBehaviour
@@ -57,5 +66,19 @@ public class ItemManager : MonoBehaviour
         }
 
         return spawned;
+    }
+
+    public List<ItemFood> foods = new();
+
+    public ItemFood GetFood(Item item)
+    {
+        foreach(ItemFood food in foods)
+        {
+            if(food.item==item)
+            {
+                return food;
+            }
+        }
+        return null;
     }
 }

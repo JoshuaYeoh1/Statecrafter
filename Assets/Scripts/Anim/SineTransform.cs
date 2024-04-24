@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class SineTransform : MonoBehaviour
 {
+    public Transform relativeTo;
+
     [Header("Position")]
     public bool sinePos;
     public Vector3 posFrequency;
     public Vector3 posMagnitude;
+    public bool localPos=true;
     Vector3 defPos;
 
     [Header("Rotation")]
@@ -28,9 +31,9 @@ public class SineTransform : MonoBehaviour
     
     void Awake()
     {
-        defPos=transform.localPosition;
-        defRot=transform.localEulerAngles;
-        defScale=transform.localScale;
+        defPos = transform.localPosition;
+        defRot = transform.localEulerAngles;
+        defScale = transform.localScale;
     }
 
     void Update()
@@ -68,7 +71,8 @@ public class SineTransform : MonoBehaviour
             Sine(posFrequency.z, posMagnitude.z)
         );
 
-        transform.localPosition = defPos + sine;
+        if(localPos) transform.localPosition = defPos + sine;
+        else transform.position = relativeTo.position + sine;
     }
 
     void SineRot()
@@ -106,7 +110,8 @@ public class SineTransform : MonoBehaviour
     [ContextMenu("Reset Position")]
     public void ResetPos()
     {
-        transform.localPosition = defPos;
+        if(localPos) transform.localPosition = defPos;
+        else transform.position = relativeTo.position;
     }
     
     [ContextMenu("Reset Rotation")]

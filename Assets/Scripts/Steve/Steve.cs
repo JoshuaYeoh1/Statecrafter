@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Steve : MonoBehaviour
 {
+    [HideInInspector] public Collider2D coll;
+    [HideInInspector] public Rigidbody2D rb;
     [HideInInspector] public ForceVehicle2D vehicle;
     [HideInInspector] public PursuitAI move;
     [HideInInspector] public HPManager hp;
@@ -13,8 +15,12 @@ public class Steve : MonoBehaviour
     [HideInInspector] public Equipment equip;
     [HideInInspector] public WanderAI wander;
 
+    public SpriteRenderer sr;
+
     void Awake()
     {
+        coll=GetComponent<Collider2D>();
+        rb=GetComponent<Rigidbody2D>();
         vehicle=GetComponent<ForceVehicle2D>();
         move=GetComponent<PursuitAI>();
         hp=GetComponent<HPManager>();
@@ -23,12 +29,15 @@ public class Steve : MonoBehaviour
         combat=GetComponent<CombatAI>();
         equip=GetComponent<Equipment>();
         wander=GetComponent<WanderAI>();
+
+        spawnpoint=transform.position;
     }
 
     void OnEnable()
     {
         EventManager.Current.HurtEvent += OnHurt;
         EventManager.Current.CraftedEvent += OnCrafted;
+        EventManager.Current.LootEvent += OnLoot;
         EventManager.Current.AmmoEvent += OnAmmo;
 
         ActorManager.Current.npcs.Add(gameObject);
@@ -37,6 +46,7 @@ public class Steve : MonoBehaviour
     {
         EventManager.Current.HurtEvent -= OnHurt;
         EventManager.Current.CraftedEvent -= OnCrafted;
+        EventManager.Current.LootEvent -= OnLoot;
         EventManager.Current.AmmoEvent -= OnAmmo;
 
         ActorManager.Current.npcs.Remove(gameObject);
@@ -48,7 +58,7 @@ public class Steve : MonoBehaviour
 
     [Header("HP")]
     public float lowHPPercent=25;
-    public float okHPPercent=75;
+    public float okHPPercent=50;
     public float sleepRegenInterval=.25f;
 
     public bool IsLowHP()
@@ -62,6 +72,10 @@ public class Steve : MonoBehaviour
     public bool IsFullHP()
     {
         return hp.hp==hp.hpMax;
+    }
+    public bool IsDead()
+    {
+        return hp.hp<=0;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -92,11 +106,22 @@ public class Steve : MonoBehaviour
 
     public GameObject GetClosestLoot()
     {
-        List<GameObject> loots = radar.GetTargetsWithTag("Loot");
+        if(inv.drops.Count>0)
+        {
+            return radar.GetClosest(inv.drops);
+        }
+        else
+        {
+            List<GameObject> loots = new();
 
-        List<GameObject> freeLoots = StationManager.Current.GetFreeTargets(loots, gameObject);
+            if(!IsOkHP()) loots = radar.GetTargetsWithTag("Food");
 
-        return radar.GetClosest(freeLoots);
+            if(loots.Count==0) loots = radar.GetTargetsWithTag("Loot");
+
+            List<GameObject> freeLoots = StationManager.Current.GetFreeTargets(loots, gameObject);
+
+            return radar.GetClosest(freeLoots);
+        }
     }
 
     public GameObject GetClosestBed()
@@ -309,10 +334,39 @@ public class Steve : MonoBehaviour
         crafted.Enable();
     }
 
+    void OnLoot(GameObject looter, GameObject loot, LootInfo lootInfo)
+    {
+        if(looter!=gameObject) return;
+
+        ItemFood food = ItemManager.Current.GetFood(lootInfo.item);
+
+        if(food!=null) hp.Add(food.heal);
+
+        else inv.AddItem(lootInfo.item, lootInfo.quantity);
+    }
+
     void OnAmmo(GameObject shooter, Item ammoItem, int quantity) // done by animation event
     {
         if(shooter!=gameObject) return;
 
         inv.RemoveItem(ammoItem, quantity);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    [Header("Death")]
+    public float respawnTime=3;
+    public Vector3 spawnpoint;
+
+    public void Respawning()
+    {
+        Invoke(nameof(Respawn), respawnTime);
+    }
+
+    void Respawn()
+    {
+        transform.position = spawnpoint;
+
+        hp.hp=hp.hpMax;
     }
 }
