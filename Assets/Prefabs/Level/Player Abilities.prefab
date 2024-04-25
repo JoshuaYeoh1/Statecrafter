@@ -196,9 +196,8 @@ MonoBehaviour:
   currentAbility: 0
   foodPrefab: {fileID: 6891834389194244545, guid: 997a6147f48b7ae42957443cf0b33587, type: 3}
   firePrefab: {fileID: 3510055666879731829, guid: eb90cefaa5b8d6244aed15499dc6152c, type: 3}
-  speedPotPrefab: {fileID: 0}
-  enderPearlPrefab: {fileID: 0}
-  macePrefab: {fileID: 0}
+  enderPearlPrefab: {fileID: -6820916187878939559, guid: 7570bba97a8bf304db96ed62922cc9e7, type: 3}
+  macePrefab: {fileID: 269160233049928268, guid: 0a0fbc231cadc884ead88b95519307c5, type: 3}
   herobrine: {fileID: 703678478913859043}
 --- !u!1 &5265920447642193918
 GameObject:

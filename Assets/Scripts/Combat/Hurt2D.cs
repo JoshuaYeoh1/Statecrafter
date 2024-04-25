@@ -34,7 +34,7 @@ public class Hurt2D : MonoBehaviour
 
         if(hp.hp>0) // if still alive
         {
-            DoIFraming(iframeTime, .5f, -.5f, -.5f); // flicker red
+            DoIFraming(iframeTime, .75f, -.75f, -.75f); // flicker red
 
             HurtPoise(attacker, hurtInfo);
         }

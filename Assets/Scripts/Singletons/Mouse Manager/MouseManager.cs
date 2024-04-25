@@ -26,8 +26,8 @@ public class MouseManager : MonoBehaviour
     public float clickRadius=.01f;
     Vector2 startClickPos, endClickPos;
     float lastClickedTime;
-    public float minSwipeDistance = 100; // distance for a tap to be considered a swipe
-    public float minSwipeTime = 0.25f; // time for a tap to be considered a swipe
+    public float minSwipeDistance=2; // distance for a tap to be considered a swipe
+    public float minSwipeTime=.25f; // time for a tap to be considered a swipe
 
     void Update()
     {
@@ -45,12 +45,12 @@ public class MouseManager : MonoBehaviour
 
         if(Input.GetMouseButtonDown(0))
         {
-            startClickPos = Input.mousePosition; // Record the start position and time of the tap
+            startClickPos = mousePos; // Record the start position and time of the tap
             lastClickedTime = Time.time;
         }
         else if(Input.GetMouseButtonUp(0))
         {
-            endClickPos = Input.mousePosition;
+            endClickPos = mousePos;
 
             float swipeDistance = Vector2.Distance(startClickPos, endClickPos); // Calculate the distance moved and time taken
 
@@ -61,8 +61,8 @@ public class MouseManager : MonoBehaviour
             }
             else // if swipe
             {
-                Vector2 swipeVector = endClickPos-startClickPos;
-                Vector2 swipeDirection = swipeVector.normalized; //Debug.Log("Swiped in direction: " + swipeDirection);
+                Vector2 swipeDirection = (endClickPos-startClickPos).normalized;
+                EventManager.Current.OnSwipe2D(startClickPos, swipeDistance, swipeDirection, endClickPos);
             }
         }
     }

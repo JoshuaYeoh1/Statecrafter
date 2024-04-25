@@ -28,46 +28,40 @@ public class PlayerAbilities : MonoBehaviour
     void OnEnable()
     {
         EventManager.Current.Click2DEvent += OnClick2D;
+        EventManager.Current.Swipe2DEvent += OnSwipe2D;
     }
     void OnDisable()
     {
         EventManager.Current.Click2DEvent -= OnClick2D;
+        EventManager.Current.Swipe2DEvent -= OnSwipe2D;
     }
 
     public GameObject foodPrefab;
     public GameObject firePrefab;
-    public GameObject speedPotPrefab;
-    public GameObject enderPearlPrefab;
+    public EnderPearl enderPearlPrefab;
     public GameObject macePrefab;
     
     void OnClick2D(Vector3 pos)
     {
         switch(currentAbility)
         {
-            case PlayerAbility.SpawnFood:
-            {
-                Spawn(foodPrefab, pos);
-            } break;
+            case PlayerAbility.SpawnFood: Spawn(foodPrefab, pos); break;
 
-            case PlayerAbility.FlintAndSteel:
-            {
-                Spawn(firePrefab, pos);
-            } break;
+            case PlayerAbility.FlintAndSteel: Spawn(firePrefab, pos); break;
             
-            case PlayerAbility.SpeedPotion:
-            {
-                
-            } break;
+            case PlayerAbility.SpeedPotion: ItemManager.Current.Spawn(Item.SpeedPotion, pos); break;
             
-            case PlayerAbility.EnderPearl:
-            {
-                
-            } break;
+            case PlayerAbility.EnderPearl: SpawnEnderPearl(pos, 0, Vector3.zero); break;
             
-            case PlayerAbility.MaceSlam:
-            {
-                
-            } break;
+            case PlayerAbility.MaceSlam: Spawn(macePrefab, pos); break;
+        }
+    }
+
+    void OnSwipe2D(Vector3 startPos, float magnitude, Vector3 direction, Vector3 endPos, Vector3 midPos)
+    {
+        switch(currentAbility)
+        {
+            case PlayerAbility.EnderPearl: SpawnEnderPearl(SpectatorCam.Current.spectatedNPC.transform.position, magnitude, direction); break;
         }
     }
 
@@ -75,6 +69,14 @@ public class PlayerAbilities : MonoBehaviour
     {
         GameObject spawned = Instantiate(prefab, pos, Quaternion.identity);
         spawned.name = prefab.name;
+    }
+
+    void SpawnEnderPearl(Vector3 pos, float force, Vector3 dir)
+    {
+        EnderPearl pearl = Instantiate(enderPearlPrefab, pos, Quaternion.identity);
+        pearl.gameObject.name = enderPearlPrefab.name;
+
+        pearl.Throw(force, dir);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -41,6 +41,8 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, GameObject, HurtInfo> HurtEvent; // respects iframe
     public event Action<GameObject, GameObject, HurtInfo> DeathEvent;
     public event Action<GameObject, Item, int> AmmoEvent;
+    public event Action<GameObject, Buff, float> AddBuffEvent;
+    public event Action<GameObject, Buff> RemoveBuffEvent;
 
     public void OnAttack(GameObject attacker)
     {
@@ -62,12 +64,21 @@ public class EventManager : MonoBehaviour
     {
         AmmoEvent?.Invoke(shooter, ammoItem, quantity);
     }
-
+    public void OnAddBuff(GameObject target, Buff newBuff, float duration)
+    {
+        AddBuffEvent?.Invoke(target, newBuff, duration);
+    }
+    public void OnRemoveBuff(GameObject target, Buff buff)
+    {
+        RemoveBuffEvent?.Invoke(target, buff);
+    }
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public event Action<GameObject, float, float> UIBarUpdateEvent;
     public event Action<GameObject> SpectateEvent;
     public event Action<Vector3> Click2DEvent;
+    public event Action<Vector3, float, Vector3, Vector3, Vector3> Swipe2DEvent;
     public event Action<GameObject> ClickObjectEvent;
 
     public void OnUIBarUpdate(GameObject owner, float value, float valueMax)
@@ -82,6 +93,12 @@ public class EventManager : MonoBehaviour
     {
         Click2DEvent?.Invoke(pos);
     }
+    public void OnSwipe2D(Vector3 startPos, float magnitude, Vector3 direction, Vector3 endPos)
+    {
+        Vector3 midPos = Vector3.Lerp(startPos, endPos, .5f);
+
+        Swipe2DEvent?.Invoke(startPos, magnitude, direction, endPos, midPos);
+    }
     public void OnClickObject(GameObject clicked)
     {
         ClickObjectEvent?.Invoke(clicked);
@@ -93,6 +110,8 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, GameObject, Recipe> UpdateCraftEvent;
     public event Action<GameObject> UpdateNotCraftEvent;
     public event Action<GameObject, GameObject, Recipe> CraftedEvent;
+    public event Action<GameObject, float> EnderPearlEvent;
+    public event Action<GameObject> MaceSlamEvent;
 
     public void OnLoot(GameObject looter, GameObject loot, LootInfo lootInfo)
     {
@@ -110,4 +129,13 @@ public class EventManager : MonoBehaviour
     {
         CraftedEvent?.Invoke(crafter, station, recipe);
     }
+    public void OnEnderPearl(GameObject teleporter, float teleportTime)
+    {
+        EnderPearlEvent?.Invoke(teleporter, teleportTime);
+    }
+    public void OnMaceSlam(GameObject mace)
+    {
+        MaceSlamEvent?.Invoke(mace);
+    }
+    
 }

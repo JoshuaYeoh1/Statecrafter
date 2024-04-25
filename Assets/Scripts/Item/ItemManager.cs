@@ -33,6 +33,7 @@ public enum Item
     Bone,
     SpiderEye,
     GenericFood,
+    SpeedPotion,
 }
 
 [System.Serializable]
@@ -41,6 +42,15 @@ public class ItemFood
     public string name;
     public Item item;
     public float heal;
+}
+
+[System.Serializable]
+public class Potion
+{
+    public string name;
+    public Item item;
+    public Buff buff;
+    public float duration;
 }
 
 public class ItemManager : MonoBehaviour
@@ -68,6 +78,8 @@ public class ItemManager : MonoBehaviour
         return spawned;
     }
 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     public List<ItemFood> foods = new();
 
     public ItemFood GetFood(Item item)
@@ -77,6 +89,20 @@ public class ItemManager : MonoBehaviour
             if(food.item==item)
             {
                 return food;
+            }
+        }
+        return null;
+    }
+
+    public List<Potion> potions = new();
+
+    public Potion GetPotion(Item item)
+    {
+        foreach(Potion potion in potions)
+        {
+            if(potion.item==item)
+            {
+                return potion;
             }
         }
         return null;

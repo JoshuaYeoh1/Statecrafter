@@ -29,15 +29,11 @@ public class EnemyState_Fleeing: BaseState
 
         enemy.move.evade=true;
         enemy.move.departure=false;
-
-        enemy.vehicle.maxSpeed = enemy.vehicle.defMaxSpeed*2;
     }
 
     protected override void OnExit()
     {
         enemy.move.evade=false;
         enemy.move.departure=true;
-
-        enemy.vehicle.maxSpeed = enemy.vehicle.defMaxSpeed;
     }
 }

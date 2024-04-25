@@ -7,18 +7,19 @@ using UnityEngine;
 public class ForceVehicle2D : MonoBehaviour
 {
     Rigidbody2D rb;
-    [HideInInspector] public float defMaxSpeed;
 
     void Awake()
     {
         rb=GetComponent<Rigidbody2D>();
         defMaxSpeed = maxSpeed;
+        defTurnSpeed = turnSpeed;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     [Header("Move")]
     public float maxSpeed=3;
+    [HideInInspector] public float defMaxSpeed;
 
     public void Steer(Vector3 vector)
     {
@@ -50,6 +51,7 @@ public class ForceVehicle2D : MonoBehaviour
 
     [Header("Turn")]
     public float turnSpeed=10;
+    [HideInInspector] public float defTurnSpeed;
     public bool linearTurn;
     public float angleOffset=-90;
 

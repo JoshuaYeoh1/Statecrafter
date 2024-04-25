@@ -347,9 +347,21 @@ public class Steve : MonoBehaviour
 
         ItemFood food = ItemManager.Current.GetFood(lootInfo.item);
 
-        if(food!=null) hp.Add(food.heal);
+        if(food!=null)
+        {
+            hp.Add(food.heal);
+            return;
+        }
 
-        else inv.AddItem(lootInfo.item, lootInfo.quantity);
+        Potion potion = ItemManager.Current.GetPotion(lootInfo.item);
+
+        if(potion!=null)
+        {
+            EventManager.Current.OnAddBuff(gameObject, potion.buff, potion.duration);
+            return;
+        }
+
+        inv.AddItem(lootInfo.item, lootInfo.quantity);
     }
 
     void OnAmmo(GameObject shooter, Item ammoItem, int quantity) // done by animation event

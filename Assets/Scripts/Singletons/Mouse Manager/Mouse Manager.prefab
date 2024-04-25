@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0851547e913035343a163d4432dc2a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePos: {x: 0, y: 0}
   canClick: 1
   layers:
     serializedVersion: 2
@@ -51,5 +52,5 @@ MonoBehaviour:
   clickRange: 1.5
   ignoreTimescale: 0
   clickRadius: 0.001
-  minSwipeDistance: 100
+  minSwipeDistance: 1
   minSwipeTime: 0.25

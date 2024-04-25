@@ -55,7 +55,7 @@ MonoBehaviour:
   flashUnlitPrefab: {fileID: 324769258230668247, guid: eb3639ecce5103c4d835304e24e3d012, type: 3}
   flashLitPrefab: {fileID: 4784600692979638115, guid: f097fd598c5a9a64abaee62ddbf913c3, type: 3}
   shockwavePrefab: {fileID: 5676686982502810466, guid: ea6229c0fe2831d40adc0c242073c463, type: 3}
-  aoePrefab: {fileID: 3128931087074182737, guid: 4b17378003bfece49ab5ef8f582e32e8, type: 3}
+  blueExplosionPrefab: {fileID: 5785235046911241416, guid: 8fd854fc0e90e6747b66ae2ab1e50812, type: 3}
   bloodPrefab: {fileID: 5800512631994957167, guid: 007b20aff061a2946a21d4513a1be031, type: 3}
   greenBloodPrefab: {fileID: 1243557866479091822, guid: ae14352fcbdb96c47b1eb99f6895bbc2, type: 3}
   purpleBloodPrefab: {fileID: 1243557866479091822, guid: fb4b41620d63a3640ac3d3f0107bd237, type: 3}
@@ -66,3 +66,5 @@ MonoBehaviour:
   mcCritPrefab: {fileID: 3380439136517362416, guid: 4a651448115c44444b50f63927ae26e9, type: 3}
   mcSmokePrefab: {fileID: 3243345404216223755, guid: d4555ea3fda9ff440a4bd1a2c617ee05, type: 3}
   mcDigPrefab: {fileID: 1675682731959025613, guid: 4cbaa8aed3ae7c148835ee082bac48f8, type: 3}
+  mcSpeedBuffPrefab: {fileID: 4481202231712977079, guid: 27897c0c9def10c4b9dfa44f4186ee92, type: 3}
+  mcEnderPearlTrailPrefab: {fileID: 3699967217281007251, guid: a6032dcf8394f3543a6d5194e0fe2e33, type: 3}

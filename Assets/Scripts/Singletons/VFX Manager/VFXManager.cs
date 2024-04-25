@@ -19,12 +19,20 @@ public class VFXManager : MonoBehaviour
         EventManager.Current.HurtEvent += OnHurt;
         EventManager.Current.DeathEvent += OnDeath;
         EventManager.Current.LootEvent += OnLoot;
+        EventManager.Current.AddBuffEvent += OnAddBuff;
+        EventManager.Current.RemoveBuffEvent += OnRemoveBuff;
+        EventManager.Current.EnderPearlEvent += OnEnderPearl;
+        EventManager.Current.MaceSlamEvent += OnMaceSlam;
     }
     void OnDisable()
     {
         EventManager.Current.HurtEvent -= OnHurt;
         EventManager.Current.DeathEvent -= OnDeath;
         EventManager.Current.LootEvent -= OnLoot;
+        EventManager.Current.AddBuffEvent -= OnAddBuff;
+        EventManager.Current.RemoveBuffEvent -= OnRemoveBuff;
+        EventManager.Current.EnderPearlEvent -= OnEnderPearl;
+        EventManager.Current.MaceSlamEvent -= OnMaceSlam;
     }
     
     void OnHurt(GameObject victim, GameObject attacker, HurtInfo hurtInfo)
@@ -40,7 +48,7 @@ public class VFXManager : MonoBehaviour
 
         Color color = victim.tag=="NPC" ? Color.red : Color.white;
 
-        SpawnPopUpText(SpriteManager.Current.GetColliderTop(victim), $"{hurtInfo.dmg}", color);
+        SpawnPopUpText(SpriteManager.Current.GetColliderTop(victim), $"{Round(hurtInfo.dmg)}", color);
 
         SpawnHitmarker(hurtInfo.contactPoint, color);
 
@@ -107,16 +115,51 @@ public class VFXManager : MonoBehaviour
     {
         ItemFood food = ItemManager.Current.GetFood(lootInfo.item);
 
-        if(food==null)
-        {
-            string suffix = lootInfo.quantity>1 ? $"({lootInfo.quantity})" : "";
-
-            SpawnPopUpText(lootInfo.contactPoint, $"+{lootInfo.item}{suffix}", Color.white);
-        }
-        else
+        if(food!=null)
         {
             SpawnPopUpText(lootInfo.contactPoint, $"+{food.heal}", Color.green);
+            return;
         }
+        
+        Potion potion = ItemManager.Current.GetPotion(lootInfo.item);
+
+        if(potion!=null)
+        {
+            SpawnPopUpText(lootInfo.contactPoint, $"+{potion.buff}", Color.cyan);
+            return;
+        }
+            
+        string suffix = lootInfo.quantity>1 ? $"({lootInfo.quantity})" : "";
+
+        SpawnPopUpText(lootInfo.contactPoint, $"+{lootInfo.item}{suffix}", Color.white);
+    }
+
+    void OnAddBuff(GameObject target, Buff newBuff, float duration)
+    {
+        if(newBuff==Buff.Speed)
+        {
+            SpawnMcSpeedBuff(target);
+        }
+    }
+
+    void OnRemoveBuff(GameObject target, Buff buff)
+    {
+        if(buff==Buff.Speed)
+        {
+            StopMcSpeedBuff(target);
+        }
+    }
+
+    void OnEnderPearl(GameObject teleporter, float teleportTime)
+    {
+        SpawnMcEnderPearlTrail(teleporter);
+        StopMcEnderPearlTrail(teleporter, teleportTime);
+    }
+
+    void OnMaceSlam(GameObject mace)
+    {
+        SpawnShockwave(mace.transform.position, Color.cyan);
+        SpawnBlueExplosion(mace.transform.position);
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -182,15 +225,14 @@ public class VFXManager : MonoBehaviour
         main.startColor = color;
     }
 
-    public GameObject aoePrefab;
+    public GameObject blueExplosionPrefab;
 
-    public void SpawnGroundExplosion(Vector3 pos, float scaleMult=1)
+    public void SpawnBlueExplosion(Vector3 pos, float scaleMult=1)
     {
-        GameObject obj = Instantiate(aoePrefab, pos, Quaternion.identity);
+        GameObject obj = Instantiate(blueExplosionPrefab, pos, Quaternion.identity);
         if(hideInHierarchy) obj.hideFlags = HideFlags.HideInHierarchy;
 
-        ParticleSystem ps = obj.GetComponent<ParticleSystem>();
-        ps.transform.localScale*=scaleMult;
+        obj.transform.localScale*=scaleMult;
         ExpandAnim(obj);
     }
 
@@ -278,6 +320,60 @@ public class VFXManager : MonoBehaviour
         main.startColor = color;
     }
 
+    public TransformConstraint mcSpeedBuffPrefab;
+
+    Dictionary<GameObject, GameObject> activeSpeedBuffs = new();
+
+    public void SpawnMcSpeedBuff(GameObject parent)
+    {
+        if(!activeSpeedBuffs.ContainsKey(parent.gameObject))
+        {
+            TransformConstraint tc = Instantiate(mcSpeedBuffPrefab, parent.transform.position, Quaternion.identity);
+            if(hideInHierarchy) tc.gameObject.hideFlags = HideFlags.HideInHierarchy;
+            
+            tc.constrainTo = parent.transform;
+        
+            activeSpeedBuffs[parent] = tc.gameObject;
+        }
+    }
+    
+    public void StopMcSpeedBuff(GameObject parent)
+    {
+        if(activeSpeedBuffs.ContainsKey(parent))
+        {
+            StopParticles(activeSpeedBuffs[parent], 0);
+
+            activeSpeedBuffs.Remove(parent);
+        }
+    }
+
+    public TransformConstraint mcEnderPearlTrailPrefab;
+
+    Dictionary<GameObject, GameObject> activeEnderPearlTrails = new();
+
+    public void SpawnMcEnderPearlTrail(GameObject parent)
+    {
+        if(!activeEnderPearlTrails.ContainsKey(parent.gameObject))
+        {
+            TransformConstraint tc = Instantiate(mcEnderPearlTrailPrefab, parent.transform.position, Quaternion.identity);
+            if(hideInHierarchy) tc.gameObject.hideFlags = HideFlags.HideInHierarchy;
+            
+            tc.constrainTo = parent.transform;
+        
+            activeEnderPearlTrails[parent] = tc.gameObject;
+        }
+    }
+    
+    public void StopMcEnderPearlTrail(GameObject parent, float after)
+    {
+        if(activeEnderPearlTrails.ContainsKey(parent))
+        {
+            StopParticles(activeEnderPearlTrails[parent], after);
+
+            activeEnderPearlTrails.Remove(parent);
+        }
+    }
+    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void StopParticles(GameObject obj, float wait)
@@ -332,5 +428,17 @@ public class VFXManager : MonoBehaviour
         obj.transform.localScale=Vector3.zero;
 
         LeanTween.scale(obj, defscale, time).setEaseInOutSine();
+    }
+
+    float Round(float num, int decimalPlaces=0)
+    {
+        int factor=1;
+
+        for(int i=0; i<decimalPlaces; i++)
+        {
+            factor *= 10;
+        }
+
+        return Mathf.Round(num * factor) / (float)factor;
     }
 }

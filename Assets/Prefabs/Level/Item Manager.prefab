@@ -55,3 +55,8 @@ MonoBehaviour:
   - name: GenericFood
     item: 28
     heal: 2
+  potions:
+  - name: SpeedPotion
+    item: 29
+    buff: 0
+    duration: 5
