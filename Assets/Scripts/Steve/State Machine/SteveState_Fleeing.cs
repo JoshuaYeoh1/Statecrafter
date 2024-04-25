@@ -16,15 +16,15 @@ public class SteveState_Fleeing: BaseState
         Debug.Log($"{steve.gameObject.name} State: {Name}");
     }
 
-    GameObject closestEnemy;
+    GameObject enemy;
 
     protected override void OnUpdate(float deltaTime)
     {
-        closestEnemy = steve.closestEnemy;
+        enemy = steve.closestHazard ? steve.closestHazard : steve.closestEnemy;
 
-        if(closestEnemy)
+        if(enemy)
         {
-            steve.move.target=closestEnemy.transform;
+            steve.move.target=enemy.transform;
         }
 
         steve.move.evade=true;

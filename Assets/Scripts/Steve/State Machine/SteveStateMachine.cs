@@ -35,6 +35,7 @@ public class SteveStateMachine : MonoBehaviour
                 !steve.CanCraftGoalItem() &&
                 !steve.closestLoot &&
                 !steve.closestEnemy &&
+                !steve.closestHazard &&
                 steve.IsOkHP() &&
                 steve.goalResource
             )
@@ -63,6 +64,7 @@ public class SteveStateMachine : MonoBehaviour
                 steve.goalCraftingStation &&
                 !steve.closestLoot &&
                 !steve.closestEnemy &&
+                !steve.closestHazard &&
                 steve.IsOkHP()
             )
             {
@@ -76,6 +78,7 @@ public class SteveStateMachine : MonoBehaviour
             if(
                 steve.closestEnemy &&
                 !steve.closestLoot &&
+                !steve.closestHazard &&
                 !steve.IsLowHP()
             )
             {
@@ -87,10 +90,17 @@ public class SteveStateMachine : MonoBehaviour
         idle.AddTransition(fleeing, (timeInState) =>
         {
             if(
-                steve.closestEnemy &&
-                !steve.closestLoot &&
-                steve.IsLowHP() &&
-                !steve.IsDead()
+                (
+                    steve.closestEnemy &&
+                    !steve.closestLoot &&
+                    steve.IsLowHP() &&
+                    !steve.IsDead()
+                )
+                ||
+                (
+                    steve.closestHazard &&
+                    !steve.IsDead()
+                )
             )
             {
                 return true;
@@ -102,6 +112,7 @@ public class SteveStateMachine : MonoBehaviour
         {
             if(
                 !steve.closestEnemy &&
+                !steve.closestHazard &&
                 !steve.closestLoot &&
                 !steve.IsOkHP() &&
                 !steve.IsDead()
@@ -131,6 +142,7 @@ public class SteveStateMachine : MonoBehaviour
                 steve.CanCraftGoalItem() ||
                 steve.closestLoot ||
                 steve.closestEnemy ||
+                steve.closestHazard ||
                 !steve.IsOkHP() ||
                 !steve.goalResource
             )
@@ -163,6 +175,7 @@ public class SteveStateMachine : MonoBehaviour
                 !steve.goalCraftingStation ||
                 steve.closestLoot ||
                 steve.closestEnemy ||
+                steve.closestHazard ||
                 !steve.IsOkHP() ||
                 steve.HasCrafted()
             )
@@ -179,6 +192,7 @@ public class SteveStateMachine : MonoBehaviour
             if(
                 !steve.closestEnemy ||
                 steve.closestLoot ||
+                steve.closestHazard ||
                 steve.IsLowHP()
             )
             {
@@ -192,10 +206,17 @@ public class SteveStateMachine : MonoBehaviour
         fleeing.AddTransition(idle, (timeInState) =>
         {
             if(
-                !steve.closestEnemy ||
-                steve.closestLoot ||
-                !steve.IsLowHP() ||
-                steve.IsDead()
+                (
+                    !steve.closestEnemy ||
+                    steve.closestLoot ||
+                    !steve.IsLowHP() ||
+                    steve.IsDead()
+                )
+                &&
+                (
+                    !steve.closestHazard ||
+                    steve.IsDead()
+                )
             )
             {
                 return true;
@@ -209,6 +230,7 @@ public class SteveStateMachine : MonoBehaviour
         {
             if(
                 steve.closestEnemy ||
+                steve.closestHazard ||
                 steve.closestLoot ||
                 steve.IsFullHP() ||
                 steve.IsDead()

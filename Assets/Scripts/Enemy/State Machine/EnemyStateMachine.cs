@@ -19,6 +19,7 @@ public class EnemyStateMachine : MonoBehaviour
 
         EnemyState_Idle idle = new(this);
         EnemyState_Fighting fighting = new(this);
+        EnemyState_Fleeing fleeing = new(this);
 
         // TRANSITIONS
         /////////////////////////////////////////////////////////////////////////////////////////
@@ -26,7 +27,8 @@ public class EnemyStateMachine : MonoBehaviour
         idle.AddTransition(fighting, (timeInState) =>
         {
             if(
-                enemy.closestEnemy
+                enemy.closestEnemy &&
+                !enemy.closestHazard
             )
             {
                 return true;
@@ -34,19 +36,44 @@ public class EnemyStateMachine : MonoBehaviour
             return false;
         });
 
+        idle.AddTransition(fleeing, (timeInState) =>
+        {
+            if(
+                enemy.closestHazard
+            )
+            {
+                return true;
+            }
+            return false;
+        });
+        
         /////////////////////////////////////////////////////////////////////////////////////////
         
         fighting.AddTransition(idle, (timeInState) =>
         {
             if(
-                !enemy.closestEnemy
+                !enemy.closestEnemy ||
+                enemy.closestHazard
             )
             {
                 return true;
             }
             return false;
         });        
-
+        
+        /////////////////////////////////////////////////////////////////////////////////////////
+        
+        fleeing.AddTransition(idle, (timeInState) =>
+        {
+            if(
+                !enemy.closestHazard
+            )
+            {
+                return true;
+            }
+            return false;
+        });        
+        
         // DEFAULT
         /////////////////////////////////////////////////////////////////////////////////////////
         

@@ -91,17 +91,24 @@ public class Steve : MonoBehaviour
 
     [Header("Radar")]
     public GameObject closestEnemy;
+    public GameObject closestHazard;
     public GameObject closestLoot;
 
     void UpdateRadar()
     {
         closestEnemy = GetClosestEnemy();
+        closestHazard = GetClosestHazard();
         closestLoot = GetClosestLoot();
     }
 
     public GameObject GetClosestEnemy()
     {
         return radar.GetClosest(radar.GetTargetsWithTag("Enemy"));
+    }
+
+    public GameObject GetClosestHazard()
+    {
+        return radar.GetClosest(radar.GetTargetsWithTag("Hazard"));
     }
 
     public GameObject GetClosestLoot()

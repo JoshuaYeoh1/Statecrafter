@@ -97,9 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe82cafa550d7784f8e4cf0de6cb825f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  relativeTo: {fileID: 0}
   sinePos: 0
   posFrequency: {x: 0, y: 0, z: 0}
   posMagnitude: {x: 0, y: 0, z: 0}
+  localPos: 1
   sineRot: 1
   rotFrequency: {x: 0, y: 0, z: 2.5}
   rotMagnitude: {x: 0, y: 0, z: 10}
@@ -409,6 +411,7 @@ MonoBehaviour:
   goalResource: {fileID: 0}
   goalCraftingStation: {fileID: 0}
   respawnTime: 3
+  spawnpoint: {x: 0, y: 0, z: 0}
 --- !u!114 &6394562662366599258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,7 +559,7 @@ MonoBehaviour:
   range: 7
   layers:
     serializedVersion: 2
-    m_Bits: 1152
+    m_Bits: 5248
   targets: []
   closest: {fileID: 0}
 --- !u!114 &376875514397710490

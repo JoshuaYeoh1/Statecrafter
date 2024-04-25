@@ -16,15 +16,15 @@ public class EnemyState_Fighting : BaseState
         Debug.Log($"{enemy.gameObject.name} State: {Name}");
     }
 
-    GameObject closestEnemy;
+    GameObject target;
 
     protected override void OnUpdate(float deltaTime)
     {
-        closestEnemy = enemy.closestEnemy;
+        target = enemy.closestEnemy;
 
-        if(closestEnemy)
+        if(target)
         {
-            enemy.move.target=closestEnemy.transform;
+            enemy.move.target=target.transform;
         }
 
         enemy.combat.range = enemy.range;

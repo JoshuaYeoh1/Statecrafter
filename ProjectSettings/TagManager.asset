@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Loot
   - Food
+  - Hazard
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Enemy Hurtbox
   - Loot
   - Ore
-  - 
+  - Hazard
   - 
   - 
   - 
