@@ -79,4 +79,7 @@ public class Enemy : MonoBehaviour
             CameraManager.Current.Shake();
         }
     }
+    
+    [Header("Voice")]
+    public AudioSource voicebox;
 }

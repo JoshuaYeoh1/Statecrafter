@@ -45,7 +45,7 @@ public class PlayerAbilities : MonoBehaviour
 
             case PlayerAbility.FlintAndSteel: Spawn(firePrefab, pos); break;
             
-            case PlayerAbility.SpeedPotion: ItemManager.Current.Spawn(Item.SpeedPotion, pos); break;
+            case PlayerAbility.SpeedPotion: ItemManager.Current.Spawn(pos, Item.SpeedPotion); break;
             
             case PlayerAbility.EnderPearl: SpawnEnderPearl(pos, 0, Vector3.zero); break;
             

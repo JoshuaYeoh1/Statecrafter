@@ -139,10 +139,10 @@ public class CameraManager : MonoBehaviour
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public List<CinemachineBasicMultiChannelPerlin> allNoises = new List<CinemachineBasicMultiChannelPerlin>();
+    public List<CinemachineBasicMultiChannelPerlin> allNoises = new();
 
     // Dictionary to store defAmp and defFreq values with CinemachineBasicMultiChannelPerlin as key
-    Dictionary<CinemachineBasicMultiChannelPerlin, Vector2> defaultAmpFreqDict = new Dictionary<CinemachineBasicMultiChannelPerlin, Vector2>();
+    Dictionary<CinemachineBasicMultiChannelPerlin, Vector2> defaultAmpFreqDict = new();
     // amp will be x, freq will be y
 
     public void RefreshAllNoises()
@@ -174,7 +174,7 @@ public class CameraManager : MonoBehaviour
     {
         if(time<currentShake.x || amp<currentShake.y || freq<currentShake.z) return;
 
-        //if(haptics) Vibrator.Vibrate();
+        if(haptics) Vibrator.Vibrate();
 
         if(shakingRt!=null) StopCoroutine(shakingRt);
         shakingRt = StartCoroutine(Shaking(time, amp, freq));
@@ -244,10 +244,10 @@ public class CameraManager : MonoBehaviour
         
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // public bool haptics=true;
+    public bool haptics=true;
 
-    // void OnToggleHaptics(bool toggle)
-    // {
-    //     haptics=toggle;
-    // }
+    void OnToggleHaptics(bool toggle)
+    {
+        haptics=toggle;
+    }
 }   

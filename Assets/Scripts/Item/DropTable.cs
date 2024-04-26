@@ -25,7 +25,7 @@ public class DropTable : MonoBehaviour
 
                 for(int i=0; i<randNum; i++)
                 {
-                    GameObject spawned = ItemManager.Current.Spawn(drop.item, transform.position);
+                    GameObject spawned = ItemManager.Current.Spawn(transform.position, drop.item);
 
                     if(redeemer) StationManager.Current.OccupyTarget(spawned, redeemer);
                 }

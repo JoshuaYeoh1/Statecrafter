@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class TransitionAnim : MonoBehaviour
 {
-    AudioSource staticLoop;
+    // AudioSource staticLoop;
 
-    public void SfxPlayStaticLoop()
-    {
-        AudioManager.Current.StopLoop(staticLoop);
+    // public void SfxPlayStaticLoop()
+    // {
+    //     AudioManager.Current.StopLoop(staticLoop);
 
-        staticLoop = AudioManager.Current.LoopSFX(gameObject, SFXManager.Current.sfxStaticLoop, false);
-    }
+    //     staticLoop = AudioManager.Current.LoopSFX(gameObject, SFXManager.Current.sfxStaticLoop, false);
+    // }
 
-    public void SfxStopStaticLoop()
-    {
-        AudioManager.Current.StopLoop(staticLoop);
-    }
+    // public void SfxStopStaticLoop()
+    // {
+    //     AudioManager.Current.StopLoop(staticLoop);
+    // }
 }

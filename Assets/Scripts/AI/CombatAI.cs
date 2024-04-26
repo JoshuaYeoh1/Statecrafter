@@ -11,6 +11,11 @@ public class CombatAI : MonoBehaviour
         move=GetComponent<PursuitAI>();
     }
 
+    void Start()
+    {
+        CooldownAttack();
+    }
+
     void Update()
     {
         UpdateRange();
@@ -74,13 +79,12 @@ public class CombatAI : MonoBehaviour
     
     [Header("Attack")]
     public Vector2 attackCooldown = new Vector2(.5f, .7f);
-    bool canAttack=true;
+    bool canAttack;
 
     public void Attack(GameObject prefab)
     {
         if(!canAttack) return;
-        canAttack=false;
-        Invoke(nameof(EnableAttack), Random.Range(attackCooldown.x, attackCooldown.y));
+        CooldownAttack();
         
         GameObject spawned = Instantiate(prefab, aimer.position, aimer.rotation);
         spawned.transform.parent = aimer;
@@ -97,6 +101,12 @@ public class CombatAI : MonoBehaviour
         }
 
         EventManager.Current.OnAttack(gameObject);
+    }
+
+    void CooldownAttack()
+    {
+        canAttack=false;
+        Invoke(nameof(EnableAttack), Random.Range(attackCooldown.x, attackCooldown.y));
     }
 
     void EnableAttack()

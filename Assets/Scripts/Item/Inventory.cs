@@ -51,18 +51,13 @@ public class Inventory : MonoBehaviour
     {
         if(!HasItem(item)) return;
 
-        int left = inventory[item];
+        quantity = Mathf.Min(quantity, GetItemQuantity(item));
 
-        for(int i=0; i<quantity && left>0; i++)
-        {
-            left--;
+        GameObject spawned = ItemManager.Current.Spawn(transform.position, item, quantity);
 
-            GameObject spawned = ItemManager.Current.Spawn(item, transform.position);
+        StationManager.Current.OccupyTarget(spawned, gameObject);
 
-            StationManager.Current.OccupyTarget(spawned, gameObject);
-
-            drops.Add(spawned);
-        }
+        drops.Add(spawned);
 
         RemoveItem(item, quantity);
     }

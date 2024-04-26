@@ -349,7 +349,7 @@ public class Steve : MonoBehaviour
 
         if(food!=null)
         {
-            hp.Add(food.heal);
+            hp.Add(food.heal * lootInfo.quantity);
             return;
         }
 
@@ -357,7 +357,7 @@ public class Steve : MonoBehaviour
 
         if(potion!=null)
         {
-            EventManager.Current.OnAddBuff(gameObject, potion.buff, potion.duration);
+            EventManager.Current.OnAddBuff(gameObject, potion.buff, potion.duration * lootInfo.quantity);
             return;
         }
 
@@ -388,4 +388,7 @@ public class Steve : MonoBehaviour
 
         hp.hp=hp.hpMax;
     }
+
+    [Header("Voice")]
+    public AudioSource voicebox;
 }

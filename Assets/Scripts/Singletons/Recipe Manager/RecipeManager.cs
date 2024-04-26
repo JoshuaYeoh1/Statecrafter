@@ -91,7 +91,7 @@ public class RecipeManager : MonoBehaviour
 
         foreach(Item item in recipe.results)
         {
-            GameObject spawned = ItemManager.Current.Spawn(item, station.transform.position);
+            GameObject spawned = ItemManager.Current.Spawn(station.transform.position, item);
 
             StationManager.Current.OccupyTarget(spawned, inv.gameObject);
         }
