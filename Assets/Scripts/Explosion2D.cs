@@ -47,6 +47,7 @@ public class Explosion2D : MonoBehaviour
     {
         HurtInfo info = new()
         {
+            hurtSource = gameObject,
             dmg = falloffDmg,
             contactPoint = contactPoint,
         };

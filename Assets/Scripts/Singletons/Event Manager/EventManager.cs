@@ -36,6 +36,7 @@ public class EventManager : MonoBehaviour
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+    public event Action<GameObject> SpawnEvent;
     public event Action<GameObject> AttackEvent;
     public event Action<GameObject, GameObject, HurtInfo> HitEvent; // ignores iframe
     public event Action<GameObject, GameObject, HurtInfo> HurtEvent; // respects iframe
@@ -44,6 +45,10 @@ public class EventManager : MonoBehaviour
     public event Action<GameObject, Buff, float> AddBuffEvent;
     public event Action<GameObject, Buff> RemoveBuffEvent;
 
+    public void OnSpawn(GameObject spawned)
+    {
+        SpawnEvent?.Invoke(spawned);
+    }    
     public void OnAttack(GameObject attacker)
     {
         AttackEvent?.Invoke(attacker);
@@ -118,10 +123,11 @@ public class EventManager : MonoBehaviour
 
     public event Action<GameObject, GameObject, LootInfo> LootEvent;
     public event Action<GameObject, GameObject, Recipe> UpdateCraftEvent;
-    public event Action<GameObject> UpdateNotCraftEvent;
+    public event Action<GameObject, Recipe> UpdateNotCraftEvent;
     public event Action<GameObject, GameObject, Recipe> CraftedEvent;
-    public event Action<GameObject, float> EnderPearlEvent;
+    public event Action<GameObject, float, Vector3, Vector3> EnderPearlEvent;
     public event Action<GameObject> MaceSlamEvent;
+    public event Action<GameObject> IdleVoiceEvent;
 
     public void OnLoot(GameObject looter, GameObject loot, LootInfo lootInfo)
     {
@@ -131,21 +137,25 @@ public class EventManager : MonoBehaviour
     {
         UpdateCraftEvent?.Invoke(crafter, station, recipe);
     }
-    public void OnUpdateNotCraft(GameObject station)
+    public void OnUpdateNotCraft(GameObject station, Recipe recipe)
     {
-        UpdateNotCraftEvent?.Invoke(station);
+        UpdateNotCraftEvent?.Invoke(station, recipe);
     }
     public void OnCrafted(GameObject crafter, GameObject station, Recipe recipe)
     {
         CraftedEvent?.Invoke(crafter, station, recipe);
     }
-    public void OnEnderPearl(GameObject teleporter, float teleportTime)
+    public void OnEnderPearl(GameObject teleporter, float teleportTime, Vector3 from, Vector3 to)
     {
-        EnderPearlEvent?.Invoke(teleporter, teleportTime);
+        EnderPearlEvent?.Invoke(teleporter, teleportTime, from, to);
     }
     public void OnMaceSlam(GameObject mace)
     {
         MaceSlamEvent?.Invoke(mace);
+    }
+    public void OnIdleVoice(GameObject subject)
+    {
+        IdleVoiceEvent?.Invoke(subject);
     }
     
 }

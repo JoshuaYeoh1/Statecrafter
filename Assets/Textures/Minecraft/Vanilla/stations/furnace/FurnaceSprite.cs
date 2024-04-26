@@ -30,7 +30,7 @@ public class FurnaceSprite : MonoBehaviour
         furnaceLight.SetActive(true);
     }
 
-    void OnUpdateNotCraft(GameObject station)
+    void OnUpdateNotCraft(GameObject station, Recipe recipe)
     {
         if(station!=gameObject) return;
 

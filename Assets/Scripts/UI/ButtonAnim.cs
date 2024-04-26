@@ -40,7 +40,7 @@ public class ButtonAnim : MonoBehaviour
             
             if(hoverText) hoverText.SetActive(true);
             // if(doSFX)
-            // AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIHover, transform.position, false);
+            AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIBtnHover, transform.position, false);
         }
     }
 
@@ -55,7 +55,7 @@ public class ButtonAnim : MonoBehaviour
 
             if(hoverText) hoverText.SetActive(false);
             // if(doSFX)
-            // AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIHover, transform.position, false);
+            AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIBtnHover, transform.position, false);
         }
     }
 
@@ -70,7 +70,7 @@ public class ButtonAnim : MonoBehaviour
             LeanTween.scale(gameObject, defScale*(1-scaleMult), animTime/2).setEaseOutExpo().setIgnoreTimeScale(true);
 
             // if(doSFX)
-            // AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIClick, transform.position, false);
+            AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIBtnClick, transform.position, false);
         }
     }
 

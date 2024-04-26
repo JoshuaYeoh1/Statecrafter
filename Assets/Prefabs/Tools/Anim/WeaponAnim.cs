@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WeaponAnim : MonoBehaviour
 {
@@ -22,5 +23,12 @@ public class WeaponAnim : MonoBehaviour
         AnimVariant variant = variants[Random.Range(0, variants.Count)];
 
         anim.Play($"{variant.animNamePrefix}{Random.Range(variant.numberSuffix.x, variant.numberSuffix.y+1)}", 0);
+    }
+
+    public UnityEvent OnSwing;
+
+    public void Swing()
+    {
+        OnSwing.Invoke();
     }
 }

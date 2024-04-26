@@ -32,6 +32,11 @@ public class Enemy : MonoBehaviour
         ActorManager.Current.enemies.Add(gameObject);
     }
 
+    void Start()
+    {
+        EventManager.Current.OnSpawn(gameObject);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     void Update()

@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 6834344410363605430}
   - component: {fileID: 6736084649249278525}
   - component: {fileID: -6820916187878939559}
+  - component: {fileID: -6438888741679676688}
   m_Layer: 0
   m_Name: Ender Pearl
   m_TagString: Untagged
@@ -204,3 +205,33 @@ MonoBehaviour:
   teleportTime: 0.1
   throwForceMult: 5
   maxThrowForce: 25
+--- !u!114 &-6438888741679676688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1735276525862170195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc0e6c40a390f94db9217aae00a62e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnabled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: -6438888741679676688}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: PlaySfxThrow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDisabled:
+    m_PersistentCalls:
+      m_Calls: []

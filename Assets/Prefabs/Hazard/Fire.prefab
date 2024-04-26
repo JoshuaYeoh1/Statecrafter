@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 6823469958404518107}
   - component: {fileID: 1389207844948973994}
   - component: {fileID: -1218370002217407924}
+  - component: {fileID: 239054444667801852}
   m_Layer: 12
   m_Name: Fire
   m_TagString: Hazard
@@ -184,11 +185,26 @@ MonoBehaviour:
   ownerName: Fire
   enabledOnAwake: 1
   dmg: 2
-  kbForce: 5
+  kbForce: 3
   hasSweepingEdge: 1
   destroyOnHit: 0
   hitboxOrigin: {fileID: 1250205975320727205}
   contactPoint: {x: 0, y: 0, z: 0}
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 239054444667801852}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: PlaySfxHitFire
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-1218370002217407924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,6 +233,60 @@ MonoBehaviour:
   playOnEnable: 1
   playOnEnableAnimTime: 0.5
   playOnEnableDelay: 0
+--- !u!114 &239054444667801852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3510055666879731829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc0e6c40a390f94db9217aae00a62e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnabled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 239054444667801852}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: PlaySfxFireIgnite
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 239054444667801852}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: LoopSfxFireLoop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDisabled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 239054444667801852}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: StopLoop
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5785062651015198410
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BowAnim : MonoBehaviour
 {
@@ -26,5 +27,15 @@ public class BowAnim : MonoBehaviour
         }
 
         EventManager.Current.OnAmmo(owner, Item.Arrow, 1);
+
+        OnShoot.Invoke();
+    }
+
+    public UnityEvent OnDraw;
+    public UnityEvent OnShoot;
+    
+    public void Draw()
+    {
+        OnDraw.Invoke();
     }
 }

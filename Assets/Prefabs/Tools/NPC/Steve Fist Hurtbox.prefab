@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3370895514164840532}
   - component: {fileID: -8762641957127965162}
   - component: {fileID: 473616687738287408}
+  - component: {fileID: 8792468546890865678}
   m_Layer: 8
   m_Name: Steve Fist Hurtbox
   m_TagString: Untagged
@@ -86,6 +87,21 @@ MonoBehaviour:
   destroyOnHit: 0
   hitboxOrigin: {fileID: 8108873885137653607}
   contactPoint: {x: 0, y: 0, z: 0}
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8792468546890865678}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: PlaySfxHitFist
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!95 &3370895514164840532
 Animator:
   serializedVersion: 5
@@ -122,6 +138,21 @@ MonoBehaviour:
   variants:
   - animNamePrefix: Stab
     numberSuffix: {x: 1, y: 1}
+  OnSwing:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8792468546890865678}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: PlaySfxSwingFist
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &473616687738287408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +170,24 @@ MonoBehaviour:
   shrinkObjects:
   - {fileID: 948980528100640746}
   shrinkTime: 0.1
+--- !u!114 &8792468546890865678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948980528100640746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc0e6c40a390f94db9217aae00a62e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnabled:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDisabled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4622333721671372044
 GameObject:
   m_ObjectHideFlags: 0

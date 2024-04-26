@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 2042385904911468790}
   - component: {fileID: 1665457036386422165}
   - component: {fileID: 1463747218845901643}
+  - component: {fileID: 2291785857085279762}
   m_Layer: 8
   m_Name: NPC Arrow Projectile
   m_TagString: Untagged
@@ -211,10 +212,25 @@ MonoBehaviour:
   enabledOnAwake: 1
   dmg: 7
   kbForce: 10
-  hasSweepingEdge: 1
-  destroyOnHit: 0
+  hasSweepingEdge: 0
+  destroyOnHit: 1
   hitboxOrigin: {fileID: 7828565290904136462}
   contactPoint: {x: 0, y: 0, z: 0}
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2291785857085279762}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: PlaySfxHitArrow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1463747218845901643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +248,24 @@ MonoBehaviour:
   shrinkObjects:
   - {fileID: 3014379882308067333}
   shrinkTime: 0.25
+--- !u!114 &2291785857085279762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3014379882308067333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc0e6c40a390f94db9217aae00a62e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnabled:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDisabled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &600664038612368008
 PrefabInstance:
   m_ObjectHideFlags: 0

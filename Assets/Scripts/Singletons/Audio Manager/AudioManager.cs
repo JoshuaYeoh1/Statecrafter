@@ -76,7 +76,7 @@ public class AudioManager : MonoBehaviour
     void SetAudioSettings(AudioSource source, bool spatialBlend=true, bool randPitch=true, float panStereo=0, float volume=1, float minRadius=15)
     {
         source.spatialBlend = spatialBlend ? 1 : 0;
-        if(randPitch) source.pitch += Random.Range(-.1f,.1f);
+        if(randPitch) source.pitch = 1+Random.Range(-.1f,.1f);
         source.panStereo = panStereo;
         source.volume = volume;
         source.maxDistance = minRadius * 2;
@@ -113,7 +113,7 @@ public class AudioManager : MonoBehaviour
     public void PlayVoice(AudioSource voiceSource, AudioClip[] clips, bool randPitch=true, float volume=1, bool spatialBlend=true, float minRadius=15, float panStereo=0)
     {   
         voiceSource.clip = clips[Random.Range(0,clips.Length)];
-
+        
         SetAudioSettings(voiceSource, spatialBlend, randPitch, panStereo, volume, minRadius);
 
         voiceSource.Play();

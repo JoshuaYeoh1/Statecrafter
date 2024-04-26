@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -8762641957127965162}
   - component: {fileID: 473616687738287408}
   - component: {fileID: 8374968137833263571}
+  - component: {fileID: 5587289804665666102}
   m_Layer: 0
   m_Name: Bow Anim
   m_TagString: Untagged
@@ -101,6 +102,9 @@ MonoBehaviour:
   variants:
   - animNamePrefix: Bow
     numberSuffix: {x: 1, y: 1}
+  OnSwing:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &473616687738287408
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,6 +138,66 @@ MonoBehaviour:
   arrowPrefab: {fileID: 3014379882308067333, guid: 26f867665ec357d45af7b92f50430e75, type: 3}
   firepoint: {fileID: 1993786793211447218}
   shootForce: 10
+  OnDraw:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5587289804665666102}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: PlaySfxBowDraw
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnShoot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5587289804665666102}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: PlaySfxBowShoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5587289804665666102}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: PlaySfxThrow
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &5587289804665666102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948980528100640746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc0e6c40a390f94db9217aae00a62e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnabled:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDisabled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1101947747015537955
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,7 +34,7 @@ public class CraftingStation : MonoBehaviour
         EventManager.Current.OnUIBarUpdate(gameObject, progress, recipe.craftingTime);
     }
 
-    void OnUpdateNotCraft(GameObject station)
+    void OnUpdateNotCraft(GameObject station, Recipe recipe)
     {
         if(station!=gameObject) return;
 

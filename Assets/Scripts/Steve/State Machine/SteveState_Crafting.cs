@@ -38,13 +38,14 @@ public class SteveState_Crafting : BaseState
         }
         else
         {
-            EventManager.Current.OnUpdateNotCraft(station);
+            if(station)
+            EventManager.Current.OnUpdateNotCraft(station, steve.goalRecipe);
         }
     }
 
     protected override void OnExit()
     {
-        EventManager.Current.OnUpdateNotCraft(station);
+        EventManager.Current.OnUpdateNotCraft(station, steve.goalRecipe);
 
         if(station)
         StationManager.Current.UnoccupyTarget(station, steve.gameObject);

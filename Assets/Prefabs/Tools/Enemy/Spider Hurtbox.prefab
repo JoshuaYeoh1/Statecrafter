@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: ownerName
       value: Spider
       objectReference: {fileID: 0}
+    - target: {fileID: 2838643147298960810, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+      propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySfxHitTool
+      objectReference: {fileID: 0}
     - target: {fileID: 4622333721671372044, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: m_Layer
       value: 9

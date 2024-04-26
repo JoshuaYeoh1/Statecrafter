@@ -52,6 +52,11 @@ public class Steve : MonoBehaviour
         ActorManager.Current.npcs.Remove(gameObject);
     }
 
+    void Start()
+    {
+        EventManager.Current.OnSpawn(gameObject);
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public NPCName npcName;

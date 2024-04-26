@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: variants.Array.data[0].numberSuffix.y
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: -8762641957127965162, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+      propertyPath: OnSwing.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySfxSwingTool
+      objectReference: {fileID: 0}
     - target: {fileID: 825880072970442279, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -59,6 +63,14 @@ PrefabInstance:
     - target: {fileID: 2838643147298960810, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: dmg
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2838643147298960810, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+      propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5329168170304765735}
+    - target: {fileID: 2838643147298960810, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+      propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlaySfxHitTool
       objectReference: {fileID: 0}
     - target: {fileID: 8108873885137653607, guid: 002fd0bd5651b3444b215db744815207, type: 3}
       propertyPath: m_LocalPosition.x
@@ -129,3 +141,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+--- !u!114 &5329168170304765735 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8792468546890865678, guid: 002fd0bd5651b3444b215db744815207, type: 3}
+  m_PrefabInstance: {fileID: 3742523967251735337}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc0e6c40a390f94db9217aae00a62e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

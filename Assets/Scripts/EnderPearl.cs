@@ -30,10 +30,12 @@ public class EnderPearl : MonoBehaviour
             npcRb.velocity=Vector3.zero;
         }
 
+        Vector3 from = npc.transform.position;
+
         LeanTween.cancel(npc);
         LeanTween.move(npc, transform.position, teleportTime).setEaseInOutSine();
 
-        EventManager.Current.OnEnderPearl(npc, teleportTime);
+        EventManager.Current.OnEnderPearl(npc, teleportTime, from, transform.position);
 
         yield return new WaitForSeconds(teleportTime);
 

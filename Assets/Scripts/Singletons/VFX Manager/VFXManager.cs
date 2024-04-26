@@ -150,7 +150,7 @@ public class VFXManager : MonoBehaviour
         }
     }
 
-    void OnEnderPearl(GameObject teleporter, float teleportTime)
+    void OnEnderPearl(GameObject teleporter, float teleportTime, Vector3 from, Vector3 to)
     {
         SpawnMcEnderPearlTrail(teleporter);
         StopMcEnderPearlTrail(teleporter, teleportTime);

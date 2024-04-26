@@ -95,7 +95,7 @@ public class TweenAnim : MonoBehaviour
             if(animScale) LeanTween.scale(gameObject, defScale, time).setEaseOutCubic().setIgnoreTimeScale(true);
             if(animAlpha) TweenAlpha(defAlpha, time);
 
-            //AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICooldown, transform.position, false);
+            AudioManager.Current.PlaySFX(SFXManager.Current.sfxUITween, transform.position, false);
         }
         else
         {
@@ -119,7 +119,7 @@ public class TweenAnim : MonoBehaviour
             if(animScale) LeanTween.scale(gameObject, outScale, time).setEaseInCubic().setIgnoreTimeScale(true).setOnComplete(Reset);
             if(animAlpha) TweenAlpha2(outAlpha, time);
 
-            //AudioManager.Current.PlaySFX(SFXManager.Current.sfxUICooldown, transform.position, false);
+            AudioManager.Current.PlaySFX(SFXManager.Current.sfxUITween, transform.position, false);
         }
         else
         {

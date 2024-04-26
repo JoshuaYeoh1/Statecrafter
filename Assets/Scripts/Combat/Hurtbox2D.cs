@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HurtInfo
 {
+    public GameObject hurtSource;
     public Collider2D coll;
     public GameObject owner;
     public string attackerName;
@@ -34,7 +36,18 @@ public class Hurtbox2D : MonoBehaviour
     {
         ToggleColl(enabledOnAwake);
     }
+
+    void OnEnable()
+    {
+        EventManager.Current.HurtEvent += OnHurt;
+    }
+    void OnDisable()
+    {
+        EventManager.Current.HurtEvent -= OnHurt;
+    }
     
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.isTrigger) return;
@@ -51,18 +64,15 @@ public class Hurtbox2D : MonoBehaviour
         if(hitboxOrigin) contactPoint = other.ClosestPoint(hitboxOrigin.position);
         else contactPoint = other.ClosestPoint(transform.position);
         contactPoint.z=0;
-
-        ToggleColl(hasSweepingEdge); // if can swipe through multiple
         
         EventManager.Current.OnHit(owner, otherRb.gameObject, CopyHurtInfo());
-
-        if(destroyOnHit) Destroy(gameObject);
     }
 
     HurtInfo CopyHurtInfo()
     {
         HurtInfo info = new()
         {
+            hurtSource = gameObject,
             coll = coll,
             owner = owner,
             attackerName = ownerName,
@@ -74,6 +84,21 @@ public class Hurtbox2D : MonoBehaviour
 
         return info;
     }
+
+    public UnityEvent OnHit;
+
+    void OnHurt(GameObject victim, GameObject attacker, HurtInfo hurtInfo)
+    {
+        if(hurtInfo.hurtSource!=gameObject) return;
+
+        ToggleColl(hasSweepingEdge); // if can swipe through multiple
+
+        OnHit.Invoke();
+
+        if(destroyOnHit) Destroy(gameObject);
+    }
+    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void BlinkHitbox(float time=.1f)
     {

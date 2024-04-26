@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5629685957448384216}
   - component: {fileID: 8261445244450265053}
   - component: {fileID: 967115347064347843}
+  - component: {fileID: 451221338206948594}
   m_Layer: 0
   m_Name: Mace
   m_TagString: Untagged
@@ -133,6 +134,36 @@ MonoBehaviour:
     m_Bits: 192
   range: 5
   force: 100
+--- !u!114 &451221338206948594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269160233049928268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbc0e6c40a390f94db9217aae00a62e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnabled:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 451221338206948594}
+        m_TargetAssemblyTypeName: SoundEvents, Assembly-CSharp
+        m_MethodName: PlaySfxMaceCharge
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnDisabled:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8690940514121985576
 GameObject:
   m_ObjectHideFlags: 0
