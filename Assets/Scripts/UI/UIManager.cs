@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    public GameObject inventoryCanvas;
+    public GameObject inventoryClose;
+    public GameObject inventoryOpen;
 
     void Update()
     {
         if(Input.GetButtonDown("Inventory"))
         {
-            inventoryCanvas.SetActive(!inventoryCanvas.activeSelf);
+            inventoryClose.SetActive(inventoryOpen.activeSelf);
+            inventoryOpen.SetActive(!inventoryClose.activeSelf);
         }
     }
 }

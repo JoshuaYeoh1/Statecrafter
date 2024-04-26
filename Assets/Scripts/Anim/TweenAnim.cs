@@ -57,21 +57,16 @@ public class TweenAnim : MonoBehaviour
     }
 
     Coroutine enablingRt;
+
     IEnumerator Enabling()
     {
+        yield return new WaitForSecondsRealtime(.001f); // give time for other awake methods to record default transforms
+
         Reset();
+
+        yield return new WaitForSecondsRealtime(playOnEnableDelay);
         
-        yield return new WaitForSecondsRealtime(.05f);
-
-        if(playOnEnableDelay>0)
-        {
-            Reset();
-
-            yield return new WaitForSecondsRealtime(playOnEnableDelay);
-
-            TweenIn(playOnEnableAnimTime);
-        }
-        else TweenIn(playOnEnableAnimTime);
+        TweenIn(playOnEnableAnimTime);
     }
 
    void Start()

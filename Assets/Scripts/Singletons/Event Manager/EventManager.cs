@@ -77,9 +77,11 @@ public class EventManager : MonoBehaviour
 
     public event Action<GameObject, float, float> UIBarUpdateEvent;
     public event Action<GameObject> SpectateEvent;
+    public event Action SwitchSpectateEvent;
     public event Action<Vector3> Click2DEvent;
     public event Action<Vector3, float, Vector3, Vector3, Vector3> Swipe2DEvent;
     public event Action<GameObject> ClickObjectEvent;
+    public event Action<PlayerAbility> SelectPlayerAbilityEvent;
 
     public void OnUIBarUpdate(GameObject owner, float value, float valueMax)
     {
@@ -88,6 +90,10 @@ public class EventManager : MonoBehaviour
     public void OnSpectate(GameObject watched)
     {
         SpectateEvent?.Invoke(watched);
+    }
+    public void OnSwitchSpectate()
+    {
+        SwitchSpectateEvent?.Invoke();
     }
     public void OnClick2D(Vector3 pos)
     {
@@ -103,7 +109,11 @@ public class EventManager : MonoBehaviour
     {
         ClickObjectEvent?.Invoke(clicked);
     }
-
+    public void OnSelectPlayerAbility(PlayerAbility ability)
+    {
+        SelectPlayerAbilityEvent?.Invoke(ability);
+    }
+    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public event Action<GameObject, GameObject, LootInfo> LootEvent;

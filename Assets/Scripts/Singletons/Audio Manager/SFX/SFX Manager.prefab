@@ -1,0 +1,114 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5820533726461378231
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1687878970428232938}
+  - component: {fileID: 8732842379191974522}
+  m_Layer: 0
+  m_Name: SFX Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1687878970428232938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5820533726461378231}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8732842379191974522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5820533726461378231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dfa233c07461a146a0c5081da0df70c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sfxUIHeartbeat:
+  - {fileID: 8300000, guid: 159020631d4206f41a4652347ad09917, type: 3}
+  sfxUIClockIn:
+  - {fileID: 8300000, guid: 0811aa5ba799e97418fcd3b5e9f56239, type: 3}
+  sfxCage:
+  - {fileID: 8300000, guid: 495654d62bb57354a8899a9f9b92088b, type: 3}
+  - {fileID: 8300000, guid: 05f70ceb72118b44b89ea6fe620f3cb5, type: 3}
+  - {fileID: 8300000, guid: 8a1df30194d172942a9a46888fc0d710, type: 3}
+  - {fileID: 8300000, guid: b5c2c1112122f0d47a50fd488167b312, type: 3}
+  - {fileID: 8300000, guid: 16a8020704a4f5048b5aa31e0e6ff9f3, type: 3}
+  sfxCageBreak:
+  - {fileID: 8300000, guid: 4ed6186ddb1350c47ac5dda759c33656, type: 3}
+  - {fileID: 8300000, guid: 4613b3f6b5227764282107275237db65, type: 3}
+  - {fileID: 8300000, guid: 6d7275a85c65d5a429755aadc49d75c2, type: 3}
+  - {fileID: 8300000, guid: 78837d7035b256146bccd3cf65000e13, type: 3}
+  sfxCamBtn:
+  - {fileID: 8300000, guid: e04e6a25dc60b13479eec64a273a46ca, type: 3}
+  - {fileID: 8300000, guid: a7265b6679f788a47b2b934eb76f7f3b, type: 3}
+  - {fileID: 8300000, guid: 725255acc849d2343b7bb0462ed478fd, type: 3}
+  sfxDoor:
+  - {fileID: 8300000, guid: bcd6955c907b11748a80779c83ffed4c, type: 3}
+  - {fileID: 8300000, guid: dc9334c8416e2644fa23792cf1c19ca4, type: 3}
+  - {fileID: 8300000, guid: 683f2c6a2c94eac458b419b96e61fb2c, type: 3}
+  sfxUIExpel:
+  - {fileID: 8300000, guid: b50eaa6c0a297b240beb8c79450113f1, type: 3}
+  sfxShutter:
+  - {fileID: 8300000, guid: 22ef2b343aeed524fb4bdfc663c73fca, type: 3}
+  sfxCageBtn:
+  - {fileID: 8300000, guid: 5fd071d4aa535314e874608b9f3afff0, type: 3}
+  sfxUIExorcistUpdate:
+  - {fileID: 8300000, guid: 22fb0501c46343f46b192c228a743d5d, type: 3}
+  sfxFlashBtn:
+  - {fileID: 8300000, guid: 8764a9af4da1c5448b295f59b79358c8, type: 3}
+  - {fileID: 8300000, guid: 3a6142a1d5b3dc646be787aa0613c4e3, type: 3}
+  sfxLightSwitch:
+  - {fileID: 8300000, guid: 4020e131735c22044b6af18c75114745, type: 3}
+  sfxReportBtn:
+  - {fileID: 8300000, guid: eae358dd862ebfd409c703f299688280, type: 3}
+  sfxShutterBreak:
+  - {fileID: 8300000, guid: 391492450ab5e964b9e8bea987365085, type: 3}
+  - {fileID: 8300000, guid: 8ad4ae7a8d804c5439fd56d9b22fcefa, type: 3}
+  sfxShutterHit:
+  - {fileID: 8300000, guid: d6054602844147f42ab40479dabf31cf, type: 3}
+  - {fileID: 8300000, guid: f80c93790c643364c9484eab1a4d1269, type: 3}
+  - {fileID: 8300000, guid: 106cdfd840bd37b4e8427c0b4e372ae4, type: 3}
+  - {fileID: 8300000, guid: d6054602844147f42ab40479dabf31cf, type: 3}
+  - {fileID: 8300000, guid: f80c93790c643364c9484eab1a4d1269, type: 3}
+  - {fileID: 8300000, guid: 106cdfd840bd37b4e8427c0b4e372ae4, type: 3}
+  sfxSoundPitchBtn:
+  - {fileID: 8300000, guid: dbdf54de631900c4aab2716fd2e34179, type: 3}
+  sfxPcBtn:
+  - {fileID: 8300000, guid: c389d5ed4a5ac8440a42ef7a223c6713, type: 3}
+  sfxUIAppearAtWindow:
+  - {fileID: 8300000, guid: d74226999dbaf6a44a6758f541fa1acd, type: 3}
+  sfxUIExorcise:
+  - {fileID: 8300000, guid: 0c03ffe0436fb3c43862e055987d150f, type: 3}
+  sfxUIPaper:
+  - {fileID: 8300000, guid: 6e2c30b324d828b42853214136648f80, type: 3}
+  sfxToyolLoop:
+  - {fileID: 8300000, guid: bd687d654d4e5a8418a36337faec8a73, type: 3}
+  sfxSoundPitchLoop:
+  - {fileID: 8300000, guid: ae29ebeecf0492d49adbaeff21049436, type: 3}
+  sfxExorciseFailScream:
+  - {fileID: 8300000, guid: ef4b866894a86d6448f4edf732d9e6d5, type: 3}
+  sfxStaticLoop:
+  - {fileID: 8300000, guid: a7b61ae861105d54f8f16904786a6a2c, type: 3}
+  sfxJumpscare:
+  - {fileID: 8300000, guid: 5bef16967ee32314880125c713f4bc55, type: 3}

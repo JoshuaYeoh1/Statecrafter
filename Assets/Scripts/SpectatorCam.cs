@@ -19,10 +19,12 @@ public class SpectatorCam : MonoBehaviour
     void OnEnable()
     {
         EventManager.Current.SpectateEvent += OnSpectate;
+        EventManager.Current.SwitchSpectateEvent += OnSwitchSpectate;
     }
     void OnDisable()
     {
         EventManager.Current.SpectateEvent -= OnSpectate;
+        EventManager.Current.SwitchSpectateEvent -= OnSwitchSpectate;
     }
     
     void OnSpectate(GameObject watched)
@@ -78,9 +80,14 @@ public class SpectatorCam : MonoBehaviour
     {
         if(Input.GetButtonDown("Spectate"))
         {
-            SpectateUp();
+            EventManager.Current.OnSwitchSpectate();
         }
-    }    
+    }
+
+    void OnSwitchSpectate()
+    {
+        SpectateUp();
+    }
 
     public void SpectateUp()
     {

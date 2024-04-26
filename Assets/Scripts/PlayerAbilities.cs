@@ -4,37 +4,33 @@ using UnityEngine;
 
 public enum PlayerAbility
 {
-    SpawnFood,
-    FlintAndSteel,
-    SpeedPotion,
-    EnderPearl,
-    MaceSlam,
-    Herobrine,
+    None=0,
+    SpawnFood=1,
+    FlintAndSteel=2,
+    SpeedPotion=3,
+    EnderPearl=4,
+    MaceSlam=5,
+    Herobrine=6,
 }
 
 public class PlayerAbilities : MonoBehaviour
 {
-    MouseManager mouseManager;
-
-    void Start()
-    {
-        mouseManager = MouseManager.Current;
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     public PlayerAbility currentAbility;
 
     void OnEnable()
     {
         EventManager.Current.Click2DEvent += OnClick2D;
         EventManager.Current.Swipe2DEvent += OnSwipe2D;
+        EventManager.Current.SelectPlayerAbilityEvent += OnSelectPlayerAbility;
     }
     void OnDisable()
     {
         EventManager.Current.Click2DEvent -= OnClick2D;
         EventManager.Current.Swipe2DEvent -= OnSwipe2D;
+        EventManager.Current.SelectPlayerAbilityEvent -= OnSelectPlayerAbility;
     }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public GameObject foodPrefab;
     public GameObject firePrefab;
@@ -65,6 +61,8 @@ public class PlayerAbilities : MonoBehaviour
         }
     }
 
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
     void Spawn(GameObject prefab, Vector3 pos)
     {
         GameObject spawned = Instantiate(prefab, pos, Quaternion.identity);
@@ -81,16 +79,50 @@ public class PlayerAbilities : MonoBehaviour
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public GameObject herobrine;
-
     void Update()
     {
-        if(currentAbility==PlayerAbility.Herobrine)
-        {
-            herobrine.SetActive(true);
+        MoveHerobrine();
+        CheckNumberButtons();
+    }
 
-            herobrine.transform.position = mouseManager.mousePos;
+    public GameObject herobrine;
+
+    void MoveHerobrine()
+    {
+        herobrine.SetActive(currentAbility==PlayerAbility.Herobrine);
+
+        herobrine.transform.position = MouseManager.Current.mousePos;
+    }
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    void Start()
+    {
+        EventManager.Current.OnSelectPlayerAbility(PlayerAbility.SpawnFood);
+    }
+
+    void OnSelectPlayerAbility(PlayerAbility ability)
+    {
+        currentAbility = ability;
+
+        Cursor.visible = currentAbility!=PlayerAbility.Herobrine;
+    }
+
+    void CheckNumberButtons()
+    {
+        for(int i=0; i<=9; i++)
+        {
+            if(Input.GetKeyDown(KeyCode.Alpha0 + i))
+            {
+                if(i>6)
+                {
+                    EventManager.Current.OnSelectPlayerAbility(PlayerAbility.None);
+                }
+                else
+                {
+                    EventManager.Current.OnSelectPlayerAbility((PlayerAbility)i);
+                }
+            }
         }
-        else herobrine.SetActive(false);
     }
 }

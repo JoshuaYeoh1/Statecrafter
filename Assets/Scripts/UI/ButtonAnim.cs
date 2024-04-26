@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class ButtonAnim : MonoBehaviour
 {
-    public float animTime=.3f, scaleMult=.1f;
-    bool inBtn, pressedBtn;
-
+    public float animTime=.3f;
+    public float scaleMult=.1f;
     Vector2 defScale;
 
+    public GameObject hoverText;
+
+    bool inBtn, pressedBtn;
     //public bool doSFX=true;
 
     void Awake()
@@ -16,6 +18,10 @@ public class ButtonAnim : MonoBehaviour
         defScale = transform.localScale;
     }
 
+    void OnEnable()
+    {
+        if(hoverText) hoverText.SetActive(false);
+    }
     void OnDisable()
     {
         LeanTween.cancel(gameObject);
@@ -32,6 +38,7 @@ public class ButtonAnim : MonoBehaviour
             LeanTween.cancel(gameObject);
             LeanTween.scale(gameObject, defScale*(1+scaleMult), animTime).setEaseOutExpo().setIgnoreTimeScale(true);
             
+            if(hoverText) hoverText.SetActive(true);
             // if(doSFX)
             // AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIHover, transform.position, false);
         }
@@ -46,6 +53,7 @@ public class ButtonAnim : MonoBehaviour
             LeanTween.cancel(gameObject);
             LeanTween.scale(gameObject, defScale, animTime).setEaseOutExpo().setIgnoreTimeScale(true);
 
+            if(hoverText) hoverText.SetActive(false);
             // if(doSFX)
             // AudioManager.Current.PlaySFX(SFXManager.Current.sfxUIHover, transform.position, false);
         }
